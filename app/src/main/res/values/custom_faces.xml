@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="custom_faces_title">Installed</string>
+    <string name="custom_faces_subtitle">Custom watchface library</string>
+    <string name="custom_faces_extended_title">Custom watchface</string>
+    <string name="custom_faces_extended_info">Select this watchface in the Fit3 menu. Selection and removal from the app are not available yet.</string>
+    <string name="custom_faces_extended_import">IDs above 255 are experimental. Sending a file does not guarantee installation: Fit3 must confirm the result. These files support variant 1; select them afterwards in the band menu.</string>
+    <string name="watch_faces_heading">On the band</string>
+    <string name="watch_faces_delete_action">Delete from the band</string>
+    <string name="custom_faces_delete_local">Delete from the app</string>
+    <string name="custom_faces_variants">Variants</string>
+    <string name="local_faces_heading">Saved in the app</string>
+    <string name="watch_faces_generic">Watchface</string>
+    <string name="watch_faces_selected">Selected</string>
+    <string name="watch_faces_offline">Connect Fit3 to get the current list.</string>
+    <string name="watch_faces_unavailable">Could not refresh the list. Pull down to try again.</string>
+    <string name="watch_faces_hint">Tap to select. Touch and hold to delete from Fit3.</string>
+    <string name="watch_faces_delete_title">Delete watchface?</string>
+    <string name="watch_faces_delete_question">This variant will be deleted from Fit3. The BIN file saved in the app will remain.</string>
+    <string name="watch_faces_delete_protected">You cannot delete the selected watchface. Select another one first and wait for the list to refresh.</string>
+    <string name="watch_faces_deleting">Deleting watchface…</string>
+    <string name="watch_faces_deleted">Watchface deleted from Fit3</string>
+    <string name="watch_faces_delete_failed">Could not delete the watchface. Refresh the list and try again.</string>
+    <string name="watch_faces_delete_timeout">Fit3 did not confirm deletion. Refresh the list before trying again.</string>
+    <string name="custom_faces_import">Add a BIN watchface</string>
+    <string name="custom_faces_empty">Add your first watchface. It stays in the app until you select it for your Fit3.</string>
+    <string name="custom_faces_hint">Tap to send to Fit3. Hold to rename or delete.</string>
+    <string name="custom_faces_connect">Connect your Fit3 to apply a watchface. Adding files works offline.</string>
+    <string name="custom_faces_battery">Charge your Fit3 to at least 30% before installing.</string>
+    <string name="custom_faces_import_error">Could not add this file. Select a valid Fit3 BIN and try again.</string>
+    <string name="custom_faces_rename">Rename</string>
+    <string name="custom_faces_delete">Delete</string>
+    <string name="custom_faces_delete_question">Delete from the app? The watchface on your Fit3 and the original BIN file will stay unchanged.</string>
+    <string name="custom_faces_name">Watchface name</string>
+    <string name="custom_faces_save">Save</string>
+    <string name="custom_faces_cancel">Cancel</string>
+    <string name="custom_faces_operation_error">Could not save the change. Please try again.</string>
+    <string name="custom_faces_variant">Variant %1$d</string>
+</resources>

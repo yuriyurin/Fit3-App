@@ -1,0 +1,45 @@
+# Local IDE/build state
+.gradle/
+.kotlin/
+.idea/
+**/build/
+local.properties
+*.iml
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+
+# Credentials and signing keys: keep these outside the repository
+.env
+.env.*
+!.env.example
+keystore.properties
+signing.properties
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+
+# Generated packages, device captures and private data
+*.apk
+*.aab
+*.bin
+*.log
+*.pcap
+*.pcapng
+*.btsnoop
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.zip
+*.7z
+captures/
+backups/
+private/
+
+# Keep the Gradle wrapper JAR tracked; do not ignore all JAR files.

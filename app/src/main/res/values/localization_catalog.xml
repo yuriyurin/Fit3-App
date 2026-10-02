@@ -1,0 +1,1241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="legacy_text_templates" translatable="false">
+        <item>&quot;BIN должен быть не больше 4 МиБ ({0} байт)&quot;</item>
+        <item>&quot;Неизвестный формат: отсутствует заголовок OPPO&quot;</item>
+        <item>&quot;Поддерживается только контейнер OPPO v4&quot;</item>
+        <item>&quot;Размер payload в заголовке не совпадает с размером BIN&quot;</item>
+        <item>&quot;Недопустимое число файлов в контейнере: {0}&quot;</item>
+        <item>&quot;Каталог OPPO выходит за границы файла&quot;</item>
+        <item>&quot;Зарезервированные байты заголовка повреждены&quot;</item>
+        <item>&quot;Не совпадает общая CRC16 контейнера&quot;</item>
+        <item>&quot;Путь записи #{0} не завершён NUL&quot;</item>
+        <item>&quot;В padding пути записи #{0} есть посторонние байты&quot;</item>
+        <item>&quot;Путь записи #{0} не ASCII&quot;</item>
+        <item>&quot;Недопустимый путь внутри BIN: {0}&quot;</item>
+        <item>&quot;Неподдерживаемый внутренний файл BIN: {0}&quot;</item>
+        <item>&quot;Повторяющийся файл внутри BIN: {0}&quot;</item>
+        <item>&quot;Контейнер не плотно упакован перед {0}&quot;</item>
+        <item>&quot;Файл {0} выходит за границы контейнера&quot;</item>
+        <item>&quot;Не совпадает CRC16 файла {0}&quot;</item>
+        <item>&quot;После последней записи есть непроверенный хвост&quot;</item>
+        <item>&quot;В контейнере смешаны разные ID циферблатов&quot;</item>
+        <item>&quot;ID циферблата {0} не помещается в протокол Fit3&quot;</item>
+        <item>&quot;ID BIN ({0}) не совпадает с ожидаемым ID ({1})&quot;</item>
+        <item>&quot;Имя выбранного BIN относится к другому циферблату&quot;</item>
+        <item>&quot;В BIN отсутствует обязательный {0}&quot;</item>
+        <item>&quot;Нет style0.bin&quot;</item>
+        <item>&quot;Номера style*.bin имеют пропуски&quot;</item>
+        <item>&quot;Номер стиля не помещается в протокол Fit3&quot;</item>
+        <item>&quot;setting.bin имеет неожиданный размер {0}&quot;</item>
+        <item>&quot;setting.bin не содержит маркер LQ_WF&quot;</item>
+        <item>&quot;setting.bin повреждён&quot;</item>
+        <item>&quot;ID в setting.bin ({0}) не совпадает с ID каталога ({1})&quot;</item>
+        <item>&quot;Повреждены name slots в setting.bin&quot;</item>
+        <item>&quot;Две копии имени в setting.bin расходятся&quot;</item>
+        <item>&quot;{0} должен иметь размер 92 байта&quot;</item>
+        <item>&quot;{0}: повреждена роль системного шрифта&quot;</item>
+        <item>&quot;{0}: недопустимый размер шрифта {1}&quot;</item>
+        <item>&quot;{0}: слишком короткая таблица локализации&quot;</item>
+        <item>&quot;{0}: неверный magic&quot;</item>
+        <item>&quot;{0}: неверное число строк&quot;</item>
+        <item>&quot;{0}: повреждён reserved header&quot;</item>
+        <item>&quot;{0}: таблица descriptors выходит за границы&quot;</item>
+        <item>&quot;{0}: строка #{1} выходит за границы&quot;</item>
+        <item>&quot;{0}: первая строка начинается не после descriptors&quot;</item>
+        <item>&quot;{0}: offsets строк идут в обратном порядке&quot;</item>
+        <item>&quot;{0}: после UTF-8 строк есть непроверенный хвост&quot;</item>
+        <item>&quot;{0}: слишком короткий style container&quot;</item>
+        <item>&quot;{0}: неверный style magic&quot;</item>
+        <item>&quot;{0}: неверное число widgets&quot;</item>
+        <item>&quot;{0}: повреждены размеры секций widgets/images&quot;</item>
+        <item>&quot;{0}: widget #{1} обрезан&quot;</item>
+        <item>&quot;{0}: widget #{1} имеет неверный размер {2}&quot;</item>
+        <item>&quot;{0}: widget section разобран не полностью&quot;</item>
+        <item>&quot;{0}: обрезан raster header&quot;</item>
+        <item>&quot;{0}: повреждён raster header&quot;</item>
+        <item>&quot;{0}: неизвестный raster format 0x{1}&quot;</item>
+        <item>&quot;{0}: raster выходит за границы&quot;</item>
+        <item>&quot;{0}: неверный размер raster payload&quot;</item>
+        <item>&quot;{0}: image section разобран не полностью&quot;</item>
+        <item>&quot;Повреждена ASCII-строка&quot;</item>
+        <item>&quot;{0}: строка #{1} содержит неверный UTF-8&quot;</item>
+        <item>&quot;Часы не приняли блок {0} из {1}&quot;</item>
+        <item>&quot;Передача отменена&quot;</item>
+        <item>&quot;Канал передачи закрыт&quot;</item>
+        <item>&quot;Неверный ответ часов&quot;</item>
+        <item>&quot;Неожиданный ответ часов: {0}&quot;</item>
+        <item>&quot;Часы не ответили при передаче циферблата&quot;</item>
+        <item>&quot;Магазин не подтвердил проверку версии&quot;</item>
+        <item>&quot;Магазин не предлагает этот циферблат&quot;</item>
+        <item>&quot;Магазин вернул неполный ответ&quot;</item>
+        <item>&quot;Магазин отказал в загрузке&quot;</item>
+        <item>&quot;Недопустимый размер пакета&quot;</item>
+        <item>&quot;Пакет загружен не полностью&quot;</item>
+        <item>&quot;Недоверенный адрес загрузки&quot;</item>
+        <item>&quot;Редирект без адреса&quot;</item>
+        <item>&quot;Магазин ответил HTTP {0}&quot;</item>
+        <item>&quot;Пакет слишком большой&quot;</item>
+        <item>&quot;Слишком много перенаправлений магазина&quot;</item>
+        <item>&quot;Магазин вернул недопустимый XML&quot;</item>
+        <item>&quot;В пакете слишком много файлов&quot;</item>
+        <item>&quot;Распакованный пакет слишком большой&quot;</item>
+        <item>&quot;Циферблат больше безопасного лимита 4 МиБ&quot;</item>
+        <item>&quot;В пакете несколько файлов циферблата&quot;</item>
+        <item>&quot;Этот циферблат не содержит обычного BIN (например, Photos)&quot;</item>
+        <item>&quot;Выбранный стиль отсутствует внутри BIN&quot;</item>
+        <item>&quot;Слишком большая копия&quot;</item>
+        <item>&quot;Не подключено&quot;</item>
+        <item>&quot;Данные здоровья ещё не синхронизированы&quot;</item>
+        <item>&quot;Уведомления ещё не отправлялись&quot;</item>
+        <item>&quot;Выберите город&quot;</item>
+        <item>&quot;Ошибка поиска Bluetooth: {0}&quot;</item>
+        <item>&quot;Bluetooth недоступен&quot;</item>
+        <item>&quot;Включите Bluetooth&quot;</item>
+        <item>&quot;BLE-сканер недоступен&quot;</item>
+        <item>&quot;Поиск часов…&quot;</item>
+        <item>&quot;Разрешите доступ к устройствам рядом&quot;</item>
+        <item>&quot;Выберите часы&quot;</item>
+        <item>&quot;Неверный адрес устройства&quot;</item>
+        <item>&quot;Проверяем данные браслета&quot;</item>
+        <item>&quot;Подключение к {0}…&quot;</item>
+        <item>&quot;Для подключения требуется разрешение Bluetooth&quot;</item>
+        <item>&quot;Согласование Bluetooth…&quot;</item>
+        <item>&quot;Не удалось запросить MTU&quot;</item>
+        <item>&quot;Связь прервана во время установки&quot;</item>
+        <item>&quot;Связь прервана&quot;</item>
+        <item>&quot;Ошибка связи: {0}&quot;</item>
+        <item>&quot;Ошибка подключения: {0}&quot;</item>
+        <item>&quot;Недостаточный BLE MTU: {0}&quot;</item>
+        <item>&quot;Поиск сервиса часов…&quot;</item>
+        <item>&quot;Сервис часов не найден&quot;</item>
+        <item>&quot;Ошибка поиска сервисов: {0}&quot;</item>
+        <item>&quot;SAP-сервис не найден на часах&quot;</item>
+        <item>&quot;Не удалось включить уведомления&quot;</item>
+        <item>&quot;Не удалось подписаться на ответы часов&quot;</item>
+        <item>&quot;Ожидание ответа часов…&quot;</item>
+        <item>&quot;Нет ответа часов при согласовании&quot;</item>
+        <item>&quot;Ошибка подписки: {0}&quot;</item>
+        <item>&quot;Ошибка записи Bluetooth: {0}&quot;</item>
+        <item>&quot;Канал часов готов&quot;</item>
+        <item>&quot;Ошибка согласования: {0}&quot;</item>
+        <item>&quot;Часы отвечают&quot;</item>
+        <item>&quot;Получено циферблатов: {0}&quot;</item>
+        <item>&quot;Циферблат установлен&quot;</item>
+        <item>&quot;Часы ответили списком циферблатов, но формат ещё неизвестен; смотрите Protocol Monitor&quot;</item>
+        <item>&quot;Проверяем циферблат на часах…&quot;</item>
+        <item>&quot;Недостаточно заряда часов&quot;</item>
+        <item>&quot;Часы не нашли файл циферблата&quot;</item>
+        <item>&quot;Часы отклонили формат циферблата&quot;</item>
+        <item>&quot;Память или список циферблатов заполнены&quot;</item>
+        <item>&quot;Часы отклонили установку ({0})&quot;</item>
+        <item>&quot;Подключено&quot;</item>
+        <item>&quot;Команда музыки с часов: {0}&quot;</item>
+        <item>&quot;Не найден активный Android MediaSession&quot;</item>
+        <item>&quot;Громкость изменена с часов&quot;</item>
+        <item>&quot;Не удалось изменить громкость&quot;</item>
+        <item>&quot;Не удалось сохранить данные. Повторите обновление.&quot;</item>
+        <item>&quot;Плитки синхронизированы&quot;</item>
+        <item>&quot;Quick Panel синхронизирован&quot;</item>
+        <item>&quot;Порядок приложений синхронизирован&quot;</item>
+        <item>&quot;Быстрые ответы синхронизированы&quot;</item>
+        <item>&quot;Формат иконок часов: {0}&quot;</item>
+        <item>&quot;Часы подтвердили тестовое уведомление&quot;</item>
+        <item>&quot;Часы отклонили уведомление&quot;</item>
+        <item>&quot;Ошибка запроса: {0}&quot;</item>
+        <item>&quot;Иконка приложения получена браслетом&quot;</item>
+        <item>&quot;Не удалось передать иконку приложения&quot;</item>
+        <item>&quot;Ошибка передачи иконки: {0}&quot;</item>
+        <item>&quot;Дождитесь подключения часов&quot;</item>
+        <item>&quot;Не удалось получить список циферблатов&quot;</item>
+        <item>&quot;Сначала получите список установленных циферблатов&quot;</item>
+        <item>&quot;Смена циферблата…&quot;</item>
+        <item>&quot;Часы не подтвердили смену циферблата&quot;</item>
+        <item>&quot;Подключите часы и дождитесь окончания предыдущей передачи&quot;</item>
+        <item>&quot;Для установки зарядите часы хотя бы до 30%&quot;</item>
+        <item>&quot;Не найден сопряжённый Galaxy Fit3&quot;</item>
+        <item>&quot;Подготавливаем передачу циферблата…&quot;</item>
+        <item>&quot;Не удалось подготовить часы: {0}&quot;</item>
+        <item>&quot;Передаём циферблат…&quot;</item>
+        <item>&quot;Передача: {0}%&quot;</item>
+        <item>&quot;Передача не завершена: {0}&quot;</item>
+        <item>&quot;Устанавливаем циферблат…&quot;</item>
+        <item>&quot;Нет подтверждения установки от часов&quot;</item>
+        <item>&quot;Не удалось отправить установку: {0}&quot;</item>
+        <item>&quot;Запрашиваем данные браслета…&quot;</item>
+        <item>&quot;Не удалось сохранить данные&quot;</item>
+        <item>&quot;Браслет не ответил на обновление&quot;</item>
+        <item>&quot;Проверяем обмен возможностями Health…&quot;</item>
+        <item>&quot;Яркость отправлена&quot;</item>
+        <item>&quot;Автояркость отправлена&quot;</item>
+        <item>&quot;AOD отправлен&quot;</item>
+        <item>&quot;Поднятие запястья отправлено&quot;</item>
+        <item>&quot;Пробуждение касанием отправлено&quot;</item>
+        <item>&quot;Ожидаем подтверждение запястья от браслета&quot;</item>
+        <item>&quot;Ожидаем подтверждение положения кнопки&quot;</item>
+        <item>&quot;Автопоказ управления музыкой отправлен&quot;</item>
+        <item>&quot;Режим сна отправлен&quot;</item>
+        <item>&quot;Режим Театр отправлен&quot;</item>
+        <item>&quot;Таймаут экрана отправлен&quot;</item>
+        <item>&quot;Запрос плиток…&quot;</item>
+        <item>&quot;Fit3 поддерживает максимум 12 активных плиток&quot;</item>
+        <item>&quot;Порядок плиток отправлен&quot;</item>
+        <item>&quot;Запрос приложений…&quot;</item>
+        <item>&quot;Порядок приложений отправлен&quot;</item>
+        <item>&quot;Запрос Quick Panel…&quot;</item>
+        <item>&quot;Quick Panel отправлен&quot;</item>
+        <item>&quot;Быстрые ответы отправлены&quot;</item>
+        <item>&quot;Время и часовой пояс отправлены на часы&quot;</item>
+        <item>&quot;Локальная резервная копия сохранена&quot;</item>
+        <item>&quot;Локальная резервная копия не найдена&quot;</item>
+        <item>&quot;Восстановление локальной копии отправлено на часы&quot;</item>
+        <item>&quot;Тест уведомлений&quot;</item>
+        <item>&quot;Если вы видите это на часах, передача работает.&quot;</item>
+        <item>&quot;Нет соединения с часами&quot;</item>
+        <item>&quot;{0}: уведомление отправлено; ждём ответ часов…&quot;</item>
+        <item>&quot;Нет подтверждения уведомления от часов; проверьте экран&quot;</item>
+        <item>&quot;Ошибка отправки {0}: {1}&quot;</item>
+        <item>&quot;Дождитесь готовности канала часов&quot;</item>
+        <item>&quot;Настройка: сведения о часах…&quot;</item>
+        <item>&quot;Нет ответа на шаг настройки: {0}&quot;</item>
+        <item>&quot;Настройка: состояние устройства…&quot;</item>
+        <item>&quot;Настройка: дата и язык…&quot;</item>
+        <item>&quot;Завершение настройки часов…&quot;</item>
+        <item>&quot;Настройка завершена. Часы могут перезапуститься&quot;</item>
+        <item>&quot;Пакет больше согласованного BLE MTU&quot;</item>
+        <item>&quot;Очередь Bluetooth переполнена&quot;</item>
+        <item>&quot;Нет соединения&quot;</item>
+        <item>&quot;Канал записи недоступен&quot;</item>
+        <item>&quot;Android отклонил запись GATT&quot;</item>
+        <item>&quot;Нет подтверждения записи Bluetooth&quot;</item>
+        <item>&quot;Переподключение через {0} с…&quot;</item>
+        <item>&quot;Установка отменена&quot;</item>
+        <item>&quot;Отключено&quot;</item>
+        <item>&quot;Не удалось создать файл в выбранной папке&quot;</item>
+        <item>&quot;Не удалось записать копию&quot;</item>
+        <item>&quot;Ожидаем погоду&quot;</item>
+        <item>&quot;Соединение с Galaxy Fit3&quot;</item>
+        <item>&quot;Журнал ограничен 4 МБ; ранние записи удалены.\n&quot;</item>
+        <item>&quot;Откройте приложение и выберите город для погоды&quot;</item>
+        <item>&quot;Подключение к Galaxy Fit3…&quot;</item>
+        <item>&quot;Обновляем погоду…&quot;</item>
+        <item>&quot;Не удалось загрузить погоду&quot;</item>
+        <item>&quot;Показан последний прогноз&quot;</item>
+        <item>&quot;Сначала подключите часы&quot;</item>
+        <item>&quot;Загружаем циферблат из магазина…&quot;</item>
+        <item>&quot;Не удалось загрузить циферблат: {0}&quot;</item>
+        <item>&quot;Повторно проверяем BIN перед передачей…&quot;</item>
+        <item>&quot;Стиль {0} отсутствует внутри BIN&quot;</item>
+        <item>&quot;BIN отклонён проверкой: {0}&quot;</item>
+        <item>&quot;Нет сохранённых данных&quot;</item>
+        <item>&quot;Архив здоровья слишком велик для JSON-копии&quot;</item>
+        <item>&quot;Слишком много записей здоровья&quot;</item>
+        <item>&quot;Повреждена история здоровья&quot;</item>
+        <item>&quot;Не удалось сохранить данные здоровья&quot;</item>
+        <item>&quot;Неподдерживаемая версия данных здоровья&quot;</item>
+        <item>&quot;Слишком много интервалов шагов&quot;</item>
+        <item>&quot;Нет дневного прогноза&quot;</item>
+        <item>&quot;Open-Meteo · модельный прогноз&quot;</item>
+        <item>&quot;Погода недоступна: HTTP {0}&quot;</item>
+        <item>&quot;Слишком большой ответ погоды&quot;</item>
+        <item>&quot;Часы не ответили при передаче медиафайла&quot;</item>
+        <item>&quot;Часы не приняли блок медиафайла&quot;</item>
+        <item>&quot;Каталог недоступен (код {0})&quot;</item>
+        <item>&quot;Циферблат&quot;</item>
+        <item>&quot;Слишком большой ответ&quot;</item>
+        <item>&quot;Браслет&quot;</item>
+        <item>&quot;Погода&quot;</item>
+        <item>&quot;Шаги&quot;</item>
+        <item>&quot;Сон&quot;</item>
+        <item>&quot;Пульс&quot;</item>
+        <item>&quot;Стресс&quot;</item>
+        <item>&quot;Дистанция&quot;</item>
+        <item>&quot;Сервис связи остановлен&quot;</item>
+        <item>&quot;Не удалось открыть файл&quot;</item>
+        <item>&quot;Копия сохранена&quot;</item>
+        <item>&quot;Не удалось сохранить: {0}&quot;</item>
+        <item>&quot;Не удалось прочитать файл&quot;</item>
+        <item>&quot;Неверный формат копии&quot;</item>
+        <item>&quot;Данные восстановлены; настройки браслета отправлены&quot;</item>
+        <item>&quot;Данные восстановлены; настройки браслета применятся после подключения&quot;</item>
+        <item>&quot;Не удалось восстановить: {0}&quot;</item>
+        <item>&quot;Папка для автоматических копий выбрана&quot;</item>
+        <item>&quot;Нет доступа к папке: {0}&quot;</item>
+        <item>&quot;Устройство не выбрано&quot;</item>
+        <item>&quot;устройство не найдено&quot;</item>
+        <item>&quot;Системный поиск: {0}&quot;</item>
+        <item>&quot;Проверка файла…&quot;</item>
+        <item>&quot;Выбранный файл&quot;</item>
+        <item>&quot;Файл больше 32 МБ&quot;</item>
+        <item>&quot;Ошибка проверки&quot;</item>
+        <item>&quot;Неизвестная ошибка&quot;</item>
+        <item>&quot;Проверка BIN…&quot;</item>
+        <item>&quot;Проверяем структуру и CRC…&quot;</item>
+        <item>&quot;Выбранный BIN&quot;</item>
+        <item>&quot;BIN больше аппаратного лимита 4 МиБ&quot;</item>
+        <item>&quot;Не удалось открыть BIN&quot;</item>
+        <item>&quot;Неизвестная ошибка проверки BIN&quot;</item>
+        <item>&quot;Главная&quot;</item>
+        <item>&quot;Активность&quot;</item>
+        <item>&quot;Подключение браслета&quot;</item>
+        <item>&quot;Циферблаты&quot;</item>
+        <item>&quot;Варианты циферблата&quot;</item>
+        <item>&quot;Настройки приложения&quot;</item>
+        <item>&quot;Экран&quot;</item>
+        <item>&quot;Карточки&quot;</item>
+        <item>&quot;Приложения&quot;</item>
+        <item>&quot;Быстрая панель&quot;</item>
+        <item>&quot;Быстрые ответы&quot;</item>
+        <item>&quot;Резервная копия&quot;</item>
+        <item>&quot;О приложении&quot;</item>
+        <item>&quot;Отладка&quot;</item>
+        <item>&quot;Лицензии и благодарности&quot;</item>
+        <item>&quot;Уведомления&quot;</item>
+        <item>&quot;Энергосбережение&quot;</item>
+        <item>&quot;Прошивальщик&quot;</item>
+        <item>&quot;Внешний вид&quot;</item>
+        <item>&quot;Синхронизация Fit3 Health&quot;</item>
+        <item>&quot;Режимы&quot;</item>
+        <item>&quot;Меню и карточки&quot;</item>
+        <item>&quot;Время&quot;</item>
+        <item>&quot;Ношение браслета&quot;</item>
+        <item>&quot;Журнал протокола&quot;</item>
+        <item>&quot;Не удалось загрузить каталог&quot;</item>
+        <item>&quot;Редактор главной&quot;</item>
+        <item>&quot;Готово&quot;</item>
+        <item>&quot;Настройки&quot;</item>
+        <item>&quot;Сегодня&quot;</item>
+        <item>&quot;Данные обновлены: {0}&quot;</item>
+        <item>&quot;Ожидаем данные с браслета&quot;</item>
+        <item>&quot;Удерживайте карточку, чтобы переместить. Размер выбирается на самой карточке.&quot;</item>
+        <item>&quot;Сбросить · вернуть обычный главный экран&quot;</item>
+        <item>&quot;Найти через Android&quot;</item>
+        <item>&quot;Ищем Galaxy Fit3 рядом…&quot;</item>
+        <item>&quot;Браслет не найден. Проверьте Bluetooth и повторите поиск.&quot;</item>
+        <item>&quot;Поиск…&quot;</item>
+        <item>&quot;Найти снова&quot;</item>
+        <item>&quot;за сегодня&quot;</item>
+        <item>&quot;Калории&quot;</item>
+        <item>&quot;{0} ккал&quot;</item>
+        <item>&quot;активные&quot;</item>
+        <item>&quot;Этажи&quot;</item>
+        <item>&quot;нет данных с браслета&quot;</item>
+        <item>&quot;подъёмы&quot;</item>
+        <item>&quot;{0} мин&quot;</item>
+        <item>&quot;движение&quot;</item>
+        <item>&quot;Здоровье&quot;</item>
+        <item>&quot;Настройки браслета&quot;</item>
+        <item>&quot;Яркость, пробуждение и AOD&quot;</item>
+        <item>&quot;Запястье и положение кнопки&quot;</item>
+        <item>&quot;Сон, театр и управление музыкой&quot;</item>
+        <item>&quot;Карточки, приложения, быстрая панель и ответы&quot;</item>
+        <item>&quot;Синхронизация с телефоном&quot;</item>
+        <item>&quot;Подключение&quot;</item>
+        <item>&quot;Отключить браслет&quot;</item>
+        <item>&quot;Подключить другой браслет&quot;</item>
+        <item>&quot;Подключите браслет, чтобы увидеть установленные циферблаты.&quot;</item>
+        <item>&quot;Другие циферблаты Samsung&quot;</item>
+        <item>&quot;Каталог не загрузился: {0}&quot;</item>
+        <item>&quot;Выберите циферблат, чтобы увидеть его варианты. Для нового варианта потребуется загрузка из магазина.&quot;</item>
+        <item>&quot;Вернитесь в каталог и выберите циферблат&quot;</item>
+        <item>&quot;Доступ и передача уведомлений&quot;</item>
+        <item>&quot;Работа в фоне и ограничения батареи&quot;</item>
+        <item>&quot;Тема и цвет приложения&quot;</item>
+        <item>&quot;Бэкап настроек браслета&quot;</item>
+        <item>&quot;Режим отладки&quot;</item>
+        <item>&quot;Проверки, журнал и прошивальщик&quot;</item>
+        <item>&quot;Автояркость&quot;</item>
+        <item>&quot;Поднять запястье для пробуждения&quot;</item>
+        <item>&quot;Касание для пробуждения&quot;</item>
+        <item>&quot;Яркость&quot;</item>
+        <item>&quot;Таймаут экрана&quot;</item>
+        <item>&quot;{0}с&quot;</item>
+        <item>&quot;Режим сна&quot;</item>
+        <item>&quot;Режим Театр&quot;</item>
+        <item>&quot;Предпочитаемое запястье&quot;</item>
+        <item>&quot;Правое&quot;</item>
+        <item>&quot;Левое&quot;</item>
+        <item>&quot;Не определено&quot;</item>
+        <item>&quot;Положение кнопки&quot;</item>
+        <item>&quot;Справа&quot;</item>
+        <item>&quot;Слева&quot;</item>
+        <item>&quot;Состав и порядок&quot;</item>
+        <item>&quot;Порядок в меню браслета&quot;</item>
+        <item>&quot;Порядок переключателей&quot;</item>
+        <item>&quot;Шаблоны сообщений&quot;</item>
+        <item>&quot;Время синхронизируется при подключении и после изменения времени, часового пояса или языка телефона.&quot;</item>
+        <item>&quot;Синхронизировать сейчас&quot;</item>
+        <item>&quot;Порядок карточек на браслете&quot;</item>
+        <item>&quot;Карточка&quot;</item>
+        <item>&quot;Список ещё не получен&quot;</item>
+        <item>&quot;Приложение&quot;</item>
+        <item>&quot;Переключатель&quot;</item>
+        <item>&quot;Быстрая настройка #{0}&quot;</item>
+        <item>&quot;Сохраните данные здоровья и настройки в файл. На новом телефоне выберите этот файл для восстановления.&quot;</item>
+        <item>&quot;Сохранить копию&quot;</item>
+        <item>&quot;Восстановить из файла&quot;</item>
+        <item>&quot;Автоматическое резервное копирование&quot;</item>
+        <item>&quot;Выключено&quot;</item>
+        <item>&quot;Раз в день&quot;</item>
+        <item>&quot;Раз в 3 дня&quot;</item>
+        <item>&quot;Раз в 7 дней&quot;</item>
+        <item>&quot;Раз в {0} ч&quot;</item>
+        <item>&quot;Копия сохраняется в памяти приложения. Чтобы она осталась после удаления приложения, выберите папку телефона.&quot;</item>
+        <item>&quot;Выбрать папку&quot;</item>
+        <item>&quot;Изменить папку&quot;</item>
+        <item>&quot;Доступ к уведомлениям&quot;</item>
+        <item>&quot;Этот системный доступ нужен также для распознавания Spotify и других плееров на браслете.&quot;</item>
+        <item>&quot;Передача на Fit3&quot;</item>
+        <item>&quot;Статус Fit3 App в шторке&quot;</item>
+        <item>&quot;При выключении подробный статус скрыт, но Android оставляет служебную строку для стабильной связи с браслетом.&quot;</item>
+        <item>&quot;Настроить уведомления приложения&quot;</item>
+        <item>&quot;Разрешить уведомления приложения&quot;</item>
+        <item>&quot;Для стабильной связи разрешите Fit3 App работу в фоне. Некоторые оболочки дополнительно ограничивают автозапуск.&quot;</item>
+        <item>&quot;Питание приложения&quot;</item>
+        <item>&quot;Откройте настройки Fit3 App и выберите «Без ограничений»&quot;</item>
+        <item>&quot;Оптимизация батареи&quot;</item>
+        <item>&quot;Fit3 App в списке исключений&quot;</item>
+        <item>&quot;Добавьте Fit3 App в исключения&quot;</item>
+        <item>&quot;Режим энергосбережения&quot;</item>
+        <item>&quot;Проверьте системный режим экономии заряда&quot;</item>
+        <item>&quot;Автозапуск в OnePlus, Xiaomi и других оболочках может находиться внутри настроек приложения. Android не даёт универсальной ссылки на этот пункт.&quot;</item>
+        <item>&quot;Тема&quot;</item>
+        <item>&quot;Цветовой акцент&quot;</item>
+        <item>&quot;А — адаптивные цвета обоев Android. На Android 10–11 используется цвет приложения.&quot;</item>
+        <item>&quot;Карточки главного экрана (БЕТА)&quot;</item>
+        <item>&quot;Порядок и размер на сетке&quot;</item>
+        <item>&quot;Запросить данные&quot;</item>
+        <item>&quot;BIN циферблата&quot;</item>
+        <item>&quot;Экспериментальный установщик использует тот же штатный путь /user/wf, что и каталог Samsung. Передача разрешается только после строгой проверки OPPO v4, CRC16 всех записей, setting.bin, UTF-8 локализаций и структуры style/AOD.&quot;</item>
+        <item>&quot;Выбрать .bin&quot;</item>
+        <item>&quot;Проверка: OK · OPPO v4 · все CRC совпали&quot;</item>
+        <item>&quot;ID: {0} · {1} байт · записей: {2}&quot;</item>
+        <item>&quot;Передача как: {0}&quot;</item>
+        <item>&quot;Стили в BIN: {0}&quot;</item>
+        <item>&quot;Локализации: {0}&quot;</item>
+        <item>&quot;Есть штатный vendor raster 0x88; формат подтверждён оригинальным каталогом.&quot;</item>
+        <item>&quot;BIN не прошёл проверку&quot;</item>
+        <item>&quot;Стиль после установки&quot;</item>
+        <item>&quot;Установить проверенный BIN&quot;</item>
+        <item>&quot;Для установки зарядите часы минимум до 30%.&quot;</item>
+        <item>&quot;Состояние связи&quot;</item>
+        <item>&quot;готов&quot;</item>
+        <item>&quot;не готов&quot;</item>
+        <item>&quot;Канал данных: {0} · пакетов в памяти: {1}&quot;</item>
+        <item>&quot;Обновить всё&quot;</item>
+        <item>&quot;Запрос Health&quot;</item>
+        <item>&quot;Проверить обмен Health&quot;</item>
+        <item>&quot;Выбор и проверка пакета&quot;</item>
+        <item>&quot;Проверка обмена данными здоровья&quot;</item>
+        <item>&quot;Пакеты обмена, копирование и очистка&quot;</item>
+        <item>&quot;Проверка уведомлений&quot;</item>
+        <item>&quot;Отправить тест на браслет&quot;</item>
+        <item>&quot;Сохранять журнал для ADB&quot;</item>
+        <item>&quot;В отладочной сборке журнал можно снять командой: adb shell run-as io.github.yuriyurin.fit3companion cat files/protocol-monitor.log. Файл может содержать данные здоровья; запись выключена по умолчанию и ограничена 4 МБ.&quot;</item>
+        <item>&quot;Краткий&quot;</item>
+        <item>&quot;Полный&quot;</item>
+        <item>&quot;Очистить&quot;</item>
+        <item>&quot;Журнал может содержать сведения о здоровье. Передавайте его только тем, кому доверяете.&quot;</item>
+        <item>&quot;Пакетов пока нет&quot;</item>
+        <item>&quot;Независимое приложение для Galaxy Fit3. Подключение и доступные функции работают без облака Samsung.&quot;</item>
+        <item>&quot;Автор: yuriyurin&quot;</item>
+        <item>&quot;Источник погоды и условия использования&quot;</item>
+        <item>&quot;Версия {0}&quot;</item>
+        <item>&quot;Погода: Open-Meteo&quot;</item>
+        <item>&quot;Данные Open-Meteo используются в Fit3 App в личных некоммерческих целях. Спасибо Open-Meteo и поставщикам погодных моделей за открытый прогноз.&quot;</item>
+        <item>&quot;Географический поиск основан на данных GeoNames. Прогноз может отличаться от фактической погоды.&quot;</item>
+        <item>&quot;Выберите пакет с телефона, чтобы проверить его размер и SHA-256. Запись на часы в этой версии отключена: защищённый протокол передачи ещё не перенесён с ПК.&quot;</item>
+        <item>&quot;Выбрать файл прошивки&quot;</item>
+        <item>&quot;Размер: {0} байт&quot;</item>
+        <item>&quot;Прошить часы — пока недоступно&quot;</item>
+        <item>&quot;Назад к отладке&quot;</item>
+        <item>&quot;Установить BIN циферблата?&quot;</item>
+        <item>&quot;Файл прошёл локальную проверку структуры и CRC. Он будет передан в /user/wf как {0}, затем часам будет отправлена команда установки ID {1}, стиль {2}. Структурная проверка снижает риск повреждённого файла, но окончательное принятие всё равно решает прошивка часов.&quot;</item>
+        <item>&quot;Передать и установить&quot;</item>
+        <item>&quot;Отмена&quot;</item>
+        <item>&quot;Понятно&quot;</item>
+        <item>&quot;Автоматическое копирование&quot;</item>
+        <item>&quot;Нет&quot;</item>
+        <item>&quot;Раз в 3 часа&quot;</item>
+        <item>&quot;Раз в 6 часов&quot;</item>
+        <item>&quot;Раз в 12 часов&quot;</item>
+        <item>&quot;Выбрать город&quot;</item>
+        <item>&quot;Город&quot;</item>
+        <item>&quot;Введите ещё буквы для поиска&quot;</item>
+        <item>&quot;Закрыть&quot;</item>
+        <item>&quot;Уведомления и музыка на браслете&quot;</item>
+        <item>&quot;Разрешите Fit3 App системный доступ к уведомлениям. Он нужен для передачи сообщений и определения активного плеера, например Spotify. Позже доступ можно включить в настройках приложения.&quot;</item>
+        <item>&quot;Открыть настройки&quot;</item>
+        <item>&quot;Позже&quot;</item>
+        <item>&quot;Fit3 App · краткий журнал&quot;</item>
+        <item>&quot;Версия: {0}&quot;</item>
+        <item>&quot;Время телефона: {0}&quot;</item>
+        <item>&quot;Соединение: {0}&quot;</item>
+        <item>&quot; (неполная сумма)&quot;</item>
+        <item>&quot;Шаги: {0}{1}&quot;</item>
+        <item>&quot;Интервалов: {0}; день: {1}&quot;</item>
+        <item>&quot;Дистанция: {0}; калории: {1}&quot;</item>
+        <item>&quot;Пульс: {0}; стресс: {1}; SpO₂: {2}&quot;</item>
+        <item>&quot;Период сна: {0} мин; оценка: {1}&quot;</item>
+        <item>&quot;Батарея часов: {0}%&quot;</item>
+        <item>&quot;Типы Health: {0}&quot;</item>
+        <item>&quot;Пакетов в журнале: {0}&quot;</item>
+        <item>&quot;Последние важные пакеты (повторы свёрнуты):&quot;</item>
+        <item>&quot;Состояние ещё не прочитано&quot;</item>
+        <item>&quot;Как выглядит на браслете&quot;</item>
+        <item>&quot;Карточки на браслете&quot;</item>
+        <item>&quot;Изменить порядок можно кнопками ниже&quot;</item>
+        <item>&quot;Да&quot;</item>
+        <item>&quot;Ок&quot;</item>
+        <item>&quot;Скоро буду&quot;</item>
+        <item>&quot;Перезвоню позже&quot;</item>
+        <item>&quot;Один ответ на строку&quot;</item>
+        <item>&quot;Отправить на часы&quot;</item>
+        <item>&quot;{0}% заряд&quot;</item>
+        <item>&quot;Заряд —&quot;</item>
+        <item>&quot;Заряд {0}%&quot;</item>
+        <item>&quot;Выбрать город ›&quot;</item>
+        <item>&quot;по данным Open-Meteo&quot;</item>
+        <item>&quot;Цель {0} · {1}%&quot;</item>
+        <item>&quot;За сегодня&quot;</item>
+        <item>&quot;Последний сон&quot;</item>
+        <item>&quot;уд/мин&quot;</item>
+        <item>&quot;Измерено {0}&quot;</item>
+        <item>&quot;Нет замера&quot;</item>
+        <item>&quot; · зарядка&quot;</item>
+        <item>&quot;Заряд {0}%{1}&quot;</item>
+        <item>&quot;Заряд пока не получен&quot;</item>
+        <item>&quot;Циферблат и настройки →&quot;</item>
+        <item>&quot;Найти браслет →&quot;</item>
+        <item>&quot;Активность и здоровье&quot;</item>
+        <item>&quot;Шаги  {0}&quot;</item>
+        <item>&quot;Сон  {0}&quot;</item>
+        <item>&quot;{0} уд/мин&quot;</item>
+        <item>&quot;Пульс  {0}&quot;</item>
+        <item>&quot;Измерения ещё не получены с браслета&quot;</item>
+        <item>&quot;Выбрать город  ›&quot;</item>
+        <item>&quot;Ясно&quot;</item>
+        <item>&quot;Переменная облачность&quot;</item>
+        <item>&quot;Облачно&quot;</item>
+        <item>&quot;Туман&quot;</item>
+        <item>&quot;Дождь&quot;</item>
+        <item>&quot;Снег&quot;</item>
+        <item>&quot;Гроза&quot;</item>
+        <item>&quot;Прогноз&quot;</item>
+        <item>&quot;Найдите свой Fit3&quot;</item>
+        <item>&quot;Поднесите браслет к телефону и выберите его ниже. Если Android запросит подтверждение сопряжения, проверьте экран браслета.&quot;</item>
+        <item>&quot;Ошибка&quot;</item>
+        <item>&quot;Включите&quot;</item>
+        <item>&quot;Разрешите&quot;</item>
+        <item>&quot;Текущий циферблат&quot;</item>
+        <item>&quot;Превью циферблата {0}&quot;</item>
+        <item>&quot;Уже сопряжён&quot;</item>
+        <item>&quot;Рядом · требуется подключение&quot;</item>
+        <item>&quot;Выбрать →&quot;</item>
+        <item>&quot;Открыть циферблаты →&quot;</item>
+        <item>&quot;Подключите браслет&quot;</item>
+        <item>&quot;Вариант {0}&quot;</item>
+        <item>&quot;Выбран&quot;</item>
+        <item>&quot;Не установлен&quot;</item>
+        <item>&quot;Как в системе&quot;</item>
+        <item>&quot;Тёмная&quot;</item>
+        <item>&quot;Светлая&quot;</item>
+        <item>&quot;AMOLED · чёрная&quot;</item>
+        <item>&quot;шагов&quot;</item>
+        <item>&quot;Цель {0} шагов · ждём данные&quot;</item>
+        <item>&quot;Ходьба {0} · бег {1}&quot;</item>
+        <item>&quot;Изменить цель →&quot;</item>
+        <item>&quot;ПН&quot;</item>
+        <item>&quot;ВТ&quot;</item>
+        <item>&quot;СР&quot;</item>
+        <item>&quot;ЧТ&quot;</item>
+        <item>&quot;ПТ&quot;</item>
+        <item>&quot;СБ&quot;</item>
+        <item>&quot;ВС&quot;</item>
+        <item>&quot;Цель по шагам&quot;</item>
+        <item>&quot;Шагов в день&quot;</item>
+        <item>&quot;Цель для статистики Fit3 App&quot;</item>
+        <item>&quot;Сохранить&quot;</item>
+        <item>&quot;Шаги за неделю&quot;</item>
+        <item>&quot;Цель {0}&quot;</item>
+        <item>&quot;Впереди&quot;</item>
+        <item>&quot;Нет данных&quot;</item>
+        <item>&quot;{0} шагов&quot;</item>
+        <item>&quot;Период сна&quot;</item>
+        <item>&quot;Пульс min {0} · max {1}&quot;</item>
+        <item>&quot;{0} из 100&quot;</item>
+        <item>&quot;Измерений пока нет&quot;</item>
+        <item>&quot;Последние типы: {0}&quot;</item>
+        <item>&quot;Последние разобранные данные: {0}&quot;</item>
+        <item>&quot;Пакеты часов получены. Показаны только подтверждённые показатели; полный обмен Health ещё исследуется.&quot;</item>
+        <item>&quot;Fit3 App ответил на запрос возможностей и ждёт данные здоровья от браслета.&quot;</item>
+        <item>&quot;%.2f км&quot;</item>
+        <item>&quot;{0} м&quot;</item>
+        <item>&quot;{0}ч {1}м&quot;</item>
+        <item>&quot;Некорректный Health-пакет&quot;</item>
+        <item>&quot;Health handshake: Fit3 protocol {0}, standalone host подтверждён&quot;</item>
+        <item>&quot;Получен ответ Health capability&quot;</item>
+        <item>&quot;Fit3 запросил Samsung Health capability: ответ 4.51 отправлен; ждём SYNC_DATA&quot;</item>
+        <item>&quot;Получен Health wearable capability response&quot;</item>
+        <item>&quot;Health capability exchange получен&quot;</item>
+        <item>&quot;Ответ на запрос возможностей Health получен&quot;</item>
+        <item>&quot;Канал Fit3 Health отвечает&quot;</item>
+        <item>&quot;Получен ответ обратной синхронизации шагов&quot;</item>
+        <item>&quot;Fit3 запросил Health data у телефона&quot;</item>
+        <item>&quot;Получено Health wearable-message&quot;</item>
+        <item>&quot;Неизвестная команда Health {0}; пакет сохранён в Protocol Monitor&quot;</item>
+        <item>&quot;Fit3 Health: получены реальные данные {0}&quot;</item>
+        <item>&quot;Fit3 Health sync: типы {0}; поля сохранены для разбора&quot;</item>
+        <item>&quot;Fit3 Health sync получен; формат записи сохранён в Protocol Monitor&quot;</item>
+        <item>&quot;Будильник&quot;</item>
+        <item>&quot;Календарь&quot;</item>
+        <item>&quot;Таймер&quot;</item>
+        <item>&quot;Мировое время&quot;</item>
+        <item>&quot;Музыка&quot;</item>
+        <item>&quot;Прогноз погоды&quot;</item>
+        <item>&quot;События&quot;</item>
+        <item>&quot;Батарея&quot;</item>
+        <item>&quot;Тренировки&quot;</item>
+        <item>&quot;Цикл&quot;</item>
+        <item>&quot;Вода&quot;</item>
+        <item>&quot;Еда&quot;</item>
+        <item>&quot;Кислород&quot;</item>
+        <item>&quot;Не беспокоить&quot;</item>
+        <item>&quot;Найти телефон&quot;</item>
+        <item>&quot;Звук / вибрация&quot;</item>
+        <item>&quot;Блокировка воды&quot;</item>
+        <item>&quot;Питание&quot;</item>
+        <item>&quot;Фонарик&quot;</item>
+        <item>&quot;Авиарежим&quot;</item>
+        <item>&quot;Контроллер мультимедиа&quot;</item>
+        <item>&quot;Найти мой телефон&quot;</item>
+        <item>&quot;Камера&quot;</item>
+        <item>&quot;Секундомер&quot;</item>
+        <item>&quot;Калькулятор&quot;</item>
+        <item>&quot;FULL_SETTINGS (не удалось разобрать параметры)&quot;</item>
+        <item>&quot;Низкий&quot;</item>
+        <item>&quot;Средний&quot;</item>
+        <item>&quot;Высокий&quot;</item>
+        <item>&quot;Очень высокий&quot;</item>
+        <item>&quot;Экстремальный&quot;</item>
+    </string-array>
+    <string-array name="legacy_text_keys" translatable="false">
+        <item>loc_000</item>
+        <item>loc_001</item>
+        <item>loc_002</item>
+        <item>loc_003</item>
+        <item>loc_004</item>
+        <item>loc_005</item>
+        <item>loc_006</item>
+        <item>loc_007</item>
+        <item>loc_008</item>
+        <item>loc_009</item>
+        <item>loc_010</item>
+        <item>loc_011</item>
+        <item>loc_012</item>
+        <item>loc_013</item>
+        <item>loc_014</item>
+        <item>loc_015</item>
+        <item>loc_016</item>
+        <item>loc_017</item>
+        <item>loc_018</item>
+        <item>loc_019</item>
+        <item>loc_020</item>
+        <item>loc_021</item>
+        <item>loc_022</item>
+        <item>loc_023</item>
+        <item>loc_024</item>
+        <item>loc_025</item>
+        <item>loc_026</item>
+        <item>loc_027</item>
+        <item>loc_028</item>
+        <item>loc_029</item>
+        <item>loc_030</item>
+        <item>loc_031</item>
+        <item>loc_032</item>
+        <item>loc_033</item>
+        <item>loc_034</item>
+        <item>loc_035</item>
+        <item>loc_036</item>
+        <item>loc_037</item>
+        <item>loc_038</item>
+        <item>loc_039</item>
+        <item>loc_040</item>
+        <item>loc_041</item>
+        <item>loc_042</item>
+        <item>loc_043</item>
+        <item>loc_044</item>
+        <item>loc_045</item>
+        <item>loc_046</item>
+        <item>loc_047</item>
+        <item>loc_048</item>
+        <item>loc_049</item>
+        <item>loc_050</item>
+        <item>loc_051</item>
+        <item>loc_052</item>
+        <item>loc_053</item>
+        <item>loc_054</item>
+        <item>loc_055</item>
+        <item>loc_056</item>
+        <item>loc_057</item>
+        <item>loc_058</item>
+        <item>loc_059</item>
+        <item>loc_060</item>
+        <item>loc_061</item>
+        <item>loc_062</item>
+        <item>loc_063</item>
+        <item>loc_064</item>
+        <item>loc_065</item>
+        <item>loc_066</item>
+        <item>loc_067</item>
+        <item>loc_068</item>
+        <item>loc_069</item>
+        <item>loc_070</item>
+        <item>loc_071</item>
+        <item>loc_072</item>
+        <item>loc_073</item>
+        <item>loc_074</item>
+        <item>loc_075</item>
+        <item>loc_076</item>
+        <item>loc_077</item>
+        <item>loc_078</item>
+        <item>loc_079</item>
+        <item>loc_080</item>
+        <item>loc_081</item>
+        <item>loc_082</item>
+        <item>loc_083</item>
+        <item>loc_084</item>
+        <item>loc_085</item>
+        <item>loc_086</item>
+        <item>loc_087</item>
+        <item>loc_088</item>
+        <item>loc_089</item>
+        <item>loc_090</item>
+        <item>loc_091</item>
+        <item>loc_092</item>
+        <item>loc_093</item>
+        <item>loc_094</item>
+        <item>loc_095</item>
+        <item>loc_096</item>
+        <item>loc_097</item>
+        <item>loc_098</item>
+        <item>loc_099</item>
+        <item>loc_100</item>
+        <item>loc_101</item>
+        <item>loc_102</item>
+        <item>loc_103</item>
+        <item>loc_104</item>
+        <item>loc_105</item>
+        <item>loc_106</item>
+        <item>loc_107</item>
+        <item>loc_108</item>
+        <item>loc_109</item>
+        <item>loc_110</item>
+        <item>loc_111</item>
+        <item>loc_112</item>
+        <item>loc_113</item>
+        <item>loc_114</item>
+        <item>loc_115</item>
+        <item>loc_116</item>
+        <item>loc_117</item>
+        <item>loc_118</item>
+        <item>loc_119</item>
+        <item>loc_120</item>
+        <item>loc_121</item>
+        <item>loc_122</item>
+        <item>loc_123</item>
+        <item>loc_124</item>
+        <item>loc_125</item>
+        <item>loc_126</item>
+        <item>loc_127</item>
+        <item>loc_128</item>
+        <item>loc_129</item>
+        <item>loc_130</item>
+        <item>loc_131</item>
+        <item>loc_132</item>
+        <item>loc_133</item>
+        <item>loc_134</item>
+        <item>loc_135</item>
+        <item>loc_136</item>
+        <item>loc_137</item>
+        <item>loc_138</item>
+        <item>loc_139</item>
+        <item>loc_140</item>
+        <item>loc_141</item>
+        <item>loc_142</item>
+        <item>loc_143</item>
+        <item>loc_144</item>
+        <item>loc_145</item>
+        <item>loc_146</item>
+        <item>loc_147</item>
+        <item>loc_148</item>
+        <item>loc_149</item>
+        <item>loc_150</item>
+        <item>loc_151</item>
+        <item>loc_152</item>
+        <item>loc_153</item>
+        <item>loc_154</item>
+        <item>loc_155</item>
+        <item>loc_156</item>
+        <item>loc_157</item>
+        <item>loc_158</item>
+        <item>loc_159</item>
+        <item>loc_160</item>
+        <item>loc_161</item>
+        <item>loc_162</item>
+        <item>loc_163</item>
+        <item>loc_164</item>
+        <item>loc_165</item>
+        <item>loc_166</item>
+        <item>loc_167</item>
+        <item>loc_168</item>
+        <item>loc_169</item>
+        <item>loc_170</item>
+        <item>loc_171</item>
+        <item>loc_172</item>
+        <item>loc_173</item>
+        <item>loc_174</item>
+        <item>loc_175</item>
+        <item>loc_176</item>
+        <item>loc_177</item>
+        <item>loc_178</item>
+        <item>loc_179</item>
+        <item>loc_180</item>
+        <item>loc_181</item>
+        <item>loc_182</item>
+        <item>loc_183</item>
+        <item>loc_184</item>
+        <item>loc_185</item>
+        <item>loc_186</item>
+        <item>loc_187</item>
+        <item>loc_188</item>
+        <item>loc_189</item>
+        <item>loc_190</item>
+        <item>loc_191</item>
+        <item>loc_192</item>
+        <item>loc_193</item>
+        <item>loc_194</item>
+        <item>loc_195</item>
+        <item>loc_196</item>
+        <item>loc_197</item>
+        <item>loc_198</item>
+        <item>loc_199</item>
+        <item>loc_200</item>
+        <item>loc_201</item>
+        <item>loc_202</item>
+        <item>loc_203</item>
+        <item>loc_204</item>
+        <item>loc_205</item>
+        <item>loc_206</item>
+        <item>loc_207</item>
+        <item>loc_208</item>
+        <item>loc_209</item>
+        <item>loc_210</item>
+        <item>loc_211</item>
+        <item>loc_212</item>
+        <item>loc_213</item>
+        <item>loc_214</item>
+        <item>loc_215</item>
+        <item>loc_216</item>
+        <item>loc_217</item>
+        <item>loc_218</item>
+        <item>loc_219</item>
+        <item>loc_220</item>
+        <item>loc_221</item>
+        <item>loc_222</item>
+        <item>loc_223</item>
+        <item>loc_224</item>
+        <item>loc_225</item>
+        <item>loc_226</item>
+        <item>loc_227</item>
+        <item>loc_228</item>
+        <item>loc_229</item>
+        <item>loc_230</item>
+        <item>loc_231</item>
+        <item>loc_232</item>
+        <item>loc_233</item>
+        <item>loc_234</item>
+        <item>loc_235</item>
+        <item>loc_236</item>
+        <item>loc_237</item>
+        <item>loc_238</item>
+        <item>loc_239</item>
+        <item>loc_240</item>
+        <item>loc_241</item>
+        <item>loc_242</item>
+        <item>loc_243</item>
+        <item>loc_244</item>
+        <item>loc_245</item>
+        <item>loc_246</item>
+        <item>loc_247</item>
+        <item>loc_248</item>
+        <item>loc_249</item>
+        <item>loc_250</item>
+        <item>loc_251</item>
+        <item>loc_252</item>
+        <item>loc_253</item>
+        <item>loc_254</item>
+        <item>loc_255</item>
+        <item>loc_256</item>
+        <item>loc_257</item>
+        <item>loc_258</item>
+        <item>loc_259</item>
+        <item>loc_260</item>
+        <item>loc_261</item>
+        <item>loc_262</item>
+        <item>loc_263</item>
+        <item>loc_264</item>
+        <item>loc_265</item>
+        <item>loc_266</item>
+        <item>loc_267</item>
+        <item>loc_268</item>
+        <item>loc_269</item>
+        <item>loc_270</item>
+        <item>loc_271</item>
+        <item>loc_272</item>
+        <item>loc_273</item>
+        <item>loc_274</item>
+        <item>loc_275</item>
+        <item>loc_276</item>
+        <item>loc_277</item>
+        <item>loc_278</item>
+        <item>loc_279</item>
+        <item>loc_280</item>
+        <item>loc_281</item>
+        <item>loc_282</item>
+        <item>loc_283</item>
+        <item>loc_284</item>
+        <item>loc_285</item>
+        <item>loc_286</item>
+        <item>loc_287</item>
+        <item>loc_288</item>
+        <item>loc_289</item>
+        <item>loc_290</item>
+        <item>loc_291</item>
+        <item>loc_292</item>
+        <item>loc_293</item>
+        <item>loc_294</item>
+        <item>loc_295</item>
+        <item>loc_296</item>
+        <item>loc_297</item>
+        <item>loc_298</item>
+        <item>loc_299</item>
+        <item>loc_300</item>
+        <item>loc_301</item>
+        <item>loc_302</item>
+        <item>loc_303</item>
+        <item>loc_304</item>
+        <item>loc_305</item>
+        <item>loc_306</item>
+        <item>loc_307</item>
+        <item>loc_308</item>
+        <item>loc_309</item>
+        <item>loc_310</item>
+        <item>loc_311</item>
+        <item>loc_312</item>
+        <item>loc_313</item>
+        <item>loc_314</item>
+        <item>loc_315</item>
+        <item>loc_316</item>
+        <item>loc_317</item>
+        <item>loc_318</item>
+        <item>loc_319</item>
+        <item>loc_320</item>
+        <item>loc_321</item>
+        <item>loc_322</item>
+        <item>loc_323</item>
+        <item>loc_324</item>
+        <item>loc_325</item>
+        <item>loc_326</item>
+        <item>loc_327</item>
+        <item>loc_328</item>
+        <item>loc_329</item>
+        <item>loc_330</item>
+        <item>loc_331</item>
+        <item>loc_332</item>
+        <item>loc_333</item>
+        <item>loc_334</item>
+        <item>loc_335</item>
+        <item>loc_336</item>
+        <item>loc_337</item>
+        <item>loc_338</item>
+        <item>loc_339</item>
+        <item>loc_340</item>
+        <item>loc_341</item>
+        <item>loc_342</item>
+        <item>loc_343</item>
+        <item>loc_344</item>
+        <item>loc_345</item>
+        <item>loc_346</item>
+        <item>loc_347</item>
+        <item>loc_348</item>
+        <item>loc_349</item>
+        <item>loc_350</item>
+        <item>loc_351</item>
+        <item>loc_352</item>
+        <item>loc_353</item>
+        <item>loc_354</item>
+        <item>loc_355</item>
+        <item>loc_356</item>
+        <item>loc_357</item>
+        <item>loc_358</item>
+        <item>loc_359</item>
+        <item>loc_360</item>
+        <item>loc_361</item>
+        <item>loc_362</item>
+        <item>loc_363</item>
+        <item>loc_364</item>
+        <item>loc_365</item>
+        <item>loc_366</item>
+        <item>loc_367</item>
+        <item>loc_368</item>
+        <item>loc_369</item>
+        <item>loc_370</item>
+        <item>loc_371</item>
+        <item>loc_372</item>
+        <item>loc_373</item>
+        <item>loc_374</item>
+        <item>loc_375</item>
+        <item>loc_376</item>
+        <item>loc_377</item>
+        <item>loc_378</item>
+        <item>loc_379</item>
+        <item>loc_380</item>
+        <item>loc_381</item>
+        <item>loc_382</item>
+        <item>loc_383</item>
+        <item>loc_384</item>
+        <item>loc_385</item>
+        <item>loc_386</item>
+        <item>loc_387</item>
+        <item>loc_388</item>
+        <item>loc_389</item>
+        <item>loc_390</item>
+        <item>loc_391</item>
+        <item>loc_392</item>
+        <item>loc_393</item>
+        <item>loc_394</item>
+        <item>loc_395</item>
+        <item>loc_396</item>
+        <item>loc_397</item>
+        <item>loc_398</item>
+        <item>loc_399</item>
+        <item>loc_400</item>
+        <item>loc_401</item>
+        <item>loc_402</item>
+        <item>loc_403</item>
+        <item>loc_405</item>
+        <item>loc_406</item>
+        <item>loc_407</item>
+        <item>loc_408</item>
+        <item>loc_409</item>
+        <item>loc_410</item>
+        <item>loc_411</item>
+        <item>loc_412</item>
+        <item>loc_413</item>
+        <item>loc_414</item>
+        <item>loc_415</item>
+        <item>loc_416</item>
+        <item>loc_417</item>
+        <item>loc_418</item>
+        <item>loc_419</item>
+        <item>loc_420</item>
+        <item>loc_421</item>
+        <item>loc_422</item>
+        <item>loc_423</item>
+        <item>loc_424</item>
+        <item>loc_425</item>
+        <item>loc_426</item>
+        <item>loc_427</item>
+        <item>loc_428</item>
+        <item>loc_429</item>
+        <item>loc_435</item>
+        <item>loc_436</item>
+        <item>loc_437</item>
+        <item>loc_438</item>
+        <item>loc_439</item>
+        <item>loc_440</item>
+        <item>loc_441</item>
+        <item>loc_442</item>
+        <item>loc_443</item>
+        <item>loc_444</item>
+        <item>loc_445</item>
+        <item>loc_446</item>
+        <item>loc_447</item>
+        <item>loc_448</item>
+        <item>loc_449</item>
+        <item>loc_450</item>
+        <item>loc_451</item>
+        <item>loc_452</item>
+        <item>loc_453</item>
+        <item>loc_454</item>
+        <item>loc_455</item>
+        <item>loc_456</item>
+        <item>loc_457</item>
+        <item>loc_460</item>
+        <item>loc_461</item>
+        <item>loc_462</item>
+        <item>loc_463</item>
+        <item>loc_464</item>
+        <item>loc_465</item>
+        <item>loc_466</item>
+        <item>loc_467</item>
+        <item>loc_468</item>
+        <item>loc_469</item>
+        <item>loc_470</item>
+        <item>loc_471</item>
+        <item>loc_472</item>
+        <item>loc_473</item>
+        <item>loc_474</item>
+        <item>loc_475</item>
+        <item>loc_476</item>
+        <item>loc_477</item>
+        <item>loc_478</item>
+        <item>loc_479</item>
+        <item>loc_480</item>
+        <item>loc_481</item>
+        <item>loc_482</item>
+        <item>loc_483</item>
+        <item>loc_484</item>
+        <item>loc_485</item>
+        <item>loc_486</item>
+        <item>loc_487</item>
+        <item>loc_488</item>
+        <item>loc_489</item>
+        <item>loc_490</item>
+        <item>loc_491</item>
+        <item>loc_492</item>
+        <item>loc_493</item>
+        <item>loc_494</item>
+        <item>loc_495</item>
+        <item>loc_496</item>
+        <item>loc_497</item>
+        <item>loc_498</item>
+        <item>loc_499</item>
+        <item>loc_500</item>
+        <item>loc_501</item>
+        <item>loc_502</item>
+        <item>loc_503</item>
+        <item>loc_504</item>
+        <item>loc_505</item>
+        <item>loc_506</item>
+        <item>loc_507</item>
+        <item>loc_508</item>
+        <item>loc_509</item>
+        <item>loc_510</item>
+        <item>loc_511</item>
+        <item>loc_512</item>
+        <item>loc_513</item>
+        <item>loc_514</item>
+        <item>loc_515</item>
+        <item>loc_516</item>
+        <item>loc_517</item>
+        <item>loc_518</item>
+        <item>loc_519</item>
+        <item>loc_528</item>
+        <item>loc_529</item>
+        <item>loc_530</item>
+        <item>loc_531</item>
+        <item>loc_532</item>
+        <item>loc_533</item>
+        <item>loc_534</item>
+        <item>loc_535</item>
+        <item>loc_536</item>
+        <item>loc_537</item>
+        <item>loc_538</item>
+        <item>loc_539</item>
+        <item>loc_540</item>
+        <item>loc_541</item>
+        <item>loc_542</item>
+        <item>loc_543</item>
+        <item>loc_544</item>
+        <item>loc_545</item>
+        <item>loc_546</item>
+        <item>loc_547</item>
+        <item>loc_548</item>
+        <item>loc_549</item>
+        <item>loc_550</item>
+        <item>loc_551</item>
+        <item>loc_552</item>
+        <item>loc_553</item>
+        <item>loc_554</item>
+        <item>loc_555</item>
+        <item>loc_556</item>
+        <item>loc_557</item>
+        <item>loc_558</item>
+        <item>loc_559</item>
+        <item>loc_560</item>
+        <item>loc_561</item>
+        <item>loc_562</item>
+        <item>loc_563</item>
+        <item>loc_564</item>
+        <item>loc_565</item>
+        <item>loc_566</item>
+        <item>loc_567</item>
+        <item>loc_568</item>
+        <item>loc_569</item>
+        <item>loc_570</item>
+        <item>loc_571</item>
+        <item>loc_572</item>
+        <item>loc_573</item>
+        <item>loc_574</item>
+        <item>loc_575</item>
+        <item>loc_576</item>
+        <item>loc_577</item>
+        <item>loc_578</item>
+        <item>loc_579</item>
+        <item>loc_580</item>
+        <item>loc_581</item>
+        <item>loc_582</item>
+        <item>loc_583</item>
+        <item>loc_584</item>
+        <item>loc_585</item>
+        <item>loc_586</item>
+        <item>loc_587</item>
+        <item>loc_588</item>
+        <item>loc_589</item>
+        <item>loc_590</item>
+        <item>loc_591</item>
+        <item>loc_592</item>
+        <item>loc_593</item>
+        <item>loc_594</item>
+        <item>loc_595</item>
+        <item>loc_596</item>
+        <item>loc_597</item>
+        <item>loc_598</item>
+        <item>loc_599</item>
+        <item>loc_600</item>
+        <item>loc_601</item>
+        <item>loc_602</item>
+        <item>loc_603</item>
+        <item>loc_604</item>
+        <item>loc_605</item>
+        <item>loc_606</item>
+        <item>loc_607</item>
+        <item>loc_608</item>
+        <item>loc_609</item>
+        <item>loc_610</item>
+        <item>loc_611</item>
+        <item>loc_612</item>
+        <item>loc_613</item>
+        <item>loc_614</item>
+        <item>loc_615</item>
+        <item>loc_616</item>
+        <item>loc_617</item>
+        <item>loc_618</item>
+        <item>loc_619</item>
+        <item>loc_620</item>
+        <item>loc_621</item>
+        <item>loc_622</item>
+        <item>loc_623</item>
+        <item>loc_624</item>
+        <item>loc_625</item>
+        <item>loc_626</item>
+        <item>loc_627</item>
+        <item>loc_628</item>
+        <item>loc_629</item>
+        <item>loc_630</item>
+        <item>loc_631</item>
+        <item>loc_632</item>
+    </string-array>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activity_goals_title">Daily activity goals</string>
+    <string name="activity_goals_description">Set your daily goals. They will also be applied to your Fit3 after connecting.</string>
+    <string name="activity_goals_steps">Steps per day</string>
+    <string name="activity_goals_minutes">Active time, minutes</string>
+    <string name="activity_goals_calories">Active calories, kcal</string>
+    <string name="activity_goal_summary">%1$d min · %2$d kcal</string>
+</resources>

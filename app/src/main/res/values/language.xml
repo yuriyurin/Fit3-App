@@ -1,0 +1,8 @@
+<resources>
+    <string name="language_title">Language</string>
+    <string name="language_system">Follow system</string>
+    <string name="language_russian" translatable="false">Русский</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="notification_listener_label">Fit3 App — notifications</string>
+    <string name="appearance_subtitle">Theme, accent and language</string>
+</resources>

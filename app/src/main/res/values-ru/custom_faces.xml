@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="custom_faces_title">Установленные</string>
+    <string name="custom_faces_subtitle">Каталог пользовательских циферблатов</string>
+    <string name="custom_faces_extended_title">Пользовательский циферблат</string>
+    <string name="custom_faces_extended_info">Выберите этот циферблат в меню Fit3. Выбор и удаление из приложения пока недоступны.</string>
+    <string name="custom_faces_extended_import">ID больше 255 поддерживаются экспериментально. Передача не гарантирует установку: результат должен подтвердить Fit3. Для таких файлов поддерживается вариант 1; дальнейший выбор — в меню браслета.</string>
+    <string name="watch_faces_heading">На браслете</string>
+    <string name="watch_faces_delete_action">Удалить с браслета</string>
+    <string name="custom_faces_delete_local">Удалить из приложения</string>
+    <string name="custom_faces_variants">Варианты</string>
+    <string name="local_faces_heading">Сохранённые в приложении</string>
+    <string name="watch_faces_generic">Циферблат</string>
+    <string name="watch_faces_selected">Выбран</string>
+    <string name="watch_faces_offline">Подключите Fit3, чтобы получить актуальный список.</string>
+    <string name="watch_faces_unavailable">Не удалось обновить список. Потяните вниз, чтобы повторить.</string>
+    <string name="watch_faces_hint">Нажмите для выбора. Удерживайте, чтобы удалить с Fit3.</string>
+    <string name="watch_faces_delete_title">Удалить циферблат?</string>
+    <string name="watch_faces_delete_question">Этот вариант будет удалён с Fit3. Сохранённый в приложении BIN-файл останется.</string>
+    <string name="watch_faces_delete_protected">Выбранный циферблат удалить нельзя. Сначала выберите другой и дождитесь обновления списка.</string>
+    <string name="watch_faces_deleting">Удаляем циферблат…</string>
+    <string name="watch_faces_deleted">Циферблат удалён с Fit3</string>
+    <string name="watch_faces_delete_failed">Не удалось удалить циферблат. Обновите список и попробуйте снова.</string>
+    <string name="watch_faces_delete_timeout">Fit3 не подтвердил удаление. Обновите список перед повторной попыткой.</string>
+    <string name="custom_faces_import">Добавить циферблат из BIN</string>
+    <string name="custom_faces_empty">Добавьте свой первый циферблат. Он сохранится в приложении и отправится на Fit3 только при выборе.</string>
+    <string name="custom_faces_hint">Нажмите, чтобы отправить на Fit3. Удерживайте для переименования или удаления.</string>
+    <string name="custom_faces_connect">Подключите Fit3, чтобы применить циферблат. Добавлять файлы можно без подключения.</string>
+    <string name="custom_faces_battery">Для установки зарядите Fit3 минимум до 30%.</string>
+    <string name="custom_faces_import_error">Не удалось добавить файл. Выберите корректный BIN для Fit3 и попробуйте ещё раз.</string>
+    <string name="custom_faces_rename">Переименовать</string>
+    <string name="custom_faces_delete">Удалить</string>
+    <string name="custom_faces_delete_question">Удалить из приложения? Циферблат на Fit3 и исходный BIN-файл останутся без изменений.</string>
+    <string name="custom_faces_name">Название циферблата</string>
+    <string name="custom_faces_save">Сохранить</string>
+    <string name="custom_faces_cancel">Отмена</string>
+    <string name="custom_faces_operation_error">Не удалось сохранить изменение. Попробуйте ещё раз.</string>
+    <string name="custom_faces_variant">Вариант %1$d</string>
+</resources>

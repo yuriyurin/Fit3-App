@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_support">Поддержать</string>
+    <string name="about_link_unavailable">Не удалось открыть ссылку. Установите или включите браузер.</string>
+</resources>

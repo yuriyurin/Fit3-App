@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loc_000" formatted="false">&quot;BIN должен быть не больше 4 МиБ ({0} байт)&quot;</string>
+    <string name="loc_001" formatted="false">&quot;Неизвестный формат: отсутствует заголовок OPPO&quot;</string>
+    <string name="loc_002" formatted="false">&quot;Поддерживается только контейнер OPPO v4&quot;</string>
+    <string name="loc_003" formatted="false">&quot;Размер payload в заголовке не совпадает с размером BIN&quot;</string>
+    <string name="loc_004" formatted="false">&quot;Недопустимое число файлов в контейнере: {0}&quot;</string>
+    <string name="loc_005" formatted="false">&quot;Каталог OPPO выходит за границы файла&quot;</string>
+    <string name="loc_006" formatted="false">&quot;Зарезервированные байты заголовка повреждены&quot;</string>
+    <string name="loc_007" formatted="false">&quot;Не совпадает общая CRC16 контейнера&quot;</string>
+    <string name="loc_008" formatted="false">&quot;Путь записи #{0} не завершён NUL&quot;</string>
+    <string name="loc_009" formatted="false">&quot;В padding пути записи #{0} есть посторонние байты&quot;</string>
+    <string name="loc_010" formatted="false">&quot;Путь записи #{0} не ASCII&quot;</string>
+    <string name="loc_011" formatted="false">&quot;Недопустимый путь внутри BIN: {0}&quot;</string>
+    <string name="loc_012" formatted="false">&quot;Неподдерживаемый внутренний файл BIN: {0}&quot;</string>
+    <string name="loc_013" formatted="false">&quot;Повторяющийся файл внутри BIN: {0}&quot;</string>
+    <string name="loc_014" formatted="false">&quot;Контейнер не плотно упакован перед {0}&quot;</string>
+    <string name="loc_015" formatted="false">&quot;Файл {0} выходит за границы контейнера&quot;</string>
+    <string name="loc_016" formatted="false">&quot;Не совпадает CRC16 файла {0}&quot;</string>
+    <string name="loc_017" formatted="false">&quot;После последней записи есть непроверенный хвост&quot;</string>
+    <string name="loc_018" formatted="false">&quot;В контейнере смешаны разные ID циферблатов&quot;</string>
+    <string name="loc_019" formatted="false">&quot;ID циферблата {0} не помещается в протокол Fit3&quot;</string>
+    <string name="loc_020" formatted="false">&quot;ID BIN ({0}) не совпадает с ожидаемым ID ({1})&quot;</string>
+    <string name="loc_021" formatted="false">&quot;Имя выбранного BIN относится к другому циферблату&quot;</string>
+    <string name="loc_022" formatted="false">&quot;В BIN отсутствует обязательный {0}&quot;</string>
+    <string name="loc_023" formatted="false">&quot;Нет style0.bin&quot;</string>
+    <string name="loc_024" formatted="false">&quot;Номера style*.bin имеют пропуски&quot;</string>
+    <string name="loc_025" formatted="false">&quot;Номер стиля не помещается в протокол Fit3&quot;</string>
+    <string name="loc_026" formatted="false">&quot;setting.bin имеет неожиданный размер {0}&quot;</string>
+    <string name="loc_027" formatted="false">&quot;setting.bin не содержит маркер LQ_WF&quot;</string>
+    <string name="loc_028" formatted="false">&quot;setting.bin повреждён&quot;</string>
+    <string name="loc_029" formatted="false">&quot;ID в setting.bin ({0}) не совпадает с ID каталога ({1})&quot;</string>
+    <string name="loc_030" formatted="false">&quot;Повреждены name slots в setting.bin&quot;</string>
+    <string name="loc_031" formatted="false">&quot;Две копии имени в setting.bin расходятся&quot;</string>
+    <string name="loc_032" formatted="false">&quot;{0} должен иметь размер 92 байта&quot;</string>
+    <string name="loc_033" formatted="false">&quot;{0}: повреждена роль системного шрифта&quot;</string>
+    <string name="loc_034" formatted="false">&quot;{0}: недопустимый размер шрифта {1}&quot;</string>
+    <string name="loc_035" formatted="false">&quot;{0}: слишком короткая таблица локализации&quot;</string>
+    <string name="loc_036" formatted="false">&quot;{0}: неверный magic&quot;</string>
+    <string name="loc_037" formatted="false">&quot;{0}: неверное число строк&quot;</string>
+    <string name="loc_038" formatted="false">&quot;{0}: повреждён reserved header&quot;</string>
+    <string name="loc_039" formatted="false">&quot;{0}: таблица descriptors выходит за границы&quot;</string>
+    <string name="loc_040" formatted="false">&quot;{0}: строка #{1} выходит за границы&quot;</string>
+    <string name="loc_041" formatted="false">&quot;{0}: первая строка начинается не после descriptors&quot;</string>
+    <string name="loc_042" formatted="false">&quot;{0}: offsets строк идут в обратном порядке&quot;</string>
+    <string name="loc_043" formatted="false">&quot;{0}: после UTF-8 строк есть непроверенный хвост&quot;</string>
+    <string name="loc_044" formatted="false">&quot;{0}: слишком короткий style container&quot;</string>
+    <string name="loc_045" formatted="false">&quot;{0}: неверный style magic&quot;</string>
+    <string name="loc_046" formatted="false">&quot;{0}: неверное число widgets&quot;</string>
+    <string name="loc_047" formatted="false">&quot;{0}: повреждены размеры секций widgets/images&quot;</string>
+    <string name="loc_048" formatted="false">&quot;{0}: widget #{1} обрезан&quot;</string>
+    <string name="loc_049" formatted="false">&quot;{0}: widget #{1} имеет неверный размер {2}&quot;</string>
+    <string name="loc_050" formatted="false">&quot;{0}: widget section разобран не полностью&quot;</string>
+    <string name="loc_051" formatted="false">&quot;{0}: обрезан raster header&quot;</string>
+    <string name="loc_052" formatted="false">&quot;{0}: повреждён raster header&quot;</string>
+    <string name="loc_053" formatted="false">&quot;{0}: неизвестный raster format 0x{1}&quot;</string>
+    <string name="loc_054" formatted="false">&quot;{0}: raster выходит за границы&quot;</string>
+    <string name="loc_055" formatted="false">&quot;{0}: неверный размер raster payload&quot;</string>
+    <string name="loc_056" formatted="false">&quot;{0}: image section разобран не полностью&quot;</string>
+    <string name="loc_057" formatted="false">&quot;Повреждена ASCII-строка&quot;</string>
+    <string name="loc_058" formatted="false">&quot;{0}: строка #{1} содержит неверный UTF-8&quot;</string>
+    <string name="loc_059" formatted="false">&quot;Часы не приняли блок {0} из {1}&quot;</string>
+    <string name="loc_060" formatted="false">&quot;Передача отменена&quot;</string>
+    <string name="loc_061" formatted="false">&quot;Канал передачи закрыт&quot;</string>
+    <string name="loc_062" formatted="false">&quot;Неверный ответ часов&quot;</string>
+    <string name="loc_063" formatted="false">&quot;Неожиданный ответ часов: {0}&quot;</string>
+    <string name="loc_064" formatted="false">&quot;Часы не ответили при передаче циферблата&quot;</string>
+    <string name="loc_065" formatted="false">&quot;Магазин не подтвердил проверку версии&quot;</string>
+    <string name="loc_066" formatted="false">&quot;Магазин не предлагает этот циферблат&quot;</string>
+    <string name="loc_067" formatted="false">&quot;Магазин вернул неполный ответ&quot;</string>
+    <string name="loc_068" formatted="false">&quot;Магазин отказал в загрузке&quot;</string>
+    <string name="loc_069" formatted="false">&quot;Недопустимый размер пакета&quot;</string>
+    <string name="loc_070" formatted="false">&quot;Пакет загружен не полностью&quot;</string>
+    <string name="loc_071" formatted="false">&quot;Недоверенный адрес загрузки&quot;</string>
+    <string name="loc_072" formatted="false">&quot;Редирект без адреса&quot;</string>
+    <string name="loc_073" formatted="false">&quot;Магазин ответил HTTP {0}&quot;</string>
+    <string name="loc_074" formatted="false">&quot;Пакет слишком большой&quot;</string>
+    <string name="loc_075" formatted="false">&quot;Слишком много перенаправлений магазина&quot;</string>
+    <string name="loc_076" formatted="false">&quot;Магазин вернул недопустимый XML&quot;</string>
+    <string name="loc_077" formatted="false">&quot;В пакете слишком много файлов&quot;</string>
+    <string name="loc_078" formatted="false">&quot;Распакованный пакет слишком большой&quot;</string>
+    <string name="loc_079" formatted="false">&quot;Циферблат больше безопасного лимита 4 МиБ&quot;</string>
+    <string name="loc_080" formatted="false">&quot;В пакете несколько файлов циферблата&quot;</string>
+    <string name="loc_081" formatted="false">&quot;Этот циферблат не содержит обычного BIN (например, Photos)&quot;</string>
+    <string name="loc_082" formatted="false">&quot;Выбранный стиль отсутствует внутри BIN&quot;</string>
+    <string name="loc_083" formatted="false">&quot;Слишком большая копия&quot;</string>
+    <string name="loc_084" formatted="false">&quot;Не подключено&quot;</string>
+    <string name="loc_085" formatted="false">&quot;Данные здоровья ещё не синхронизированы&quot;</string>
+    <string name="loc_086" formatted="false">&quot;Уведомления ещё не отправлялись&quot;</string>
+    <string name="loc_087" formatted="false">&quot;Выберите город&quot;</string>
+    <string name="loc_088" formatted="false">&quot;Ошибка поиска Bluetooth: {0}&quot;</string>
+    <string name="loc_089" formatted="false">&quot;Bluetooth недоступен&quot;</string>
+    <string name="loc_090" formatted="false">&quot;Включите Bluetooth&quot;</string>
+    <string name="loc_091" formatted="false">&quot;BLE-сканер недоступен&quot;</string>
+    <string name="loc_092" formatted="false">&quot;Поиск часов…&quot;</string>
+    <string name="loc_093" formatted="false">&quot;Разрешите доступ к устройствам рядом&quot;</string>
+    <string name="loc_094" formatted="false">&quot;Выберите часы&quot;</string>
+    <string name="loc_095" formatted="false">&quot;Неверный адрес устройства&quot;</string>
+    <string name="loc_096" formatted="false">&quot;Проверяем данные браслета&quot;</string>
+    <string name="loc_097" formatted="false">&quot;Подключение к {0}…&quot;</string>
+    <string name="loc_098" formatted="false">&quot;Для подключения требуется разрешение Bluetooth&quot;</string>
+    <string name="loc_099" formatted="false">&quot;Согласование Bluetooth…&quot;</string>
+    <string name="loc_100" formatted="false">&quot;Не удалось запросить MTU&quot;</string>
+    <string name="loc_101" formatted="false">&quot;Связь прервана во время установки&quot;</string>
+    <string name="loc_102" formatted="false">&quot;Связь прервана&quot;</string>
+    <string name="loc_103" formatted="false">&quot;Ошибка связи: {0}&quot;</string>
+    <string name="loc_104" formatted="false">&quot;Ошибка подключения: {0}&quot;</string>
+    <string name="loc_105" formatted="false">&quot;Недостаточный BLE MTU: {0}&quot;</string>
+    <string name="loc_106" formatted="false">&quot;Поиск сервиса часов…&quot;</string>
+    <string name="loc_107" formatted="false">&quot;Сервис часов не найден&quot;</string>
+    <string name="loc_108" formatted="false">&quot;Ошибка поиска сервисов: {0}&quot;</string>
+    <string name="loc_109" formatted="false">&quot;SAP-сервис не найден на часах&quot;</string>
+    <string name="loc_110" formatted="false">&quot;Не удалось включить уведомления&quot;</string>
+    <string name="loc_111" formatted="false">&quot;Не удалось подписаться на ответы часов&quot;</string>
+    <string name="loc_112" formatted="false">&quot;Ожидание ответа часов…&quot;</string>
+    <string name="loc_113" formatted="false">&quot;Нет ответа часов при согласовании&quot;</string>
+    <string name="loc_114" formatted="false">&quot;Ошибка подписки: {0}&quot;</string>
+    <string name="loc_115" formatted="false">&quot;Ошибка записи Bluetooth: {0}&quot;</string>
+    <string name="loc_116" formatted="false">&quot;Канал часов готов&quot;</string>
+    <string name="loc_117" formatted="false">&quot;Ошибка согласования: {0}&quot;</string>
+    <string name="loc_118" formatted="false">&quot;Часы отвечают&quot;</string>
+    <string name="loc_119" formatted="false">&quot;Получено циферблатов: {0}&quot;</string>
+    <string name="loc_120" formatted="false">&quot;Циферблат установлен&quot;</string>
+    <string name="loc_121" formatted="false">&quot;Часы ответили списком циферблатов, но формат ещё неизвестен; смотрите Protocol Monitor&quot;</string>
+    <string name="loc_122" formatted="false">&quot;Проверяем циферблат на часах…&quot;</string>
+    <string name="loc_123" formatted="false">&quot;Недостаточно заряда часов&quot;</string>
+    <string name="loc_124" formatted="false">&quot;Часы не нашли файл циферблата&quot;</string>
+    <string name="loc_125" formatted="false">&quot;Часы отклонили формат циферблата&quot;</string>
+    <string name="loc_126" formatted="false">&quot;Память или список циферблатов заполнены&quot;</string>
+    <string name="loc_127" formatted="false">&quot;Часы отклонили установку ({0})&quot;</string>
+    <string name="loc_128" formatted="false">&quot;Подключено&quot;</string>
+    <string name="loc_129" formatted="false">&quot;Команда музыки с часов: {0}&quot;</string>
+    <string name="loc_130" formatted="false">&quot;Не найден активный Android MediaSession&quot;</string>
+    <string name="loc_131" formatted="false">&quot;Громкость изменена с часов&quot;</string>
+    <string name="loc_132" formatted="false">&quot;Не удалось изменить громкость&quot;</string>
+    <string name="loc_133" formatted="false">&quot;Не удалось сохранить данные. Повторите обновление.&quot;</string>
+    <string name="loc_134" formatted="false">&quot;Плитки синхронизированы&quot;</string>
+    <string name="loc_135" formatted="false">&quot;Quick Panel синхронизирован&quot;</string>
+    <string name="loc_136" formatted="false">&quot;Порядок приложений синхронизирован&quot;</string>
+    <string name="loc_137" formatted="false">&quot;Быстрые ответы синхронизированы&quot;</string>
+    <string name="loc_138" formatted="false">&quot;Формат иконок часов: {0}&quot;</string>
+    <string name="loc_139" formatted="false">&quot;Часы подтвердили тестовое уведомление&quot;</string>
+    <string name="loc_140" formatted="false">&quot;Часы отклонили уведомление&quot;</string>
+    <string name="loc_141" formatted="false">&quot;Ошибка запроса: {0}&quot;</string>
+    <string name="loc_142" formatted="false">&quot;Иконка приложения получена браслетом&quot;</string>
+    <string name="loc_143" formatted="false">&quot;Не удалось передать иконку приложения&quot;</string>
+    <string name="loc_144" formatted="false">&quot;Ошибка передачи иконки: {0}&quot;</string>
+    <string name="loc_145" formatted="false">&quot;Дождитесь подключения часов&quot;</string>
+    <string name="loc_146" formatted="false">&quot;Не удалось получить список циферблатов&quot;</string>
+    <string name="loc_147" formatted="false">&quot;Сначала получите список установленных циферблатов&quot;</string>
+    <string name="loc_148" formatted="false">&quot;Смена циферблата…&quot;</string>
+    <string name="loc_149" formatted="false">&quot;Часы не подтвердили смену циферблата&quot;</string>
+    <string name="loc_150" formatted="false">&quot;Подключите часы и дождитесь окончания предыдущей передачи&quot;</string>
+    <string name="loc_151" formatted="false">&quot;Для установки зарядите часы хотя бы до 30%&quot;</string>
+    <string name="loc_152" formatted="false">&quot;Не найден сопряжённый Galaxy Fit3&quot;</string>
+    <string name="loc_153" formatted="false">&quot;Подготавливаем передачу циферблата…&quot;</string>
+    <string name="loc_154" formatted="false">&quot;Не удалось подготовить часы: {0}&quot;</string>
+    <string name="loc_155" formatted="false">&quot;Передаём циферблат…&quot;</string>
+    <string name="loc_156" formatted="false">&quot;Передача: {0}%&quot;</string>
+    <string name="loc_157" formatted="false">&quot;Передача не завершена: {0}&quot;</string>
+    <string name="loc_158" formatted="false">&quot;Устанавливаем циферблат…&quot;</string>
+    <string name="loc_159" formatted="false">&quot;Нет подтверждения установки от часов&quot;</string>
+    <string name="loc_160" formatted="false">&quot;Не удалось отправить установку: {0}&quot;</string>
+    <string name="loc_161" formatted="false">&quot;Запрашиваем данные браслета…&quot;</string>
+    <string name="loc_162" formatted="false">&quot;Не удалось сохранить данные&quot;</string>
+    <string name="loc_163" formatted="false">&quot;Браслет не ответил на обновление&quot;</string>
+    <string name="loc_164" formatted="false">&quot;Проверяем обмен возможностями Health…&quot;</string>
+    <string name="loc_165" formatted="false">&quot;Яркость отправлена&quot;</string>
+    <string name="loc_166" formatted="false">&quot;Автояркость отправлена&quot;</string>
+    <string name="loc_167" formatted="false">&quot;AOD отправлен&quot;</string>
+    <string name="loc_168" formatted="false">&quot;Поднятие запястья отправлено&quot;</string>
+    <string name="loc_169" formatted="false">&quot;Пробуждение касанием отправлено&quot;</string>
+    <string name="loc_170" formatted="false">&quot;Ожидаем подтверждение запястья от браслета&quot;</string>
+    <string name="loc_171" formatted="false">&quot;Ожидаем подтверждение положения кнопки&quot;</string>
+    <string name="loc_172" formatted="false">&quot;Автопоказ управления музыкой отправлен&quot;</string>
+    <string name="loc_173" formatted="false">&quot;Режим сна отправлен&quot;</string>
+    <string name="loc_174" formatted="false">&quot;Режим Театр отправлен&quot;</string>
+    <string name="loc_175" formatted="false">&quot;Таймаут экрана отправлен&quot;</string>
+    <string name="loc_176" formatted="false">&quot;Запрос плиток…&quot;</string>
+    <string name="loc_177" formatted="false">&quot;Fit3 поддерживает максимум 12 активных плиток&quot;</string>
+    <string name="loc_178" formatted="false">&quot;Порядок плиток отправлен&quot;</string>
+    <string name="loc_179" formatted="false">&quot;Запрос приложений…&quot;</string>
+    <string name="loc_180" formatted="false">&quot;Порядок приложений отправлен&quot;</string>
+    <string name="loc_181" formatted="false">&quot;Запрос Quick Panel…&quot;</string>
+    <string name="loc_182" formatted="false">&quot;Quick Panel отправлен&quot;</string>
+    <string name="loc_183" formatted="false">&quot;Быстрые ответы отправлены&quot;</string>
+    <string name="loc_184" formatted="false">&quot;Время и часовой пояс отправлены на часы&quot;</string>
+    <string name="loc_185" formatted="false">&quot;Локальная резервная копия сохранена&quot;</string>
+    <string name="loc_186" formatted="false">&quot;Локальная резервная копия не найдена&quot;</string>
+    <string name="loc_187" formatted="false">&quot;Восстановление локальной копии отправлено на часы&quot;</string>
+    <string name="loc_188" formatted="false">&quot;Тест уведомлений&quot;</string>
+    <string name="loc_189" formatted="false">&quot;Если вы видите это на часах, передача работает.&quot;</string>
+    <string name="loc_190" formatted="false">&quot;Нет соединения с часами&quot;</string>
+    <string name="loc_191" formatted="false">&quot;{0}: уведомление отправлено; ждём ответ часов…&quot;</string>
+    <string name="loc_192" formatted="false">&quot;Нет подтверждения уведомления от часов; проверьте экран&quot;</string>
+    <string name="loc_193" formatted="false">&quot;Ошибка отправки {0}: {1}&quot;</string>
+    <string name="loc_194" formatted="false">&quot;Дождитесь готовности канала часов&quot;</string>
+    <string name="loc_195" formatted="false">&quot;Настройка: сведения о часах…&quot;</string>
+    <string name="loc_196" formatted="false">&quot;Нет ответа на шаг настройки: {0}&quot;</string>
+    <string name="loc_197" formatted="false">&quot;Настройка: состояние устройства…&quot;</string>
+    <string name="loc_198" formatted="false">&quot;Настройка: дата и язык…&quot;</string>
+    <string name="loc_199" formatted="false">&quot;Завершение настройки часов…&quot;</string>
+    <string name="loc_200" formatted="false">&quot;Настройка завершена. Часы могут перезапуститься&quot;</string>
+    <string name="loc_201" formatted="false">&quot;Пакет больше согласованного BLE MTU&quot;</string>
+    <string name="loc_202" formatted="false">&quot;Очередь Bluetooth переполнена&quot;</string>
+    <string name="loc_203" formatted="false">&quot;Нет соединения&quot;</string>
+    <string name="loc_204" formatted="false">&quot;Канал записи недоступен&quot;</string>
+    <string name="loc_205" formatted="false">&quot;Android отклонил запись GATT&quot;</string>
+    <string name="loc_206" formatted="false">&quot;Нет подтверждения записи Bluetooth&quot;</string>
+    <string name="loc_207" formatted="false">&quot;Переподключение через {0} с…&quot;</string>
+    <string name="loc_208" formatted="false">&quot;Установка отменена&quot;</string>
+    <string name="loc_209" formatted="false">&quot;Отключено&quot;</string>
+    <string name="loc_210" formatted="false">&quot;Не удалось создать файл в выбранной папке&quot;</string>
+    <string name="loc_211" formatted="false">&quot;Не удалось записать копию&quot;</string>
+    <string name="loc_212" formatted="false">&quot;Ожидаем погоду&quot;</string>
+    <string name="loc_213" formatted="false">&quot;Соединение с Galaxy Fit3&quot;</string>
+    <string name="loc_214" formatted="false">&quot;Журнал ограничен 4 МБ; ранние записи удалены.\n&quot;</string>
+    <string name="loc_215" formatted="false">&quot;Откройте приложение и выберите город для погоды&quot;</string>
+    <string name="loc_216" formatted="false">&quot;Подключение к Galaxy Fit3…&quot;</string>
+    <string name="loc_217" formatted="false">&quot;Обновляем погоду…&quot;</string>
+    <string name="loc_218" formatted="false">&quot;Не удалось загрузить погоду&quot;</string>
+    <string name="loc_219" formatted="false">&quot;Показан последний прогноз&quot;</string>
+    <string name="loc_220" formatted="false">&quot;Сначала подключите часы&quot;</string>
+    <string name="loc_221" formatted="false">&quot;Загружаем циферблат из магазина…&quot;</string>
+    <string name="loc_222" formatted="false">&quot;Не удалось загрузить циферблат: {0}&quot;</string>
+    <string name="loc_223" formatted="false">&quot;Повторно проверяем BIN перед передачей…&quot;</string>
+    <string name="loc_224" formatted="false">&quot;Стиль {0} отсутствует внутри BIN&quot;</string>
+    <string name="loc_225" formatted="false">&quot;BIN отклонён проверкой: {0}&quot;</string>
+    <string name="loc_226" formatted="false">&quot;Нет сохранённых данных&quot;</string>
+    <string name="loc_227" formatted="false">&quot;Архив здоровья слишком велик для JSON-копии&quot;</string>
+    <string name="loc_228" formatted="false">&quot;Слишком много записей здоровья&quot;</string>
+    <string name="loc_229" formatted="false">&quot;Повреждена история здоровья&quot;</string>
+    <string name="loc_230" formatted="false">&quot;Не удалось сохранить данные здоровья&quot;</string>
+    <string name="loc_231" formatted="false">&quot;Неподдерживаемая версия данных здоровья&quot;</string>
+    <string name="loc_232" formatted="false">&quot;Слишком много интервалов шагов&quot;</string>
+    <string name="loc_233" formatted="false">&quot;Нет дневного прогноза&quot;</string>
+    <string name="loc_234" formatted="false">&quot;Open-Meteo · модельный прогноз&quot;</string>
+    <string name="loc_235" formatted="false">&quot;Погода недоступна: HTTP {0}&quot;</string>
+    <string name="loc_236" formatted="false">&quot;Слишком большой ответ погоды&quot;</string>
+    <string name="loc_237" formatted="false">&quot;Часы не ответили при передаче медиафайла&quot;</string>
+    <string name="loc_238" formatted="false">&quot;Часы не приняли блок медиафайла&quot;</string>
+    <string name="loc_239" formatted="false">&quot;Каталог недоступен (код {0})&quot;</string>
+    <string name="loc_240" formatted="false">&quot;Циферблат&quot;</string>
+    <string name="loc_241" formatted="false">&quot;Слишком большой ответ&quot;</string>
+    <string name="loc_242" formatted="false">&quot;Браслет&quot;</string>
+    <string name="loc_243" formatted="false">&quot;Погода&quot;</string>
+    <string name="loc_244" formatted="false">&quot;Шаги&quot;</string>
+    <string name="loc_245" formatted="false">&quot;Сон&quot;</string>
+    <string name="loc_246" formatted="false">&quot;Пульс&quot;</string>
+    <string name="loc_247" formatted="false">&quot;Стресс&quot;</string>
+    <string name="loc_248" formatted="false">&quot;Дистанция&quot;</string>
+    <string name="loc_249" formatted="false">&quot;Сервис связи остановлен&quot;</string>
+    <string name="loc_250" formatted="false">&quot;Не удалось открыть файл&quot;</string>
+    <string name="loc_251" formatted="false">&quot;Копия сохранена&quot;</string>
+    <string name="loc_252" formatted="false">&quot;Не удалось сохранить: {0}&quot;</string>
+    <string name="loc_253" formatted="false">&quot;Не удалось прочитать файл&quot;</string>
+    <string name="loc_254" formatted="false">&quot;Неверный формат копии&quot;</string>
+    <string name="loc_255" formatted="false">&quot;Данные восстановлены; настройки браслета отправлены&quot;</string>
+    <string name="loc_256" formatted="false">&quot;Данные восстановлены; настройки браслета применятся после подключения&quot;</string>
+    <string name="loc_257" formatted="false">&quot;Не удалось восстановить: {0}&quot;</string>
+    <string name="loc_258" formatted="false">&quot;Папка для автоматических копий выбрана&quot;</string>
+    <string name="loc_259" formatted="false">&quot;Нет доступа к папке: {0}&quot;</string>
+    <string name="loc_260" formatted="false">&quot;Устройство не выбрано&quot;</string>
+    <string name="loc_261" formatted="false">&quot;устройство не найдено&quot;</string>
+    <string name="loc_262" formatted="false">&quot;Системный поиск: {0}&quot;</string>
+    <string name="loc_263" formatted="false">&quot;Проверка файла…&quot;</string>
+    <string name="loc_264" formatted="false">&quot;Выбранный файл&quot;</string>
+    <string name="loc_265" formatted="false">&quot;Файл больше 32 МБ&quot;</string>
+    <string name="loc_266" formatted="false">&quot;Ошибка проверки&quot;</string>
+    <string name="loc_267" formatted="false">&quot;Неизвестная ошибка&quot;</string>
+    <string name="loc_268" formatted="false">&quot;Проверка BIN…&quot;</string>
+    <string name="loc_269" formatted="false">&quot;Проверяем структуру и CRC…&quot;</string>
+    <string name="loc_270" formatted="false">&quot;Выбранный BIN&quot;</string>
+    <string name="loc_271" formatted="false">&quot;BIN больше аппаратного лимита 4 МиБ&quot;</string>
+    <string name="loc_272" formatted="false">&quot;Не удалось открыть BIN&quot;</string>
+    <string name="loc_273" formatted="false">&quot;Неизвестная ошибка проверки BIN&quot;</string>
+    <string name="loc_274" formatted="false">&quot;Главная&quot;</string>
+    <string name="loc_275" formatted="false">&quot;Активность&quot;</string>
+    <string name="loc_276" formatted="false">&quot;Подключение браслета&quot;</string>
+    <string name="loc_277" formatted="false">&quot;Циферблаты&quot;</string>
+    <string name="loc_278" formatted="false">&quot;Варианты циферблата&quot;</string>
+    <string name="loc_279" formatted="false">&quot;Настройки приложения&quot;</string>
+    <string name="loc_280" formatted="false">&quot;Экран&quot;</string>
+    <string name="loc_281" formatted="false">&quot;Карточки&quot;</string>
+    <string name="loc_282" formatted="false">&quot;Приложения&quot;</string>
+    <string name="loc_283" formatted="false">&quot;Быстрая панель&quot;</string>
+    <string name="loc_284" formatted="false">&quot;Быстрые ответы&quot;</string>
+    <string name="loc_285" formatted="false">&quot;Резервная копия&quot;</string>
+    <string name="loc_286" formatted="false">&quot;О приложении&quot;</string>
+    <string name="loc_287" formatted="false">&quot;Отладка&quot;</string>
+    <string name="loc_288" formatted="false">&quot;Лицензии и благодарности&quot;</string>
+    <string name="loc_289" formatted="false">&quot;Уведомления&quot;</string>
+    <string name="loc_290" formatted="false">&quot;Энергосбережение&quot;</string>
+    <string name="loc_291" formatted="false">&quot;Прошивальщик&quot;</string>
+    <string name="loc_292" formatted="false">&quot;Внешний вид&quot;</string>
+    <string name="loc_293" formatted="false">&quot;Синхронизация Fit3 Health&quot;</string>
+    <string name="loc_294" formatted="false">&quot;Режимы&quot;</string>
+    <string name="loc_295" formatted="false">&quot;Меню и карточки&quot;</string>
+    <string name="loc_296" formatted="false">&quot;Время&quot;</string>
+    <string name="loc_297" formatted="false">&quot;Ношение браслета&quot;</string>
+    <string name="loc_298" formatted="false">&quot;Журнал протокола&quot;</string>
+    <string name="loc_299" formatted="false">&quot;Не удалось загрузить каталог&quot;</string>
+    <string name="loc_300" formatted="false">&quot;Редактор главной&quot;</string>
+    <string name="loc_301" formatted="false">&quot;Готово&quot;</string>
+    <string name="loc_302" formatted="false">&quot;Настройки&quot;</string>
+    <string name="loc_303" formatted="false">&quot;Сегодня&quot;</string>
+    <string name="loc_304" formatted="false">&quot;Данные обновлены: {0}&quot;</string>
+    <string name="loc_305" formatted="false">&quot;Ожидаем данные с браслета&quot;</string>
+    <string name="loc_306" formatted="false">&quot;Удерживайте карточку, чтобы переместить. Размер выбирается на самой карточке.&quot;</string>
+    <string name="loc_307" formatted="false">&quot;Сбросить · вернуть обычный главный экран&quot;</string>
+    <string name="loc_308" formatted="false">&quot;Найти через Android&quot;</string>
+    <string name="loc_309" formatted="false">&quot;Ищем Galaxy Fit3 рядом…&quot;</string>
+    <string name="loc_310" formatted="false">&quot;Браслет не найден. Проверьте Bluetooth и повторите поиск.&quot;</string>
+    <string name="loc_311" formatted="false">&quot;Поиск…&quot;</string>
+    <string name="loc_312" formatted="false">&quot;Найти снова&quot;</string>
+    <string name="loc_313" formatted="false">&quot;за сегодня&quot;</string>
+    <string name="loc_314" formatted="false">&quot;Калории&quot;</string>
+    <string name="loc_315" formatted="false">&quot;{0} ккал&quot;</string>
+    <string name="loc_316" formatted="false">&quot;активные&quot;</string>
+    <string name="loc_317" formatted="false">&quot;Этажи&quot;</string>
+    <string name="loc_318" formatted="false">&quot;нет данных с браслета&quot;</string>
+    <string name="loc_319" formatted="false">&quot;подъёмы&quot;</string>
+    <string name="loc_320" formatted="false">&quot;{0} мин&quot;</string>
+    <string name="loc_321" formatted="false">&quot;движение&quot;</string>
+    <string name="loc_322" formatted="false">&quot;Здоровье&quot;</string>
+    <string name="loc_323" formatted="false">&quot;Настройки браслета&quot;</string>
+    <string name="loc_324" formatted="false">&quot;Яркость, пробуждение и AOD&quot;</string>
+    <string name="loc_325" formatted="false">&quot;Запястье и положение кнопки&quot;</string>
+    <string name="loc_326" formatted="false">&quot;Сон, театр и управление музыкой&quot;</string>
+    <string name="loc_327" formatted="false">&quot;Карточки, приложения, быстрая панель и ответы&quot;</string>
+    <string name="loc_328" formatted="false">&quot;Синхронизация с телефоном&quot;</string>
+    <string name="loc_329" formatted="false">&quot;Подключение&quot;</string>
+    <string name="loc_330" formatted="false">&quot;Отключить браслет&quot;</string>
+    <string name="loc_331" formatted="false">&quot;Подключить другой браслет&quot;</string>
+    <string name="loc_332" formatted="false">&quot;Подключите браслет, чтобы увидеть установленные циферблаты.&quot;</string>
+    <string name="loc_333" formatted="false">&quot;Другие циферблаты Samsung&quot;</string>
+    <string name="loc_334" formatted="false">&quot;Каталог не загрузился: {0}&quot;</string>
+    <string name="loc_335" formatted="false">&quot;Выберите циферблат, чтобы увидеть его варианты. Для нового варианта потребуется загрузка из магазина.&quot;</string>
+    <string name="loc_336" formatted="false">&quot;Вернитесь в каталог и выберите циферблат&quot;</string>
+    <string name="loc_337" formatted="false">&quot;Доступ и передача уведомлений&quot;</string>
+    <string name="loc_338" formatted="false">&quot;Работа в фоне и ограничения батареи&quot;</string>
+    <string name="loc_339" formatted="false">&quot;Тема и цвет приложения&quot;</string>
+    <string name="loc_340" formatted="false">&quot;Бэкап настроек браслета&quot;</string>
+    <string name="loc_341" formatted="false">&quot;Режим отладки&quot;</string>
+    <string name="loc_342" formatted="false">&quot;Проверки, журнал и прошивальщик&quot;</string>
+    <string name="loc_343" formatted="false">&quot;Автояркость&quot;</string>
+    <string name="loc_344" formatted="false">&quot;Поднять запястье для пробуждения&quot;</string>
+    <string name="loc_345" formatted="false">&quot;Касание для пробуждения&quot;</string>
+    <string name="loc_346" formatted="false">&quot;Яркость&quot;</string>
+    <string name="loc_347" formatted="false">&quot;Таймаут экрана&quot;</string>
+    <string name="loc_348" formatted="false">&quot;{0}с&quot;</string>
+    <string name="loc_349" formatted="false">&quot;Режим сна&quot;</string>
+    <string name="loc_350" formatted="false">&quot;Режим Театр&quot;</string>
+    <string name="loc_351" formatted="false">&quot;Предпочитаемое запястье&quot;</string>
+    <string name="loc_352" formatted="false">&quot;Правое&quot;</string>
+    <string name="loc_353" formatted="false">&quot;Левое&quot;</string>
+    <string name="loc_354" formatted="false">&quot;Не определено&quot;</string>
+    <string name="loc_355" formatted="false">&quot;Положение кнопки&quot;</string>
+    <string name="loc_356" formatted="false">&quot;Справа&quot;</string>
+    <string name="loc_357" formatted="false">&quot;Слева&quot;</string>
+    <string name="loc_358" formatted="false">&quot;Состав и порядок&quot;</string>
+    <string name="loc_359" formatted="false">&quot;Порядок в меню браслета&quot;</string>
+    <string name="loc_360" formatted="false">&quot;Порядок переключателей&quot;</string>
+    <string name="loc_361" formatted="false">&quot;Шаблоны сообщений&quot;</string>
+    <string name="loc_362" formatted="false">&quot;Время синхронизируется при подключении и после изменения времени, часового пояса или языка телефона.&quot;</string>
+    <string name="loc_363" formatted="false">&quot;Синхронизировать сейчас&quot;</string>
+    <string name="loc_364" formatted="false">&quot;Порядок карточек на браслете&quot;</string>
+    <string name="loc_365" formatted="false">&quot;Карточка&quot;</string>
+    <string name="loc_366" formatted="false">&quot;Список ещё не получен&quot;</string>
+    <string name="loc_367" formatted="false">&quot;Приложение&quot;</string>
+    <string name="loc_368" formatted="false">&quot;Переключатель&quot;</string>
+    <string name="loc_369" formatted="false">&quot;Быстрая настройка #{0}&quot;</string>
+    <string name="loc_370" formatted="false">&quot;Сохраните данные здоровья и настройки в файл. На новом телефоне выберите этот файл для восстановления.&quot;</string>
+    <string name="loc_371" formatted="false">&quot;Сохранить копию&quot;</string>
+    <string name="loc_372" formatted="false">&quot;Восстановить из файла&quot;</string>
+    <string name="loc_373" formatted="false">&quot;Автоматическое резервное копирование&quot;</string>
+    <string name="loc_374" formatted="false">&quot;Выключено&quot;</string>
+    <string name="loc_375" formatted="false">&quot;Раз в день&quot;</string>
+    <string name="loc_376" formatted="false">&quot;Раз в 3 дня&quot;</string>
+    <string name="loc_377" formatted="false">&quot;Раз в 7 дней&quot;</string>
+    <string name="loc_378" formatted="false">&quot;Раз в {0} ч&quot;</string>
+    <string name="loc_379" formatted="false">&quot;Копия сохраняется в памяти приложения. Чтобы она осталась после удаления приложения, выберите папку телефона.&quot;</string>
+    <string name="loc_380" formatted="false">&quot;Выбрать папку&quot;</string>
+    <string name="loc_381" formatted="false">&quot;Изменить папку&quot;</string>
+    <string name="loc_382" formatted="false">&quot;Доступ к уведомлениям&quot;</string>
+    <string name="loc_383" formatted="false">&quot;Этот системный доступ нужен также для распознавания Spotify и других плееров на браслете.&quot;</string>
+    <string name="loc_384" formatted="false">&quot;Передача на Fit3&quot;</string>
+    <string name="loc_385" formatted="false">&quot;Статус Fit3 App в шторке&quot;</string>
+    <string name="loc_386" formatted="false">&quot;При выключении подробный статус скрыт, но Android оставляет служебную строку для стабильной связи с браслетом.&quot;</string>
+    <string name="loc_387" formatted="false">&quot;Настроить уведомления приложения&quot;</string>
+    <string name="loc_388" formatted="false">&quot;Разрешить уведомления приложения&quot;</string>
+    <string name="loc_389" formatted="false">&quot;Для стабильной связи разрешите Fit3 App работу в фоне. Некоторые оболочки дополнительно ограничивают автозапуск.&quot;</string>
+    <string name="loc_390" formatted="false">&quot;Питание приложения&quot;</string>
+    <string name="loc_391" formatted="false">&quot;Откройте настройки Fit3 App и выберите «Без ограничений»&quot;</string>
+    <string name="loc_392" formatted="false">&quot;Оптимизация батареи&quot;</string>
+    <string name="loc_393" formatted="false">&quot;Fit3 App в списке исключений&quot;</string>
+    <string name="loc_394" formatted="false">&quot;Добавьте Fit3 App в исключения&quot;</string>
+    <string name="loc_395" formatted="false">&quot;Режим энергосбережения&quot;</string>
+    <string name="loc_396" formatted="false">&quot;Проверьте системный режим экономии заряда&quot;</string>
+    <string name="loc_397" formatted="false">&quot;Автозапуск в OnePlus, Xiaomi и других оболочках может находиться внутри настроек приложения. Android не даёт универсальной ссылки на этот пункт.&quot;</string>
+    <string name="loc_398" formatted="false">&quot;Тема&quot;</string>
+    <string name="loc_399" formatted="false">&quot;Цветовой акцент&quot;</string>
+    <string name="loc_400" formatted="false">&quot;А — адаптивные цвета обоев Android. На Android 10–11 используется цвет приложения.&quot;</string>
+    <string name="loc_401" formatted="false">&quot;Карточки главного экрана (БЕТА)&quot;</string>
+    <string name="loc_402" formatted="false">&quot;Порядок и размер на сетке&quot;</string>
+    <string name="loc_403" formatted="false">&quot;Запросить данные&quot;</string>
+    <string name="loc_405" formatted="false">&quot;BIN циферблата&quot;</string>
+    <string name="loc_406" formatted="false">&quot;Экспериментальный установщик использует тот же штатный путь /user/wf, что и каталог Samsung. Передача разрешается только после строгой проверки OPPO v4, CRC16 всех записей, setting.bin, UTF-8 локализаций и структуры style/AOD.&quot;</string>
+    <string name="loc_407" formatted="false">&quot;Выбрать .bin&quot;</string>
+    <string name="loc_408" formatted="false">&quot;Проверка: OK · OPPO v4 · все CRC совпали&quot;</string>
+    <string name="loc_409" formatted="false">&quot;ID: {0} · {1} байт · записей: {2}&quot;</string>
+    <string name="loc_410" formatted="false">&quot;Передача как: {0}&quot;</string>
+    <string name="loc_411" formatted="false">&quot;Стили в BIN: {0}&quot;</string>
+    <string name="loc_412" formatted="false">&quot;Локализации: {0}&quot;</string>
+    <string name="loc_413" formatted="false">&quot;Есть штатный vendor raster 0x88; формат подтверждён оригинальным каталогом.&quot;</string>
+    <string name="loc_414" formatted="false">&quot;BIN не прошёл проверку&quot;</string>
+    <string name="loc_415" formatted="false">&quot;Стиль после установки&quot;</string>
+    <string name="loc_416" formatted="false">&quot;Установить проверенный BIN&quot;</string>
+    <string name="loc_417" formatted="false">&quot;Для установки зарядите часы минимум до 30%.&quot;</string>
+    <string name="loc_418" formatted="false">&quot;Состояние связи&quot;</string>
+    <string name="loc_419" formatted="false">&quot;готов&quot;</string>
+    <string name="loc_420" formatted="false">&quot;не готов&quot;</string>
+    <string name="loc_421" formatted="false">&quot;Канал данных: {0} · пакетов в памяти: {1}&quot;</string>
+    <string name="loc_422" formatted="false">&quot;Обновить всё&quot;</string>
+    <string name="loc_423" formatted="false">&quot;Запрос Health&quot;</string>
+    <string name="loc_424" formatted="false">&quot;Проверить обмен Health&quot;</string>
+    <string name="loc_425" formatted="false">&quot;Выбор и проверка пакета&quot;</string>
+    <string name="loc_426" formatted="false">&quot;Проверка обмена данными здоровья&quot;</string>
+    <string name="loc_427" formatted="false">&quot;Пакеты обмена, копирование и очистка&quot;</string>
+    <string name="loc_428" formatted="false">&quot;Проверка уведомлений&quot;</string>
+    <string name="loc_429" formatted="false">&quot;Отправить тест на браслет&quot;</string>
+    <string name="loc_435" formatted="false">&quot;Сохранять журнал для ADB&quot;</string>
+    <string name="loc_436" formatted="false">&quot;В отладочной сборке журнал можно снять командой: adb shell run-as io.github.yuriyurin.fit3companion cat files/protocol-monitor.log. Файл может содержать данные здоровья; запись выключена по умолчанию и ограничена 4 МБ.&quot;</string>
+    <string name="loc_437" formatted="false">&quot;Краткий&quot;</string>
+    <string name="loc_438" formatted="false">&quot;Полный&quot;</string>
+    <string name="loc_439" formatted="false">&quot;Очистить&quot;</string>
+    <string name="loc_440" formatted="false">&quot;Журнал может содержать сведения о здоровье. Передавайте его только тем, кому доверяете.&quot;</string>
+    <string name="loc_441" formatted="false">&quot;Пакетов пока нет&quot;</string>
+    <string name="loc_442" formatted="false">&quot;Независимое приложение для Galaxy Fit3. Подключение и доступные функции работают без облака Samsung.&quot;</string>
+    <string name="loc_443" formatted="false">&quot;Автор: yuriyurin&quot;</string>
+    <string name="loc_444" formatted="false">&quot;Источник погоды и условия использования&quot;</string>
+    <string name="loc_445" formatted="false">&quot;Версия {0}&quot;</string>
+    <string name="loc_446" formatted="false">&quot;Погода: Open-Meteo&quot;</string>
+    <string name="loc_447" formatted="false">&quot;Данные Open-Meteo используются в Fit3 App в личных некоммерческих целях. Спасибо Open-Meteo и поставщикам погодных моделей за открытый прогноз.&quot;</string>
+    <string name="loc_448" formatted="false">&quot;Географический поиск основан на данных GeoNames. Прогноз может отличаться от фактической погоды.&quot;</string>
+    <string name="loc_449" formatted="false">&quot;Выберите пакет с телефона, чтобы проверить его размер и SHA-256. Запись на часы в этой версии отключена: защищённый протокол передачи ещё не перенесён с ПК.&quot;</string>
+    <string name="loc_450" formatted="false">&quot;Выбрать файл прошивки&quot;</string>
+    <string name="loc_451" formatted="false">&quot;Размер: {0} байт&quot;</string>
+    <string name="loc_452" formatted="false">&quot;Прошить часы — пока недоступно&quot;</string>
+    <string name="loc_453" formatted="false">&quot;Назад к отладке&quot;</string>
+    <string name="loc_454" formatted="false">&quot;Установить BIN циферблата?&quot;</string>
+    <string name="loc_455" formatted="false">&quot;Файл прошёл локальную проверку структуры и CRC. Он будет передан в /user/wf как {0}, затем часам будет отправлена команда установки ID {1}, стиль {2}. Структурная проверка снижает риск повреждённого файла, но окончательное принятие всё равно решает прошивка часов.&quot;</string>
+    <string name="loc_456" formatted="false">&quot;Передать и установить&quot;</string>
+    <string name="loc_457" formatted="false">&quot;Отмена&quot;</string>
+    <string name="loc_460" formatted="false">&quot;Понятно&quot;</string>
+    <string name="loc_461" formatted="false">&quot;Автоматическое копирование&quot;</string>
+    <string name="loc_462" formatted="false">&quot;Нет&quot;</string>
+    <string name="loc_463" formatted="false">&quot;Раз в 3 часа&quot;</string>
+    <string name="loc_464" formatted="false">&quot;Раз в 6 часов&quot;</string>
+    <string name="loc_465" formatted="false">&quot;Раз в 12 часов&quot;</string>
+    <string name="loc_466" formatted="false">&quot;Выбрать город&quot;</string>
+    <string name="loc_467" formatted="false">&quot;Город&quot;</string>
+    <string name="loc_468" formatted="false">&quot;Введите ещё буквы для поиска&quot;</string>
+    <string name="loc_469" formatted="false">&quot;Закрыть&quot;</string>
+    <string name="loc_470" formatted="false">&quot;Уведомления и музыка на браслете&quot;</string>
+    <string name="loc_471" formatted="false">&quot;Разрешите Fit3 App системный доступ к уведомлениям. Он нужен для передачи сообщений и определения активного плеера, например Spotify. Позже доступ можно включить в настройках приложения.&quot;</string>
+    <string name="loc_472" formatted="false">&quot;Открыть настройки&quot;</string>
+    <string name="loc_473" formatted="false">&quot;Позже&quot;</string>
+    <string name="loc_474" formatted="false">&quot;Fit3 App · краткий журнал&quot;</string>
+    <string name="loc_475" formatted="false">&quot;Версия: {0}&quot;</string>
+    <string name="loc_476" formatted="false">&quot;Время телефона: {0}&quot;</string>
+    <string name="loc_477" formatted="false">&quot;Соединение: {0}&quot;</string>
+    <string name="loc_478" formatted="false">&quot; (неполная сумма)&quot;</string>
+    <string name="loc_479" formatted="false">&quot;Шаги: {0}{1}&quot;</string>
+    <string name="loc_480" formatted="false">&quot;Интервалов: {0}; день: {1}&quot;</string>
+    <string name="loc_481" formatted="false">&quot;Дистанция: {0}; калории: {1}&quot;</string>
+    <string name="loc_482" formatted="false">&quot;Пульс: {0}; стресс: {1}; SpO₂: {2}&quot;</string>
+    <string name="loc_483" formatted="false">&quot;Период сна: {0} мин; оценка: {1}&quot;</string>
+    <string name="loc_484" formatted="false">&quot;Батарея часов: {0}%&quot;</string>
+    <string name="loc_485" formatted="false">&quot;Типы Health: {0}&quot;</string>
+    <string name="loc_486" formatted="false">&quot;Пакетов в журнале: {0}&quot;</string>
+    <string name="loc_487" formatted="false">&quot;Последние важные пакеты (повторы свёрнуты):&quot;</string>
+    <string name="loc_488" formatted="false">&quot;Состояние ещё не прочитано&quot;</string>
+    <string name="loc_489" formatted="false">&quot;Как выглядит на браслете&quot;</string>
+    <string name="loc_490" formatted="false">&quot;Карточки на браслете&quot;</string>
+    <string name="loc_491" formatted="false">&quot;Изменить порядок можно кнопками ниже&quot;</string>
+    <string name="loc_492" formatted="false">&quot;Да&quot;</string>
+    <string name="loc_493" formatted="false">&quot;Ок&quot;</string>
+    <string name="loc_494" formatted="false">&quot;Скоро буду&quot;</string>
+    <string name="loc_495" formatted="false">&quot;Перезвоню позже&quot;</string>
+    <string name="loc_496" formatted="false">&quot;Один ответ на строку&quot;</string>
+    <string name="loc_497" formatted="false">&quot;Отправить на часы&quot;</string>
+    <string name="loc_498" formatted="false">&quot;{0}% заряд&quot;</string>
+    <string name="loc_499" formatted="false">&quot;Заряд —&quot;</string>
+    <string name="loc_500" formatted="false">&quot;Заряд {0}%&quot;</string>
+    <string name="loc_501" formatted="false">&quot;Выбрать город ›&quot;</string>
+    <string name="loc_502" formatted="false">&quot;по данным Open-Meteo&quot;</string>
+    <string name="loc_503" formatted="false">&quot;Цель {0} · {1}%&quot;</string>
+    <string name="loc_504" formatted="false">&quot;За сегодня&quot;</string>
+    <string name="loc_505" formatted="false">&quot;Последний сон&quot;</string>
+    <string name="loc_506" formatted="false">&quot;уд/мин&quot;</string>
+    <string name="loc_507" formatted="false">&quot;Измерено {0}&quot;</string>
+    <string name="loc_508" formatted="false">&quot;Нет замера&quot;</string>
+    <string name="loc_509" formatted="false">&quot; · зарядка&quot;</string>
+    <string name="loc_510" formatted="false">&quot;Заряд {0}%{1}&quot;</string>
+    <string name="loc_511" formatted="false">&quot;Заряд пока не получен&quot;</string>
+    <string name="loc_512" formatted="false">&quot;Циферблат и настройки →&quot;</string>
+    <string name="loc_513" formatted="false">&quot;Найти браслет →&quot;</string>
+    <string name="loc_514" formatted="false">&quot;Активность и здоровье&quot;</string>
+    <string name="loc_515" formatted="false">&quot;Шаги  {0}&quot;</string>
+    <string name="loc_516" formatted="false">&quot;Сон  {0}&quot;</string>
+    <string name="loc_517" formatted="false">&quot;{0} уд/мин&quot;</string>
+    <string name="loc_518" formatted="false">&quot;Пульс  {0}&quot;</string>
+    <string name="loc_519" formatted="false">&quot;Измерения ещё не получены с браслета&quot;</string>
+    <string name="loc_520" formatted="false">&quot;Москва&quot;</string>
+    <string name="loc_521" formatted="false">&quot;Россия&quot;</string>
+    <string name="loc_522" formatted="false">&quot;Санкт-Петербург&quot;</string>
+    <string name="loc_523" formatted="false">&quot;Казань&quot;</string>
+    <string name="loc_524" formatted="false">&quot;Татарстан&quot;</string>
+    <string name="loc_525" formatted="false">&quot;Новосибирск&quot;</string>
+    <string name="loc_526" formatted="false">&quot;Екатеринбург&quot;</string>
+    <string name="loc_527" formatted="false">&quot;Ростов-на-Дону&quot;</string>
+    <string name="loc_528" formatted="false">&quot;Выбрать город  ›&quot;</string>
+    <string name="loc_529" formatted="false">&quot;Ясно&quot;</string>
+    <string name="loc_530" formatted="false">&quot;Переменная облачность&quot;</string>
+    <string name="loc_531" formatted="false">&quot;Облачно&quot;</string>
+    <string name="loc_532" formatted="false">&quot;Туман&quot;</string>
+    <string name="loc_533" formatted="false">&quot;Дождь&quot;</string>
+    <string name="loc_534" formatted="false">&quot;Снег&quot;</string>
+    <string name="loc_535" formatted="false">&quot;Гроза&quot;</string>
+    <string name="loc_536" formatted="false">&quot;Прогноз&quot;</string>
+    <string name="loc_537" formatted="false">&quot;Найдите свой Fit3&quot;</string>
+    <string name="loc_538" formatted="false">&quot;Поднесите браслет к телефону и выберите его ниже. Если Android запросит подтверждение сопряжения, проверьте экран браслета.&quot;</string>
+    <string name="loc_539" formatted="false">&quot;Ошибка&quot;</string>
+    <string name="loc_540" formatted="false">&quot;Включите&quot;</string>
+    <string name="loc_541" formatted="false">&quot;Разрешите&quot;</string>
+    <string name="loc_542" formatted="false">&quot;Текущий циферблат&quot;</string>
+    <string name="loc_543" formatted="false">&quot;Превью циферблата {0}&quot;</string>
+    <string name="loc_544" formatted="false">&quot;Уже сопряжён&quot;</string>
+    <string name="loc_545" formatted="false">&quot;Рядом · требуется подключение&quot;</string>
+    <string name="loc_546" formatted="false">&quot;Выбрать →&quot;</string>
+    <string name="loc_547" formatted="false">&quot;Открыть циферблаты →&quot;</string>
+    <string name="loc_548" formatted="false">&quot;Подключите браслет&quot;</string>
+    <string name="loc_549" formatted="false">&quot;Вариант {0}&quot;</string>
+    <string name="loc_550" formatted="false">&quot;Выбран&quot;</string>
+    <string name="loc_551" formatted="false">&quot;Не установлен&quot;</string>
+    <string name="loc_552" formatted="false">&quot;Как в системе&quot;</string>
+    <string name="loc_553" formatted="false">&quot;Тёмная&quot;</string>
+    <string name="loc_554" formatted="false">&quot;Светлая&quot;</string>
+    <string name="loc_555" formatted="false">&quot;AMOLED · чёрная&quot;</string>
+    <string name="loc_556" formatted="false">&quot;шагов&quot;</string>
+    <string name="loc_557" formatted="false">&quot;Цель {0} шагов · ждём данные&quot;</string>
+    <string name="loc_558" formatted="false">&quot;Ходьба {0} · бег {1}&quot;</string>
+    <string name="loc_559" formatted="false">&quot;Изменить цель →&quot;</string>
+    <string name="loc_560" formatted="false">&quot;ПН&quot;</string>
+    <string name="loc_561" formatted="false">&quot;ВТ&quot;</string>
+    <string name="loc_562" formatted="false">&quot;СР&quot;</string>
+    <string name="loc_563" formatted="false">&quot;ЧТ&quot;</string>
+    <string name="loc_564" formatted="false">&quot;ПТ&quot;</string>
+    <string name="loc_565" formatted="false">&quot;СБ&quot;</string>
+    <string name="loc_566" formatted="false">&quot;ВС&quot;</string>
+    <string name="loc_567" formatted="false">&quot;Цель по шагам&quot;</string>
+    <string name="loc_568" formatted="false">&quot;Шагов в день&quot;</string>
+    <string name="loc_569" formatted="false">&quot;Цель для статистики Fit3 App&quot;</string>
+    <string name="loc_570" formatted="false">&quot;Сохранить&quot;</string>
+    <string name="loc_571" formatted="false">&quot;Шаги за неделю&quot;</string>
+    <string name="loc_572" formatted="false">&quot;Цель {0}&quot;</string>
+    <string name="loc_573" formatted="false">&quot;Впереди&quot;</string>
+    <string name="loc_574" formatted="false">&quot;Нет данных&quot;</string>
+    <string name="loc_575" formatted="false">&quot;{0} шагов&quot;</string>
+    <string name="loc_576" formatted="false">&quot;Период сна&quot;</string>
+    <string name="loc_577" formatted="false">&quot;Пульс min {0} · max {1}&quot;</string>
+    <string name="loc_578" formatted="false">&quot;{0} из 100&quot;</string>
+    <string name="loc_579" formatted="false">&quot;Измерений пока нет&quot;</string>
+    <string name="loc_580" formatted="false">&quot;Последние типы: {0}&quot;</string>
+    <string name="loc_581" formatted="false">&quot;Последние разобранные данные: {0}&quot;</string>
+    <string name="loc_582" formatted="false">&quot;Пакеты часов получены. Показаны только подтверждённые показатели; полный обмен Health ещё исследуется.&quot;</string>
+    <string name="loc_583" formatted="false">&quot;Fit3 App ответил на запрос возможностей и ждёт данные здоровья от браслета.&quot;</string>
+    <string name="loc_584" formatted="false">&quot;%.2f км&quot;</string>
+    <string name="loc_585" formatted="false">&quot;{0} м&quot;</string>
+    <string name="loc_586" formatted="false">&quot;{0}ч {1}м&quot;</string>
+    <string name="loc_587" formatted="false">&quot;Некорректный Health-пакет&quot;</string>
+    <string name="loc_588" formatted="false">&quot;Health handshake: Fit3 protocol {0}, standalone host подтверждён&quot;</string>
+    <string name="loc_589" formatted="false">&quot;Получен ответ Health capability&quot;</string>
+    <string name="loc_590" formatted="false">&quot;Fit3 запросил Samsung Health capability: ответ 4.51 отправлен; ждём SYNC_DATA&quot;</string>
+    <string name="loc_591" formatted="false">&quot;Получен Health wearable capability response&quot;</string>
+    <string name="loc_592" formatted="false">&quot;Health capability exchange получен&quot;</string>
+    <string name="loc_593" formatted="false">&quot;Ответ на запрос возможностей Health получен&quot;</string>
+    <string name="loc_594" formatted="false">&quot;Канал Fit3 Health отвечает&quot;</string>
+    <string name="loc_595" formatted="false">&quot;Получен ответ обратной синхронизации шагов&quot;</string>
+    <string name="loc_596" formatted="false">&quot;Fit3 запросил Health data у телефона&quot;</string>
+    <string name="loc_597" formatted="false">&quot;Получено Health wearable-message&quot;</string>
+    <string name="loc_598" formatted="false">&quot;Неизвестная команда Health {0}; пакет сохранён в Protocol Monitor&quot;</string>
+    <string name="loc_599" formatted="false">&quot;Fit3 Health: получены реальные данные {0}&quot;</string>
+    <string name="loc_600" formatted="false">&quot;Fit3 Health sync: типы {0}; поля сохранены для разбора&quot;</string>
+    <string name="loc_601" formatted="false">&quot;Fit3 Health sync получен; формат записи сохранён в Protocol Monitor&quot;</string>
+    <string name="loc_602" formatted="false">&quot;Будильник&quot;</string>
+    <string name="loc_603" formatted="false">&quot;Календарь&quot;</string>
+    <string name="loc_604" formatted="false">&quot;Таймер&quot;</string>
+    <string name="loc_605" formatted="false">&quot;Мировое время&quot;</string>
+    <string name="loc_606" formatted="false">&quot;Музыка&quot;</string>
+    <string name="loc_607" formatted="false">&quot;Прогноз погоды&quot;</string>
+    <string name="loc_608" formatted="false">&quot;События&quot;</string>
+    <string name="loc_609" formatted="false">&quot;Батарея&quot;</string>
+    <string name="loc_610" formatted="false">&quot;Тренировки&quot;</string>
+    <string name="loc_611" formatted="false">&quot;Цикл&quot;</string>
+    <string name="loc_612" formatted="false">&quot;Вода&quot;</string>
+    <string name="loc_613" formatted="false">&quot;Еда&quot;</string>
+    <string name="loc_614" formatted="false">&quot;Кислород&quot;</string>
+    <string name="loc_615" formatted="false">&quot;Не беспокоить&quot;</string>
+    <string name="loc_616" formatted="false">&quot;Найти телефон&quot;</string>
+    <string name="loc_617" formatted="false">&quot;Звук / вибрация&quot;</string>
+    <string name="loc_618" formatted="false">&quot;Блокировка воды&quot;</string>
+    <string name="loc_619" formatted="false">&quot;Питание&quot;</string>
+    <string name="loc_620" formatted="false">&quot;Фонарик&quot;</string>
+    <string name="loc_621" formatted="false">&quot;Авиарежим&quot;</string>
+    <string name="loc_622" formatted="false">&quot;Контроллер мультимедиа&quot;</string>
+    <string name="loc_623" formatted="false">&quot;Найти мой телефон&quot;</string>
+    <string name="loc_624" formatted="false">&quot;Камера&quot;</string>
+    <string name="loc_625" formatted="false">&quot;Секундомер&quot;</string>
+    <string name="loc_626" formatted="false">&quot;Калькулятор&quot;</string>
+    <string name="loc_627" formatted="false">&quot;FULL_SETTINGS (не удалось разобрать параметры)&quot;</string>
+    <string name="loc_628" formatted="false">&quot;Низкий&quot;</string>
+    <string name="loc_629" formatted="false">&quot;Средний&quot;</string>
+    <string name="loc_630" formatted="false">&quot;Высокий&quot;</string>
+    <string name="loc_631" formatted="false">&quot;Очень высокий&quot;</string>
+    <string name="loc_632" formatted="false">&quot;Экстремальный&quot;</string>
+</resources>

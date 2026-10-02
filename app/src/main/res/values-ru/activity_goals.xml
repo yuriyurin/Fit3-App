@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activity_goals_title">Цели активности</string>
+    <string name="activity_goals_description">Укажите ежедневные цели. После подключения они также применятся на Fit3.</string>
+    <string name="activity_goals_steps">Шагов в день</string>
+    <string name="activity_goals_minutes">Время активности, мин</string>
+    <string name="activity_goals_calories">Активные калории, ккал</string>
+    <string name="activity_goal_summary">%1$d мин · %2$d ккал</string>
+</resources>

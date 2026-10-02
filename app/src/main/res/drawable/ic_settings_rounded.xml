@@ -1,0 +1,11 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Eight identical teeth at 45-degree intervals; tint comes from the Icon. -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M8.90,4.52 L9.77,4.21 L9.59,1.57 L14.41,1.57 L14.23,4.21 L15.10,4.52 L15.93,4.92 L17.67,2.93 L21.07,6.33 L19.08,8.07 L19.48,8.90 L19.79,9.77 L22.43,9.59 L22.43,14.41 L19.79,14.23 L19.48,15.10 L19.08,15.93 L21.07,17.67 L17.67,21.07 L15.93,19.08 L15.10,19.48 L14.23,19.79 L14.41,22.43 L9.59,22.43 L9.77,19.79 L8.90,19.48 L8.07,19.08 L6.33,21.07 L2.93,17.67 L4.92,15.93 L4.52,15.10 L4.21,14.23 L1.57,14.41 L1.57,9.59 L4.21,9.77 L4.52,8.90 L4.92,8.07 L2.93,6.33 L6.33,2.93 L8.07,4.92 Z M12,9.2 A2.8,2.8 0,1 0,12,14.8 A2.8,2.8 0,1 0,12,9.2 Z" />
+</vector>

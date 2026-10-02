@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loc_000" formatted="false">&quot;BIN must not exceed 4 MiB ({0} bytes)&quot;</string>
+    <string name="loc_001" formatted="false">&quot;Unknown format: missing OPPO header&quot;</string>
+    <string name="loc_002" formatted="false">&quot;Only OPPO v4 containers are supported&quot;</string>
+    <string name="loc_003" formatted="false">&quot;Header payload size does not match the BIN size&quot;</string>
+    <string name="loc_004" formatted="false">&quot;Invalid number of files in the container: {0}&quot;</string>
+    <string name="loc_005" formatted="false">&quot;OPPO directory extends beyond the file&quot;</string>
+    <string name="loc_006" formatted="false">&quot;Reserved header bytes are corrupted&quot;</string>
+    <string name="loc_007" formatted="false">&quot;Container CRC16 mismatch&quot;</string>
+    <string name="loc_008" formatted="false">&quot;Entry #{0} path is not NUL-terminated&quot;</string>
+    <string name="loc_009" formatted="false">&quot;Unexpected bytes in entry #{0} path padding&quot;</string>
+    <string name="loc_010" formatted="false">&quot;Entry #{0} path is not ASCII&quot;</string>
+    <string name="loc_011" formatted="false">&quot;Invalid path inside BIN: {0}&quot;</string>
+    <string name="loc_012" formatted="false">&quot;Unsupported internal BIN file: {0}&quot;</string>
+    <string name="loc_013" formatted="false">&quot;Duplicate file inside BIN: {0}&quot;</string>
+    <string name="loc_014" formatted="false">&quot;Container is not packed contiguously before {0}&quot;</string>
+    <string name="loc_015" formatted="false">&quot;File {0} extends beyond the container&quot;</string>
+    <string name="loc_016" formatted="false">&quot;File {0} CRC16 mismatch&quot;</string>
+    <string name="loc_017" formatted="false">&quot;Unverified trailing data after the last entry&quot;</string>
+    <string name="loc_018" formatted="false">&quot;Container mixes different watch face IDs&quot;</string>
+    <string name="loc_019" formatted="false">&quot;Watch face ID {0} is out of range for the Fit3 protocol&quot;</string>
+    <string name="loc_020" formatted="false">&quot;BIN ID ({0}) does not match the expected ID ({1})&quot;</string>
+    <string name="loc_021" formatted="false">&quot;The selected BIN filename belongs to another watch face&quot;</string>
+    <string name="loc_022" formatted="false">&quot;Required file {0} is missing from BIN&quot;</string>
+    <string name="loc_023" formatted="false">&quot;Missing style0.bin&quot;</string>
+    <string name="loc_024" formatted="false">&quot;Gaps in style*.bin numbering&quot;</string>
+    <string name="loc_025" formatted="false">&quot;Style number is out of range for the Fit3 protocol&quot;</string>
+    <string name="loc_026" formatted="false">&quot;Unexpected setting.bin size: {0}&quot;</string>
+    <string name="loc_027" formatted="false">&quot;setting.bin does not contain the LQ_WF marker&quot;</string>
+    <string name="loc_028" formatted="false">&quot;setting.bin is corrupted&quot;</string>
+    <string name="loc_029" formatted="false">&quot;setting.bin ID ({0}) does not match the directory ID ({1})&quot;</string>
+    <string name="loc_030" formatted="false">&quot;Corrupted name slots in setting.bin&quot;</string>
+    <string name="loc_031" formatted="false">&quot;The two name copies in setting.bin differ&quot;</string>
+    <string name="loc_032" formatted="false">&quot;{0} must be 92 bytes long&quot;</string>
+    <string name="loc_033" formatted="false">&quot;{0}: corrupted system font role&quot;</string>
+    <string name="loc_034" formatted="false">&quot;{0}: invalid font size {1}&quot;</string>
+    <string name="loc_035" formatted="false">&quot;{0}: localization table is too short&quot;</string>
+    <string name="loc_036" formatted="false">&quot;{0}: invalid magic&quot;</string>
+    <string name="loc_037" formatted="false">&quot;{0}: invalid string count&quot;</string>
+    <string name="loc_038" formatted="false">&quot;{0}: corrupted reserved header&quot;</string>
+    <string name="loc_039" formatted="false">&quot;{0}: descriptor table is out of bounds&quot;</string>
+    <string name="loc_040" formatted="false">&quot;{0}: string #{1} is out of bounds&quot;</string>
+    <string name="loc_041" formatted="false">&quot;{0}: first string does not start after the descriptors&quot;</string>
+    <string name="loc_042" formatted="false">&quot;{0}: string offsets are in reverse order&quot;</string>
+    <string name="loc_043" formatted="false">&quot;{0}: unverified trailing data after UTF-8 strings&quot;</string>
+    <string name="loc_044" formatted="false">&quot;{0}: style container is too short&quot;</string>
+    <string name="loc_045" formatted="false">&quot;{0}: invalid style magic&quot;</string>
+    <string name="loc_046" formatted="false">&quot;{0}: invalid widget count&quot;</string>
+    <string name="loc_047" formatted="false">&quot;{0}: corrupted widget/image section sizes&quot;</string>
+    <string name="loc_048" formatted="false">&quot;{0}: widget #{1} is truncated&quot;</string>
+    <string name="loc_049" formatted="false">&quot;{0}: widget #{1} has an invalid size {2}&quot;</string>
+    <string name="loc_050" formatted="false">&quot;{0}: widget section was not fully parsed&quot;</string>
+    <string name="loc_051" formatted="false">&quot;{0}: truncated raster header&quot;</string>
+    <string name="loc_052" formatted="false">&quot;{0}: corrupted raster header&quot;</string>
+    <string name="loc_053" formatted="false">&quot;{0}: unknown raster format 0x{1}&quot;</string>
+    <string name="loc_054" formatted="false">&quot;{0}: raster is out of bounds&quot;</string>
+    <string name="loc_055" formatted="false">&quot;{0}: invalid raster payload size&quot;</string>
+    <string name="loc_056" formatted="false">&quot;{0}: image section was not fully parsed&quot;</string>
+    <string name="loc_057" formatted="false">&quot;Corrupted ASCII string&quot;</string>
+    <string name="loc_058" formatted="false">&quot;{0}: string #{1} contains invalid UTF-8&quot;</string>
+    <string name="loc_059" formatted="false">&quot;Watch rejected block {0} of {1}&quot;</string>
+    <string name="loc_060" formatted="false">&quot;Transfer cancelled&quot;</string>
+    <string name="loc_061" formatted="false">&quot;Transfer channel closed&quot;</string>
+    <string name="loc_062" formatted="false">&quot;Invalid watch response&quot;</string>
+    <string name="loc_063" formatted="false">&quot;Unexpected watch response: {0}&quot;</string>
+    <string name="loc_064" formatted="false">&quot;Watch did not respond during watch face transfer&quot;</string>
+    <string name="loc_065" formatted="false">&quot;Store did not confirm the version check&quot;</string>
+    <string name="loc_066" formatted="false">&quot;This watch face is not available in the store&quot;</string>
+    <string name="loc_067" formatted="false">&quot;Store returned an incomplete response&quot;</string>
+    <string name="loc_068" formatted="false">&quot;Store refused the download&quot;</string>
+    <string name="loc_069" formatted="false">&quot;Invalid package size&quot;</string>
+    <string name="loc_070" formatted="false">&quot;Package download is incomplete&quot;</string>
+    <string name="loc_071" formatted="false">&quot;Untrusted download URL&quot;</string>
+    <string name="loc_072" formatted="false">&quot;Redirect without a URL&quot;</string>
+    <string name="loc_073" formatted="false">&quot;Store returned HTTP {0}&quot;</string>
+    <string name="loc_074" formatted="false">&quot;Package is too large&quot;</string>
+    <string name="loc_075" formatted="false">&quot;Too many store redirects&quot;</string>
+    <string name="loc_076" formatted="false">&quot;Store returned invalid XML&quot;</string>
+    <string name="loc_077" formatted="false">&quot;Too many files in the package&quot;</string>
+    <string name="loc_078" formatted="false">&quot;Unpacked package is too large&quot;</string>
+    <string name="loc_079" formatted="false">&quot;Watch face exceeds the 4 MiB safety limit&quot;</string>
+    <string name="loc_080" formatted="false">&quot;Package contains multiple watch face files&quot;</string>
+    <string name="loc_081" formatted="false">&quot;This watch face does not contain a regular BIN (for example, Photos)&quot;</string>
+    <string name="loc_082" formatted="false">&quot;Selected style is missing from BIN&quot;</string>
+    <string name="loc_083" formatted="false">&quot;Backup is too large&quot;</string>
+    <string name="loc_084" formatted="false">&quot;Not connected&quot;</string>
+    <string name="loc_085" formatted="false">&quot;Health data has not been synced yet&quot;</string>
+    <string name="loc_086" formatted="false">&quot;No notifications sent yet&quot;</string>
+    <string name="loc_087" formatted="false">&quot;Choose a city&quot;</string>
+    <string name="loc_088" formatted="false">&quot;Bluetooth scan error: {0}&quot;</string>
+    <string name="loc_089" formatted="false">&quot;Bluetooth is unavailable&quot;</string>
+    <string name="loc_090" formatted="false">&quot;Turn on Bluetooth&quot;</string>
+    <string name="loc_091" formatted="false">&quot;BLE scanner is unavailable&quot;</string>
+    <string name="loc_092" formatted="false">&quot;Searching for watch…&quot;</string>
+    <string name="loc_093" formatted="false">&quot;Allow access to nearby devices&quot;</string>
+    <string name="loc_094" formatted="false">&quot;Choose a watch&quot;</string>
+    <string name="loc_095" formatted="false">&quot;Invalid device address&quot;</string>
+    <string name="loc_096" formatted="false">&quot;Checking band data&quot;</string>
+    <string name="loc_097" formatted="false">&quot;Connecting to {0}…&quot;</string>
+    <string name="loc_098" formatted="false">&quot;Bluetooth permission is required to connect&quot;</string>
+    <string name="loc_099" formatted="false">&quot;Negotiating Bluetooth connection…&quot;</string>
+    <string name="loc_100" formatted="false">&quot;Could not request MTU&quot;</string>
+    <string name="loc_101" formatted="false">&quot;Connection lost during installation&quot;</string>
+    <string name="loc_102" formatted="false">&quot;Connection lost&quot;</string>
+    <string name="loc_103" formatted="false">&quot;Connection error: {0}&quot;</string>
+    <string name="loc_104" formatted="false">&quot;Connection failed: {0}&quot;</string>
+    <string name="loc_105" formatted="false">&quot;BLE MTU is too small: {0}&quot;</string>
+    <string name="loc_106" formatted="false">&quot;Searching for watch service…&quot;</string>
+    <string name="loc_107" formatted="false">&quot;Watch service not found&quot;</string>
+    <string name="loc_108" formatted="false">&quot;Service discovery error: {0}&quot;</string>
+    <string name="loc_109" formatted="false">&quot;SAP service not found on watch&quot;</string>
+    <string name="loc_110" formatted="false">&quot;Could not enable notifications&quot;</string>
+    <string name="loc_111" formatted="false">&quot;Could not subscribe to watch responses&quot;</string>
+    <string name="loc_112" formatted="false">&quot;Waiting for watch response…&quot;</string>
+    <string name="loc_113" formatted="false">&quot;No watch response during negotiation&quot;</string>
+    <string name="loc_114" formatted="false">&quot;Subscription error: {0}&quot;</string>
+    <string name="loc_115" formatted="false">&quot;Bluetooth write error: {0}&quot;</string>
+    <string name="loc_116" formatted="false">&quot;Watch channel ready&quot;</string>
+    <string name="loc_117" formatted="false">&quot;Negotiation error: {0}&quot;</string>
+    <string name="loc_118" formatted="false">&quot;Watch is responding&quot;</string>
+    <string name="loc_119" formatted="false">&quot;Watch faces received: {0}&quot;</string>
+    <string name="loc_120" formatted="false">&quot;Watch face installed&quot;</string>
+    <string name="loc_121" formatted="false">&quot;Watch returned a watch face list in an unknown format; see Protocol Monitor&quot;</string>
+    <string name="loc_122" formatted="false">&quot;Checking watch face on watch…&quot;</string>
+    <string name="loc_123" formatted="false">&quot;Watch battery is too low&quot;</string>
+    <string name="loc_124" formatted="false">&quot;Watch could not find the watch face file&quot;</string>
+    <string name="loc_125" formatted="false">&quot;Watch rejected the watch face format&quot;</string>
+    <string name="loc_126" formatted="false">&quot;Watch face storage or list is full&quot;</string>
+    <string name="loc_127" formatted="false">&quot;Watch rejected installation ({0})&quot;</string>
+    <string name="loc_128" formatted="false">&quot;Connected&quot;</string>
+    <string name="loc_129" formatted="false">&quot;Music command from watch: {0}&quot;</string>
+    <string name="loc_130" formatted="false">&quot;No active Android MediaSession found&quot;</string>
+    <string name="loc_131" formatted="false">&quot;Volume changed from watch&quot;</string>
+    <string name="loc_132" formatted="false">&quot;Could not change volume&quot;</string>
+    <string name="loc_133" formatted="false">&quot;Could not save data. Refresh again.&quot;</string>
+    <string name="loc_134" formatted="false">&quot;Tiles synced&quot;</string>
+    <string name="loc_135" formatted="false">&quot;Quick panel synced&quot;</string>
+    <string name="loc_136" formatted="false">&quot;App order synced&quot;</string>
+    <string name="loc_137" formatted="false">&quot;Quick replies synced&quot;</string>
+    <string name="loc_138" formatted="false">&quot;Watch icon format: {0}&quot;</string>
+    <string name="loc_139" formatted="false">&quot;Watch acknowledged the test notification&quot;</string>
+    <string name="loc_140" formatted="false">&quot;Watch rejected the notification&quot;</string>
+    <string name="loc_141" formatted="false">&quot;Request error: {0}&quot;</string>
+    <string name="loc_142" formatted="false">&quot;Band received the app icon&quot;</string>
+    <string name="loc_143" formatted="false">&quot;Could not transfer the app icon&quot;</string>
+    <string name="loc_144" formatted="false">&quot;Icon transfer error: {0}&quot;</string>
+    <string name="loc_145" formatted="false">&quot;Wait for the watch to connect&quot;</string>
+    <string name="loc_146" formatted="false">&quot;Could not get the watch face list&quot;</string>
+    <string name="loc_147" formatted="false">&quot;Get the installed watch face list first&quot;</string>
+    <string name="loc_148" formatted="false">&quot;Changing watch face…&quot;</string>
+    <string name="loc_149" formatted="false">&quot;Watch did not confirm the watch face change&quot;</string>
+    <string name="loc_150" formatted="false">&quot;Connect the watch and wait for the previous transfer to finish&quot;</string>
+    <string name="loc_151" formatted="false">&quot;Charge the watch to at least 30% before installation&quot;</string>
+    <string name="loc_152" formatted="false">&quot;No paired Galaxy Fit3 found&quot;</string>
+    <string name="loc_153" formatted="false">&quot;Preparing watch face transfer…&quot;</string>
+    <string name="loc_154" formatted="false">&quot;Could not prepare watch: {0}&quot;</string>
+    <string name="loc_155" formatted="false">&quot;Transferring watch face…&quot;</string>
+    <string name="loc_156" formatted="false">&quot;Transfer: {0}%&quot;</string>
+    <string name="loc_157" formatted="false">&quot;Transfer incomplete: {0}&quot;</string>
+    <string name="loc_158" formatted="false">&quot;Installing watch face…&quot;</string>
+    <string name="loc_159" formatted="false">&quot;No installation confirmation from watch&quot;</string>
+    <string name="loc_160" formatted="false">&quot;Could not send installation command: {0}&quot;</string>
+    <string name="loc_161" formatted="false">&quot;Requesting band data…&quot;</string>
+    <string name="loc_162" formatted="false">&quot;Could not save data&quot;</string>
+    <string name="loc_163" formatted="false">&quot;Band did not respond to refresh&quot;</string>
+    <string name="loc_164" formatted="false">&quot;Checking Health capability exchange…&quot;</string>
+    <string name="loc_165" formatted="false">&quot;Brightness sent&quot;</string>
+    <string name="loc_166" formatted="false">&quot;Auto brightness sent&quot;</string>
+    <string name="loc_167" formatted="false">&quot;AOD sent&quot;</string>
+    <string name="loc_168" formatted="false">&quot;Raise to wake sent&quot;</string>
+    <string name="loc_169" formatted="false">&quot;Touch to wake sent&quot;</string>
+    <string name="loc_170" formatted="false">&quot;Waiting for wrist confirmation from band&quot;</string>
+    <string name="loc_171" formatted="false">&quot;Waiting for button position confirmation&quot;</string>
+    <string name="loc_172" formatted="false">&quot;Auto-show music controls sent&quot;</string>
+    <string name="loc_173" formatted="false">&quot;Sleep mode sent&quot;</string>
+    <string name="loc_174" formatted="false">&quot;Theatre mode sent&quot;</string>
+    <string name="loc_175" formatted="false">&quot;Screen timeout sent&quot;</string>
+    <string name="loc_176" formatted="false">&quot;Requesting tiles…&quot;</string>
+    <string name="loc_177" formatted="false">&quot;Fit3 supports up to 12 active tiles&quot;</string>
+    <string name="loc_178" formatted="false">&quot;Tile order sent&quot;</string>
+    <string name="loc_179" formatted="false">&quot;Requesting apps…&quot;</string>
+    <string name="loc_180" formatted="false">&quot;App order sent&quot;</string>
+    <string name="loc_181" formatted="false">&quot;Requesting quick panel…&quot;</string>
+    <string name="loc_182" formatted="false">&quot;Quick panel sent&quot;</string>
+    <string name="loc_183" formatted="false">&quot;Quick replies sent&quot;</string>
+    <string name="loc_184" formatted="false">&quot;Time and time zone sent to watch&quot;</string>
+    <string name="loc_185" formatted="false">&quot;Local backup saved&quot;</string>
+    <string name="loc_186" formatted="false">&quot;Local backup not found&quot;</string>
+    <string name="loc_187" formatted="false">&quot;Local backup restore sent to watch&quot;</string>
+    <string name="loc_188" formatted="false">&quot;Notification test&quot;</string>
+    <string name="loc_189" formatted="false">&quot;If you can see this on your watch, forwarding works.&quot;</string>
+    <string name="loc_190" formatted="false">&quot;No watch connection&quot;</string>
+    <string name="loc_191" formatted="false">&quot;{0}: notification sent; waiting for watch response…&quot;</string>
+    <string name="loc_192" formatted="false">&quot;No notification confirmation from watch; check its screen&quot;</string>
+    <string name="loc_193" formatted="false">&quot;Failed to send {0}: {1}&quot;</string>
+    <string name="loc_194" formatted="false">&quot;Wait for the watch channel to be ready&quot;</string>
+    <string name="loc_195" formatted="false">&quot;Setup: watch information…&quot;</string>
+    <string name="loc_196" formatted="false">&quot;No response to setup step: {0}&quot;</string>
+    <string name="loc_197" formatted="false">&quot;Setup: device status…&quot;</string>
+    <string name="loc_198" formatted="false">&quot;Setup: date and language…&quot;</string>
+    <string name="loc_199" formatted="false">&quot;Finishing watch setup…&quot;</string>
+    <string name="loc_200" formatted="false">&quot;Setup complete. Watch may restart&quot;</string>
+    <string name="loc_201" formatted="false">&quot;Packet exceeds the negotiated BLE MTU&quot;</string>
+    <string name="loc_202" formatted="false">&quot;Bluetooth queue is full&quot;</string>
+    <string name="loc_203" formatted="false">&quot;No connection&quot;</string>
+    <string name="loc_204" formatted="false">&quot;Write channel is unavailable&quot;</string>
+    <string name="loc_205" formatted="false">&quot;Android rejected the GATT write&quot;</string>
+    <string name="loc_206" formatted="false">&quot;No Bluetooth write acknowledgement&quot;</string>
+    <string name="loc_207" formatted="false">&quot;Reconnecting in {0} s…&quot;</string>
+    <string name="loc_208" formatted="false">&quot;Installation cancelled&quot;</string>
+    <string name="loc_209" formatted="false">&quot;Disconnected&quot;</string>
+    <string name="loc_210" formatted="false">&quot;Could not create a file in the selected folder&quot;</string>
+    <string name="loc_211" formatted="false">&quot;Could not write backup&quot;</string>
+    <string name="loc_212" formatted="false">&quot;Waiting for weather&quot;</string>
+    <string name="loc_213" formatted="false">&quot;Galaxy Fit3 connection&quot;</string>
+    <string name="loc_214" formatted="false">&quot;Log limited to 4 MB; earlier entries removed.\n&quot;</string>
+    <string name="loc_215" formatted="false">&quot;Open the app and choose a city for weather&quot;</string>
+    <string name="loc_216" formatted="false">&quot;Connecting to Galaxy Fit3…&quot;</string>
+    <string name="loc_217" formatted="false">&quot;Updating weather…&quot;</string>
+    <string name="loc_218" formatted="false">&quot;Could not load weather&quot;</string>
+    <string name="loc_219" formatted="false">&quot;Showing the last forecast&quot;</string>
+    <string name="loc_220" formatted="false">&quot;Connect the watch first&quot;</string>
+    <string name="loc_221" formatted="false">&quot;Downloading watch face from store…&quot;</string>
+    <string name="loc_222" formatted="false">&quot;Could not download watch face: {0}&quot;</string>
+    <string name="loc_223" formatted="false">&quot;Rechecking BIN before transfer…&quot;</string>
+    <string name="loc_224" formatted="false">&quot;Style {0} is missing from BIN&quot;</string>
+    <string name="loc_225" formatted="false">&quot;BIN failed validation: {0}&quot;</string>
+    <string name="loc_226" formatted="false">&quot;No saved data&quot;</string>
+    <string name="loc_227" formatted="false">&quot;Health archive is too large for a JSON backup&quot;</string>
+    <string name="loc_228" formatted="false">&quot;Too many health records&quot;</string>
+    <string name="loc_229" formatted="false">&quot;Health history is corrupted&quot;</string>
+    <string name="loc_230" formatted="false">&quot;Could not save health data&quot;</string>
+    <string name="loc_231" formatted="false">&quot;Unsupported health data version&quot;</string>
+    <string name="loc_232" formatted="false">&quot;Too many step intervals&quot;</string>
+    <string name="loc_233" formatted="false">&quot;No daily forecast&quot;</string>
+    <string name="loc_234" formatted="false">&quot;Open-Meteo · model forecast&quot;</string>
+    <string name="loc_235" formatted="false">&quot;Weather unavailable: HTTP {0}&quot;</string>
+    <string name="loc_236" formatted="false">&quot;Weather response is too large&quot;</string>
+    <string name="loc_237" formatted="false">&quot;Watch did not respond during media file transfer&quot;</string>
+    <string name="loc_238" formatted="false">&quot;Watch rejected the media file block&quot;</string>
+    <string name="loc_239" formatted="false">&quot;Catalog unavailable (code {0})&quot;</string>
+    <string name="loc_240" formatted="false">&quot;Watch face&quot;</string>
+    <string name="loc_241" formatted="false">&quot;Response is too large&quot;</string>
+    <string name="loc_242" formatted="false">&quot;Band&quot;</string>
+    <string name="loc_243" formatted="false">&quot;Weather&quot;</string>
+    <string name="loc_244" formatted="false">&quot;Steps&quot;</string>
+    <string name="loc_245" formatted="false">&quot;Sleep&quot;</string>
+    <string name="loc_246" formatted="false">&quot;Heart rate&quot;</string>
+    <string name="loc_247" formatted="false">&quot;Stress&quot;</string>
+    <string name="loc_248" formatted="false">&quot;Distance&quot;</string>
+    <string name="loc_249" formatted="false">&quot;Connection service stopped&quot;</string>
+    <string name="loc_250" formatted="false">&quot;Could not open file&quot;</string>
+    <string name="loc_251" formatted="false">&quot;Backup saved&quot;</string>
+    <string name="loc_252" formatted="false">&quot;Could not save: {0}&quot;</string>
+    <string name="loc_253" formatted="false">&quot;Could not read file&quot;</string>
+    <string name="loc_254" formatted="false">&quot;Invalid backup format&quot;</string>
+    <string name="loc_255" formatted="false">&quot;Data restored; band settings sent&quot;</string>
+    <string name="loc_256" formatted="false">&quot;Data restored; band settings will be applied after connection&quot;</string>
+    <string name="loc_257" formatted="false">&quot;Could not restore: {0}&quot;</string>
+    <string name="loc_258" formatted="false">&quot;Automatic backup folder selected&quot;</string>
+    <string name="loc_259" formatted="false">&quot;Cannot access folder: {0}&quot;</string>
+    <string name="loc_260" formatted="false">&quot;No device selected&quot;</string>
+    <string name="loc_261" formatted="false">&quot;device not found&quot;</string>
+    <string name="loc_262" formatted="false">&quot;System discovery: {0}&quot;</string>
+    <string name="loc_263" formatted="false">&quot;Checking file…&quot;</string>
+    <string name="loc_264" formatted="false">&quot;Selected file&quot;</string>
+    <string name="loc_265" formatted="false">&quot;File exceeds 32 MB&quot;</string>
+    <string name="loc_266" formatted="false">&quot;Validation error&quot;</string>
+    <string name="loc_267" formatted="false">&quot;Unknown error&quot;</string>
+    <string name="loc_268" formatted="false">&quot;Checking BIN…&quot;</string>
+    <string name="loc_269" formatted="false">&quot;Checking structure and CRC…&quot;</string>
+    <string name="loc_270" formatted="false">&quot;Selected BIN&quot;</string>
+    <string name="loc_271" formatted="false">&quot;BIN exceeds the 4 MiB hardware limit&quot;</string>
+    <string name="loc_272" formatted="false">&quot;Could not open BIN&quot;</string>
+    <string name="loc_273" formatted="false">&quot;Unknown BIN validation error&quot;</string>
+    <string name="loc_274" formatted="false">&quot;Home&quot;</string>
+    <string name="loc_275" formatted="false">&quot;Activity&quot;</string>
+    <string name="loc_276" formatted="false">&quot;Connect band&quot;</string>
+    <string name="loc_277" formatted="false">&quot;Watch faces&quot;</string>
+    <string name="loc_278" formatted="false">&quot;Watch face variants&quot;</string>
+    <string name="loc_279" formatted="false">&quot;App settings&quot;</string>
+    <string name="loc_280" formatted="false">&quot;Display&quot;</string>
+    <string name="loc_281" formatted="false">&quot;Tiles&quot;</string>
+    <string name="loc_282" formatted="false">&quot;Apps&quot;</string>
+    <string name="loc_283" formatted="false">&quot;Quick panel&quot;</string>
+    <string name="loc_284" formatted="false">&quot;Quick replies&quot;</string>
+    <string name="loc_285" formatted="false">&quot;Backup&quot;</string>
+    <string name="loc_286" formatted="false">&quot;About&quot;</string>
+    <string name="loc_287" formatted="false">&quot;Debug&quot;</string>
+    <string name="loc_288" formatted="false">&quot;Licenses and acknowledgements&quot;</string>
+    <string name="loc_289" formatted="false">&quot;Notifications&quot;</string>
+    <string name="loc_290" formatted="false">&quot;Power management&quot;</string>
+    <string name="loc_291" formatted="false">&quot;Firmware flasher&quot;</string>
+    <string name="loc_292" formatted="false">&quot;Appearance&quot;</string>
+    <string name="loc_293" formatted="false">&quot;Fit3 Health sync&quot;</string>
+    <string name="loc_294" formatted="false">&quot;Modes&quot;</string>
+    <string name="loc_295" formatted="false">&quot;Menu and tiles&quot;</string>
+    <string name="loc_296" formatted="false">&quot;Time&quot;</string>
+    <string name="loc_297" formatted="false">&quot;Wearing preferences&quot;</string>
+    <string name="loc_298" formatted="false">&quot;Protocol log&quot;</string>
+    <string name="loc_299" formatted="false">&quot;Could not load catalog&quot;</string>
+    <string name="loc_300" formatted="false">&quot;Home editor&quot;</string>
+    <string name="loc_301" formatted="false">&quot;Done&quot;</string>
+    <string name="loc_302" formatted="false">&quot;Settings&quot;</string>
+    <string name="loc_303" formatted="false">&quot;Today&quot;</string>
+    <string name="loc_304" formatted="false">&quot;Data updated: {0}&quot;</string>
+    <string name="loc_305" formatted="false">&quot;Waiting for band data&quot;</string>
+    <string name="loc_306" formatted="false">&quot;Hold a card to move it. Use its size control to resize it.&quot;</string>
+    <string name="loc_307" formatted="false">&quot;Reset · restore the default home screen&quot;</string>
+    <string name="loc_308" formatted="false">&quot;Find with Android&quot;</string>
+    <string name="loc_309" formatted="false">&quot;Looking for a nearby Galaxy Fit3…&quot;</string>
+    <string name="loc_310" formatted="false">&quot;Band not found. Check Bluetooth and try again.&quot;</string>
+    <string name="loc_311" formatted="false">&quot;Searching…&quot;</string>
+    <string name="loc_312" formatted="false">&quot;Search again&quot;</string>
+    <string name="loc_313" formatted="false">&quot;today&quot;</string>
+    <string name="loc_314" formatted="false">&quot;Calories&quot;</string>
+    <string name="loc_315" formatted="false">&quot;{0} kcal&quot;</string>
+    <string name="loc_316" formatted="false">&quot;active&quot;</string>
+    <string name="loc_317" formatted="false">&quot;Floors&quot;</string>
+    <string name="loc_318" formatted="false">&quot;no band data&quot;</string>
+    <string name="loc_319" formatted="false">&quot;climbed&quot;</string>
+    <string name="loc_320" formatted="false">&quot;{0} min&quot;</string>
+    <string name="loc_321" formatted="false">&quot;active time&quot;</string>
+    <string name="loc_322" formatted="false">&quot;Health&quot;</string>
+    <string name="loc_323" formatted="false">&quot;Band settings&quot;</string>
+    <string name="loc_324" formatted="false">&quot;Brightness, wake gestures and AOD&quot;</string>
+    <string name="loc_325" formatted="false">&quot;Wrist and button position&quot;</string>
+    <string name="loc_326" formatted="false">&quot;Sleep, theatre and music controls&quot;</string>
+    <string name="loc_327" formatted="false">&quot;Tiles, apps, quick panel and replies&quot;</string>
+    <string name="loc_328" formatted="false">&quot;Sync with phone&quot;</string>
+    <string name="loc_329" formatted="false">&quot;Connection&quot;</string>
+    <string name="loc_330" formatted="false">&quot;Disconnect band&quot;</string>
+    <string name="loc_331" formatted="false">&quot;Connect another band&quot;</string>
+    <string name="loc_332" formatted="false">&quot;Connect your band to view installed watch faces.&quot;</string>
+    <string name="loc_333" formatted="false">&quot;More Samsung watch faces&quot;</string>
+    <string name="loc_334" formatted="false">&quot;Could not load catalog: {0}&quot;</string>
+    <string name="loc_335" formatted="false">&quot;Choose a watch face to see its variants. New variants need to be downloaded from the store.&quot;</string>
+    <string name="loc_336" formatted="false">&quot;Return to the catalog and choose a watch face&quot;</string>
+    <string name="loc_337" formatted="false">&quot;Notification access and forwarding&quot;</string>
+    <string name="loc_338" formatted="false">&quot;Background activity and battery restrictions&quot;</string>
+    <string name="loc_339" formatted="false">&quot;Theme, accent and language&quot;</string>
+    <string name="loc_340" formatted="false">&quot;Back up band settings&quot;</string>
+    <string name="loc_341" formatted="false">&quot;Debug mode&quot;</string>
+    <string name="loc_342" formatted="false">&quot;Diagnostics, log and firmware flasher&quot;</string>
+    <string name="loc_343" formatted="false">&quot;Auto brightness&quot;</string>
+    <string name="loc_344" formatted="false">&quot;Raise wrist to wake&quot;</string>
+    <string name="loc_345" formatted="false">&quot;Touch to wake&quot;</string>
+    <string name="loc_346" formatted="false">&quot;Brightness&quot;</string>
+    <string name="loc_347" formatted="false">&quot;Screen timeout&quot;</string>
+    <string name="loc_348" formatted="false">&quot;{0}s&quot;</string>
+    <string name="loc_349" formatted="false">&quot;Sleep mode&quot;</string>
+    <string name="loc_350" formatted="false">&quot;Theatre mode&quot;</string>
+    <string name="loc_351" formatted="false">&quot;Preferred wrist&quot;</string>
+    <string name="loc_352" formatted="false">&quot;Right&quot;</string>
+    <string name="loc_353" formatted="false">&quot;Left&quot;</string>
+    <string name="loc_354" formatted="false">&quot;Unknown&quot;</string>
+    <string name="loc_355" formatted="false">&quot;Button position&quot;</string>
+    <string name="loc_356" formatted="false">&quot;Right side&quot;</string>
+    <string name="loc_357" formatted="false">&quot;Left side&quot;</string>
+    <string name="loc_358" formatted="false">&quot;Selection and order&quot;</string>
+    <string name="loc_359" formatted="false">&quot;Band app menu order&quot;</string>
+    <string name="loc_360" formatted="false">&quot;Toggle order&quot;</string>
+    <string name="loc_361" formatted="false">&quot;Message templates&quot;</string>
+    <string name="loc_362" formatted="false">&quot;Time syncs on connection and after a change to the phone time, time zone or language.&quot;</string>
+    <string name="loc_363" formatted="false">&quot;Sync now&quot;</string>
+    <string name="loc_364" formatted="false">&quot;Band tile order&quot;</string>
+    <string name="loc_365" formatted="false">&quot;Tile&quot;</string>
+    <string name="loc_366" formatted="false">&quot;List not received yet&quot;</string>
+    <string name="loc_367" formatted="false">&quot;App&quot;</string>
+    <string name="loc_368" formatted="false">&quot;Toggle&quot;</string>
+    <string name="loc_369" formatted="false">&quot;Quick setting #{0}&quot;</string>
+    <string name="loc_370" formatted="false">&quot;Save your health data and settings to a file. Choose this file on a new phone to restore them.&quot;</string>
+    <string name="loc_371" formatted="false">&quot;Save backup&quot;</string>
+    <string name="loc_372" formatted="false">&quot;Restore from file&quot;</string>
+    <string name="loc_373" formatted="false">&quot;Automatic backups&quot;</string>
+    <string name="loc_374" formatted="false">&quot;Off&quot;</string>
+    <string name="loc_375" formatted="false">&quot;Every day&quot;</string>
+    <string name="loc_376" formatted="false">&quot;Every 3 days&quot;</string>
+    <string name="loc_377" formatted="false">&quot;Every 7 days&quot;</string>
+    <string name="loc_378" formatted="false">&quot;Every {0} h&quot;</string>
+    <string name="loc_379" formatted="false">&quot;Backups are stored in app storage. Choose a phone folder to keep them after uninstalling the app.&quot;</string>
+    <string name="loc_380" formatted="false">&quot;Choose folder&quot;</string>
+    <string name="loc_381" formatted="false">&quot;Change folder&quot;</string>
+    <string name="loc_382" formatted="false">&quot;Notification access&quot;</string>
+    <string name="loc_383" formatted="false">&quot;This system access is also needed to detect Spotify and other music players on the band.&quot;</string>
+    <string name="loc_384" formatted="false">&quot;Forward to Fit3&quot;</string>
+    <string name="loc_385" formatted="false">&quot;Fit3 App status notification&quot;</string>
+    <string name="loc_386" formatted="false">&quot;When off, detailed status is hidden, but Android keeps a service notification for a stable band connection.&quot;</string>
+    <string name="loc_387" formatted="false">&quot;App notification settings&quot;</string>
+    <string name="loc_388" formatted="false">&quot;Allow app notifications&quot;</string>
+    <string name="loc_389" formatted="false">&quot;Allow Fit3 App to run in the background for a stable connection. Some phones also restrict auto-start.&quot;</string>
+    <string name="loc_390" formatted="false">&quot;App battery settings&quot;</string>
+    <string name="loc_391" formatted="false">&quot;Open Fit3 App settings and choose Unrestricted&quot;</string>
+    <string name="loc_392" formatted="false">&quot;Battery optimization&quot;</string>
+    <string name="loc_393" formatted="false">&quot;Fit3 App is excluded from optimization&quot;</string>
+    <string name="loc_394" formatted="false">&quot;Exclude Fit3 App from optimization&quot;</string>
+    <string name="loc_395" formatted="false">&quot;Battery saver&quot;</string>
+    <string name="loc_396" formatted="false">&quot;Check the system battery saver setting&quot;</string>
+    <string name="loc_397" formatted="false">&quot;On OnePlus, Xiaomi and other phones, auto-start may be inside app settings. Android has no universal shortcut to this option.&quot;</string>
+    <string name="loc_398" formatted="false">&quot;Theme&quot;</string>
+    <string name="loc_399" formatted="false">&quot;Accent color&quot;</string>
+    <string name="loc_400" formatted="false">&quot;A uses adaptive Android wallpaper colors. Android 10–11 uses the app color.&quot;</string>
+    <string name="loc_401" formatted="false">&quot;Home screen cards (BETA)&quot;</string>
+    <string name="loc_402" formatted="false">&quot;Order and size on a grid&quot;</string>
+    <string name="loc_403" formatted="false">&quot;Request data&quot;</string>
+    <string name="loc_405" formatted="false">&quot;Watch face BIN&quot;</string>
+    <string name="loc_406" formatted="false">&quot;The experimental installer uses the standard /user/wf path, like the Samsung catalog. Transfer is allowed only after strict validation of OPPO v4, all entry CRC16 values, setting.bin, UTF-8 localizations and style/AOD structure.&quot;</string>
+    <string name="loc_407" formatted="false">&quot;Choose .bin&quot;</string>
+    <string name="loc_408" formatted="false">&quot;Validation: OK · OPPO v4 · all CRC values match&quot;</string>
+    <string name="loc_409" formatted="false">&quot;ID: {0} · {1} bytes · entries: {2}&quot;</string>
+    <string name="loc_410" formatted="false">&quot;Transfer filename: {0}&quot;</string>
+    <string name="loc_411" formatted="false">&quot;BIN styles: {0}&quot;</string>
+    <string name="loc_412" formatted="false">&quot;Localizations: {0}&quot;</string>
+    <string name="loc_413" formatted="false">&quot;Contains the standard vendor raster 0x88; format verified against the original catalog.&quot;</string>
+    <string name="loc_414" formatted="false">&quot;BIN failed validation&quot;</string>
+    <string name="loc_415" formatted="false">&quot;Style after installation&quot;</string>
+    <string name="loc_416" formatted="false">&quot;Install validated BIN&quot;</string>
+    <string name="loc_417" formatted="false">&quot;Charge the watch to at least 30% before installation.&quot;</string>
+    <string name="loc_418" formatted="false">&quot;Connection status&quot;</string>
+    <string name="loc_419" formatted="false">&quot;ready&quot;</string>
+    <string name="loc_420" formatted="false">&quot;not ready&quot;</string>
+    <string name="loc_421" formatted="false">&quot;Data channel: {0} · packets in memory: {1}&quot;</string>
+    <string name="loc_422" formatted="false">&quot;Refresh all&quot;</string>
+    <string name="loc_423" formatted="false">&quot;Health request&quot;</string>
+    <string name="loc_424" formatted="false">&quot;Check Health exchange&quot;</string>
+    <string name="loc_425" formatted="false">&quot;Select and validate package&quot;</string>
+    <string name="loc_426" formatted="false">&quot;Health data exchange diagnostics&quot;</string>
+    <string name="loc_427" formatted="false">&quot;Exchange packets, copy and clear&quot;</string>
+    <string name="loc_428" formatted="false">&quot;Notification test&quot;</string>
+    <string name="loc_429" formatted="false">&quot;Send test to band&quot;</string>
+    <string name="loc_435" formatted="false">&quot;Save log for ADB&quot;</string>
+    <string name="loc_436" formatted="false">&quot;In a debug build, retrieve the log with: adb shell run-as io.github.yuriyurin.fit3companion cat files/protocol-monitor.log. It may contain health data; recording is off by default and limited to 4 MB.&quot;</string>
+    <string name="loc_437" formatted="false">&quot;Summary&quot;</string>
+    <string name="loc_438" formatted="false">&quot;Full&quot;</string>
+    <string name="loc_439" formatted="false">&quot;Clear&quot;</string>
+    <string name="loc_440" formatted="false">&quot;The log may contain health information. Share it only with people you trust.&quot;</string>
+    <string name="loc_441" formatted="false">&quot;No packets yet&quot;</string>
+    <string name="loc_442" formatted="false">&quot;An independent app for Galaxy Fit3. Connection and available features work without the Samsung cloud.&quot;</string>
+    <string name="loc_443" formatted="false">&quot;Author: yuriyurin&quot;</string>
+    <string name="loc_444" formatted="false">&quot;Weather source and terms of use&quot;</string>
+    <string name="loc_445" formatted="false">&quot;Version {0}&quot;</string>
+    <string name="loc_446" formatted="false">&quot;Weather: Open-Meteo&quot;</string>
+    <string name="loc_447" formatted="false">&quot;Fit3 App uses Open-Meteo data for personal, non-commercial purposes. Thanks to Open-Meteo and the weather model providers for the open forecast.&quot;</string>
+    <string name="loc_448" formatted="false">&quot;City search uses GeoNames data. Forecasts may differ from actual weather.&quot;</string>
+    <string name="loc_449" formatted="false">&quot;Choose a package from your phone to check its size and SHA-256. Writing to the watch is disabled in this version: the protected transfer protocol has not yet been ported from the PC.&quot;</string>
+    <string name="loc_450" formatted="false">&quot;Choose firmware file&quot;</string>
+    <string name="loc_451" formatted="false">&quot;Size: {0} bytes&quot;</string>
+    <string name="loc_452" formatted="false">&quot;Flash watch — not available yet&quot;</string>
+    <string name="loc_453" formatted="false">&quot;Back to debug&quot;</string>
+    <string name="loc_454" formatted="false">&quot;Install watch face BIN?&quot;</string>
+    <string name="loc_455" formatted="false">&quot;The file passed local structure and CRC validation. It will be transferred to /user/wf as {0}, then the watch will receive an installation command for ID {1}, style {2}. Structural validation reduces the risk of a corrupted file, but the watch firmware makes the final acceptance decision.&quot;</string>
+    <string name="loc_456" formatted="false">&quot;Transfer and install&quot;</string>
+    <string name="loc_457" formatted="false">&quot;Cancel&quot;</string>
+    <string name="loc_460" formatted="false">&quot;Understood&quot;</string>
+    <string name="loc_461" formatted="false">&quot;Automatic backups&quot;</string>
+    <string name="loc_462" formatted="false">&quot;No&quot;</string>
+    <string name="loc_463" formatted="false">&quot;Every 3 hours&quot;</string>
+    <string name="loc_464" formatted="false">&quot;Every 6 hours&quot;</string>
+    <string name="loc_465" formatted="false">&quot;Every 12 hours&quot;</string>
+    <string name="loc_466" formatted="false">&quot;Choose city&quot;</string>
+    <string name="loc_467" formatted="false">&quot;City&quot;</string>
+    <string name="loc_468" formatted="false">&quot;Type more letters to search&quot;</string>
+    <string name="loc_469" formatted="false">&quot;Close&quot;</string>
+    <string name="loc_470" formatted="false">&quot;Notifications and music on your band&quot;</string>
+    <string name="loc_471" formatted="false">&quot;Allow Fit3 App system notification access to forward messages and detect the active music player, such as Spotify. You can also enable access later in app settings.&quot;</string>
+    <string name="loc_472" formatted="false">&quot;Open settings&quot;</string>
+    <string name="loc_473" formatted="false">&quot;Later&quot;</string>
+    <string name="loc_474" formatted="false">&quot;Fit3 App · log summary&quot;</string>
+    <string name="loc_475" formatted="false">&quot;Version: {0}&quot;</string>
+    <string name="loc_476" formatted="false">&quot;Phone time: {0}&quot;</string>
+    <string name="loc_477" formatted="false">&quot;Connection: {0}&quot;</string>
+    <string name="loc_478" formatted="false">&quot; (partial total)&quot;</string>
+    <string name="loc_479" formatted="false">&quot;Steps: {0}{1}&quot;</string>
+    <string name="loc_480" formatted="false">&quot;Intervals: {0}; day: {1}&quot;</string>
+    <string name="loc_481" formatted="false">&quot;Distance: {0}; calories: {1}&quot;</string>
+    <string name="loc_482" formatted="false">&quot;Heart rate: {0}; stress: {1}; SpO₂: {2}&quot;</string>
+    <string name="loc_483" formatted="false">&quot;Sleep duration: {0} min; score: {1}&quot;</string>
+    <string name="loc_484" formatted="false">&quot;Watch battery: {0}%&quot;</string>
+    <string name="loc_485" formatted="false">&quot;Health types: {0}&quot;</string>
+    <string name="loc_486" formatted="false">&quot;Log packets: {0}&quot;</string>
+    <string name="loc_487" formatted="false">&quot;Recent important packets (repeats collapsed):&quot;</string>
+    <string name="loc_488" formatted="false">&quot;Status not read yet&quot;</string>
+    <string name="loc_489" formatted="false">&quot;Band preview&quot;</string>
+    <string name="loc_490" formatted="false">&quot;Band tiles&quot;</string>
+    <string name="loc_491" formatted="false">&quot;Use the buttons below to reorder&quot;</string>
+    <string name="loc_492" formatted="false">&quot;Yes&quot;</string>
+    <string name="loc_493" formatted="false">&quot;OK&quot;</string>
+    <string name="loc_494" formatted="false">&quot;I\'ll be there soon&quot;</string>
+    <string name="loc_495" formatted="false">&quot;I\'ll call back later&quot;</string>
+    <string name="loc_496" formatted="false">&quot;One reply per line&quot;</string>
+    <string name="loc_497" formatted="false">&quot;Send to watch&quot;</string>
+    <string name="loc_498" formatted="false">&quot;{0}% battery&quot;</string>
+    <string name="loc_499" formatted="false">&quot;Battery —&quot;</string>
+    <string name="loc_500" formatted="false">&quot;Battery {0}%&quot;</string>
+    <string name="loc_501" formatted="false">&quot;Choose city ›&quot;</string>
+    <string name="loc_502" formatted="false">&quot;Weather data by Open-Meteo&quot;</string>
+    <string name="loc_503" formatted="false">&quot;Goal {0} · {1}%&quot;</string>
+    <string name="loc_504" formatted="false">&quot;Today&quot;</string>
+    <string name="loc_505" formatted="false">&quot;Last sleep&quot;</string>
+    <string name="loc_506" formatted="false">&quot;bpm&quot;</string>
+    <string name="loc_507" formatted="false">&quot;Measured at {0}&quot;</string>
+    <string name="loc_508" formatted="false">&quot;No measurement&quot;</string>
+    <string name="loc_509" formatted="false">&quot; · charging&quot;</string>
+    <string name="loc_510" formatted="false">&quot;Battery {0}%{1}&quot;</string>
+    <string name="loc_511" formatted="false">&quot;Battery level not received yet&quot;</string>
+    <string name="loc_512" formatted="false">&quot;Watch face and settings →&quot;</string>
+    <string name="loc_513" formatted="false">&quot;Find band →&quot;</string>
+    <string name="loc_514" formatted="false">&quot;Activity and health&quot;</string>
+    <string name="loc_515" formatted="false">&quot;Steps  {0}&quot;</string>
+    <string name="loc_516" formatted="false">&quot;Sleep  {0}&quot;</string>
+    <string name="loc_517" formatted="false">&quot;{0} bpm&quot;</string>
+    <string name="loc_518" formatted="false">&quot;Heart rate  {0}&quot;</string>
+    <string name="loc_519" formatted="false">&quot;No measurements received from band yet&quot;</string>
+    <string name="loc_520" formatted="false">&quot;Moscow&quot;</string>
+    <string name="loc_521" formatted="false">&quot;Russia&quot;</string>
+    <string name="loc_522" formatted="false">&quot;Saint Petersburg&quot;</string>
+    <string name="loc_523" formatted="false">&quot;Kazan&quot;</string>
+    <string name="loc_524" formatted="false">&quot;Tatarstan&quot;</string>
+    <string name="loc_525" formatted="false">&quot;Novosibirsk&quot;</string>
+    <string name="loc_526" formatted="false">&quot;Yekaterinburg&quot;</string>
+    <string name="loc_527" formatted="false">&quot;Rostov-on-Don&quot;</string>
+    <string name="loc_528" formatted="false">&quot;Choose city  ›&quot;</string>
+    <string name="loc_529" formatted="false">&quot;Clear&quot;</string>
+    <string name="loc_530" formatted="false">&quot;Partly cloudy&quot;</string>
+    <string name="loc_531" formatted="false">&quot;Cloudy&quot;</string>
+    <string name="loc_532" formatted="false">&quot;Fog&quot;</string>
+    <string name="loc_533" formatted="false">&quot;Rain&quot;</string>
+    <string name="loc_534" formatted="false">&quot;Snow&quot;</string>
+    <string name="loc_535" formatted="false">&quot;Thunderstorm&quot;</string>
+    <string name="loc_536" formatted="false">&quot;Forecast&quot;</string>
+    <string name="loc_537" formatted="false">&quot;Find your Fit3&quot;</string>
+    <string name="loc_538" formatted="false">&quot;Bring your band close to the phone and choose it below. If Android asks to confirm pairing, check the band screen.&quot;</string>
+    <string name="loc_539" formatted="false">&quot;Error&quot;</string>
+    <string name="loc_540" formatted="false">&quot;Turn on&quot;</string>
+    <string name="loc_541" formatted="false">&quot;Allow&quot;</string>
+    <string name="loc_542" formatted="false">&quot;Current watch face&quot;</string>
+    <string name="loc_543" formatted="false">&quot;Watch face {0} preview&quot;</string>
+    <string name="loc_544" formatted="false">&quot;Already paired&quot;</string>
+    <string name="loc_545" formatted="false">&quot;Nearby · not connected&quot;</string>
+    <string name="loc_546" formatted="false">&quot;Select →&quot;</string>
+    <string name="loc_547" formatted="false">&quot;Open watch faces →&quot;</string>
+    <string name="loc_548" formatted="false">&quot;Connect your band&quot;</string>
+    <string name="loc_549" formatted="false">&quot;Variant {0}&quot;</string>
+    <string name="loc_550" formatted="false">&quot;Selected&quot;</string>
+    <string name="loc_551" formatted="false">&quot;Not installed&quot;</string>
+    <string name="loc_552" formatted="false">&quot;Follow system&quot;</string>
+    <string name="loc_553" formatted="false">&quot;Dark&quot;</string>
+    <string name="loc_554" formatted="false">&quot;Light&quot;</string>
+    <string name="loc_555" formatted="false">&quot;AMOLED · black&quot;</string>
+    <string name="loc_556" formatted="false">&quot;steps&quot;</string>
+    <string name="loc_557" formatted="false">&quot;Goal: {0} steps · waiting for data&quot;</string>
+    <string name="loc_558" formatted="false">&quot;Walking {0} · running {1}&quot;</string>
+    <string name="loc_559" formatted="false">&quot;Change goal →&quot;</string>
+    <string name="loc_560" formatted="false">&quot;Mon&quot;</string>
+    <string name="loc_561" formatted="false">&quot;Tue&quot;</string>
+    <string name="loc_562" formatted="false">&quot;Wed&quot;</string>
+    <string name="loc_563" formatted="false">&quot;Thu&quot;</string>
+    <string name="loc_564" formatted="false">&quot;Fri&quot;</string>
+    <string name="loc_565" formatted="false">&quot;Sat&quot;</string>
+    <string name="loc_566" formatted="false">&quot;Sun&quot;</string>
+    <string name="loc_567" formatted="false">&quot;Step goal&quot;</string>
+    <string name="loc_568" formatted="false">&quot;Steps per day&quot;</string>
+    <string name="loc_569" formatted="false">&quot;Goal for Fit3 App statistics&quot;</string>
+    <string name="loc_570" formatted="false">&quot;Save&quot;</string>
+    <string name="loc_571" formatted="false">&quot;Weekly steps&quot;</string>
+    <string name="loc_572" formatted="false">&quot;Goal {0}&quot;</string>
+    <string name="loc_573" formatted="false">&quot;Upcoming&quot;</string>
+    <string name="loc_574" formatted="false">&quot;No data&quot;</string>
+    <string name="loc_575" formatted="false">&quot;{0} steps&quot;</string>
+    <string name="loc_576" formatted="false">&quot;Sleep duration&quot;</string>
+    <string name="loc_577" formatted="false">&quot;Heart rate min {0} · max {1}&quot;</string>
+    <string name="loc_578" formatted="false">&quot;{0} out of 100&quot;</string>
+    <string name="loc_579" formatted="false">&quot;No measurements yet&quot;</string>
+    <string name="loc_580" formatted="false">&quot;Latest types: {0}&quot;</string>
+    <string name="loc_581" formatted="false">&quot;Last parsed data: {0}&quot;</string>
+    <string name="loc_582" formatted="false">&quot;Watch packets received. Only verified measurements are shown; the full Health exchange is still being investigated.&quot;</string>
+    <string name="loc_583" formatted="false">&quot;Fit3 App answered the capability request and is waiting for health data from the band.&quot;</string>
+    <string name="loc_584" formatted="false">&quot;%.2f km&quot;</string>
+    <string name="loc_585" formatted="false">&quot;{0} m&quot;</string>
+    <string name="loc_586" formatted="false">&quot;{0}h {1}m&quot;</string>
+    <string name="loc_587" formatted="false">&quot;Invalid Health packet&quot;</string>
+    <string name="loc_588" formatted="false">&quot;Health handshake: Fit3 protocol {0}, standalone host confirmed&quot;</string>
+    <string name="loc_589" formatted="false">&quot;Health capability response received&quot;</string>
+    <string name="loc_590" formatted="false">&quot;Fit3 requested Samsung Health capability: response 4.51 sent; waiting for SYNC_DATA&quot;</string>
+    <string name="loc_591" formatted="false">&quot;Health wearable capability response received&quot;</string>
+    <string name="loc_592" formatted="false">&quot;Health capability exchange received&quot;</string>
+    <string name="loc_593" formatted="false">&quot;Health capability request answered&quot;</string>
+    <string name="loc_594" formatted="false">&quot;Fit3 Health channel is responding&quot;</string>
+    <string name="loc_595" formatted="false">&quot;Step back-sync response received&quot;</string>
+    <string name="loc_596" formatted="false">&quot;Fit3 requested Health data from phone&quot;</string>
+    <string name="loc_597" formatted="false">&quot;Health wearable message received&quot;</string>
+    <string name="loc_598" formatted="false">&quot;Unknown Health command {0}; packet saved in Protocol Monitor&quot;</string>
+    <string name="loc_599" formatted="false">&quot;Fit3 Health: received actual data {0}&quot;</string>
+    <string name="loc_600" formatted="false">&quot;Fit3 Health sync: types {0}; fields saved for analysis&quot;</string>
+    <string name="loc_601" formatted="false">&quot;Fit3 Health sync received; record format saved in Protocol Monitor&quot;</string>
+    <string name="loc_602" formatted="false">&quot;Alarm&quot;</string>
+    <string name="loc_603" formatted="false">&quot;Calendar&quot;</string>
+    <string name="loc_604" formatted="false">&quot;Timer&quot;</string>
+    <string name="loc_605" formatted="false">&quot;World clock&quot;</string>
+    <string name="loc_606" formatted="false">&quot;Music&quot;</string>
+    <string name="loc_607" formatted="false">&quot;Weather forecast&quot;</string>
+    <string name="loc_608" formatted="false">&quot;Events&quot;</string>
+    <string name="loc_609" formatted="false">&quot;Battery&quot;</string>
+    <string name="loc_610" formatted="false">&quot;Workouts&quot;</string>
+    <string name="loc_611" formatted="false">&quot;Cycle&quot;</string>
+    <string name="loc_612" formatted="false">&quot;Water&quot;</string>
+    <string name="loc_613" formatted="false">&quot;Food&quot;</string>
+    <string name="loc_614" formatted="false">&quot;Blood oxygen&quot;</string>
+    <string name="loc_615" formatted="false">&quot;Do not disturb&quot;</string>
+    <string name="loc_616" formatted="false">&quot;Find phone&quot;</string>
+    <string name="loc_617" formatted="false">&quot;Sound / vibration&quot;</string>
+    <string name="loc_618" formatted="false">&quot;Water lock&quot;</string>
+    <string name="loc_619" formatted="false">&quot;Power&quot;</string>
+    <string name="loc_620" formatted="false">&quot;Flashlight&quot;</string>
+    <string name="loc_621" formatted="false">&quot;Airplane mode&quot;</string>
+    <string name="loc_622" formatted="false">&quot;Media controller&quot;</string>
+    <string name="loc_623" formatted="false">&quot;Find my phone&quot;</string>
+    <string name="loc_624" formatted="false">&quot;Camera&quot;</string>
+    <string name="loc_625" formatted="false">&quot;Stopwatch&quot;</string>
+    <string name="loc_626" formatted="false">&quot;Calculator&quot;</string>
+    <string name="loc_627" formatted="false">&quot;FULL_SETTINGS (could not parse parameters)&quot;</string>
+    <string name="loc_628" formatted="false">&quot;Low&quot;</string>
+    <string name="loc_629" formatted="false">&quot;Moderate&quot;</string>
+    <string name="loc_630" formatted="false">&quot;High&quot;</string>
+    <string name="loc_631" formatted="false">&quot;Very high&quot;</string>
+    <string name="loc_632" formatted="false">&quot;Extreme&quot;</string>
+</resources>
