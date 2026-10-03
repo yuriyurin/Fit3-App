@@ -1,0 +1,21 @@
+<resources>
+    <string name="sleep_title">Сон</string>
+    <string name="sleep_empty">За этот день нет записей сна</string>
+    <string name="sleep_split">Ночной %1$s · Дневной %2$s</string>
+    <string name="sleep_period_only">Включает периоды сна без полной информации о стадиях</string>
+    <string name="sleep_details">Подробнее о сне →</string>
+    <string name="sleep_total">Всего за выбранный день</string>
+    <string name="sleep_night">Ночной сон</string>
+    <string name="sleep_day">Дневной сон</string>
+    <string name="sleep_period">Период сна: %1$s</string>
+    <string name="sleep_actual">Время во сне: %1$s</string>
+    <string name="sleep_awake">Бодрствование</string>
+    <string name="sleep_awakenings">Записанных периодов бодрствования: %1$d</string>
+    <string name="sleep_stage_unknown">Некоторые стадии не распознаны и показаны серым.</string>
+    <string name="sleep_light">Лёгкий сон</string>
+    <string name="sleep_deep">Глубокий сон</string>
+    <string name="sleep_rem">Быстрый сон</string>
+    <string name="sleep_stages_missing">Данные о стадиях ещё не получены</string>
+    <string name="sleep_stages_partial">Данные о стадиях неполные; пропущенные периоды не достраиваются.</string>
+    <string name="sleep_day_rule">Эпизоды относятся к дате пробуждения. Ночной и дневной сон разделяются по середине эпизода: 20:00–10:00 — ночь. Бодрствование вычитается только при наличии полной информации о стадиях.</string>
+</resources>

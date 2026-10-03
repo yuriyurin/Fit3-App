@@ -1,0 +1,5 @@
+<resources>
+    <string name="band_language_title">Язык браслета</string>
+    <string name="band_language_app">Как в приложении</string>
+    <string name="band_language_close">Закрыть</string>
+</resources>

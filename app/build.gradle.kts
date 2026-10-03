@@ -12,8 +12,8 @@ android {
         applicationId = "io.github.yuriyurin.fit3companion"
         minSdk = 29
         targetSdk = 35
-        versionCode = 73
-        versionName = "0.7.0b2"
+        versionCode = 74
+        versionName = "0.7.0b3"
         testInstrumentationRunner = "io.github.yuriyurin.fit3companion.HealthStorageSmoke"
     }
 

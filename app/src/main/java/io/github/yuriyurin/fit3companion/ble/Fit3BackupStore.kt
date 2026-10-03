@@ -65,6 +65,7 @@ object Fit3BackupStore {
             put("theme", appearance.getString("theme", "system"))
             put("accent", appearance.getString("accent", "adaptive"))
             put("language", io.github.yuriyurin.fit3companion.AppLanguage.selection(context))
+            put("bandLanguage", io.github.yuriyurin.fit3companion.BandLanguage.selection(context))
             put("homeTiles", appearance.getString("home_tiles", HomeDashboardLayout.encode(HomeDashboardLayout.default)))
             put("homeDashboardEnabled", appearance.getBoolean("home_dashboard_enabled", false))
             val notifications = context.getSharedPreferences("fit3_notifications", Context.MODE_PRIVATE)
@@ -153,6 +154,9 @@ object Fit3BackupStore {
                 ?.let { appearance.putString("home_tiles", HomeDashboardLayout.encode(HomeDashboardLayout.decode(it))) }
             appearance.putBoolean("home_dashboard_enabled", preferences.optBoolean("homeDashboardEnabled", false))
             appearance.commit()
+            preferences.optString("bandLanguage").takeIf {
+                io.github.yuriyurin.fit3companion.protocol.Fit3Languages.isSelection(it)
+            }?.let { io.github.yuriyurin.fit3companion.BandLanguage.set(context, it) }
             val notificationPrefs = context.getSharedPreferences("fit3_notifications", Context.MODE_PRIVATE).edit()
             if (preferences.has("forwardNotifications")) notificationPrefs.putBoolean("enabled",
                 preferences.optBoolean("forwardNotifications"))

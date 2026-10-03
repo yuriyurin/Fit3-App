@@ -1,0 +1,21 @@
+<resources>
+    <string name="sleep_title">Sleep</string>
+    <string name="sleep_empty">No sleep records for this day</string>
+    <string name="sleep_split">Night %1$s · Day %2$s</string>
+    <string name="sleep_period_only">Includes sleep periods without complete stage data</string>
+    <string name="sleep_details">View sleep details →</string>
+    <string name="sleep_total">Total for the selected day</string>
+    <string name="sleep_night">Night sleep</string>
+    <string name="sleep_day">Day sleep</string>
+    <string name="sleep_period">Sleep period: %1$s</string>
+    <string name="sleep_actual">Time asleep: %1$s</string>
+    <string name="sleep_awake">Awake</string>
+    <string name="sleep_awakenings">Recorded awake intervals: %1$d</string>
+    <string name="sleep_stage_unknown">Some stages were not recognised and are shown in grey.</string>
+    <string name="sleep_light">Light</string>
+    <string name="sleep_deep">Deep</string>
+    <string name="sleep_rem">REM</string>
+    <string name="sleep_stages_missing">Stage data has not been received</string>
+    <string name="sleep_stages_partial">Stage data is incomplete; missing periods are not inferred.</string>
+    <string name="sleep_day_rule">Episodes are grouped by the date you woke up. Night/day labels use the episode midpoint: 20:00–10:00 is night. Awake time is excluded only when complete stage data is available.</string>
+</resources>

@@ -9,6 +9,7 @@ import android.util.Base64
 import io.github.yuriyurin.fit3companion.protocol.Fit3HealthCodec
 import io.github.yuriyurin.fit3companion.protocol.Fit3PedometerBackSync
 import io.github.yuriyurin.fit3companion.protocol.Fit3VitalCodec
+import io.github.yuriyurin.fit3companion.protocol.Fit3Sleep
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -36,6 +37,16 @@ object Fit3HealthStore {
     fun load(context: Context): Fit3HealthCodec.State = runCatching {
         val document = readDocument(context) ?: error("Нет сохранённых данных")
         var state = Fit3PedometerBackSync.reconcile(decode(document), System.currentTimeMillis())
+        if (!document.has("sleepEpisodes")) {
+            // Reconstruct old sleep batches from the retained archive, without replaying steps.
+            database(context).rawQuery("SELECT payload FROM packets ORDER BY received,hash", null).use { rows ->
+                while (rows.moveToNext()) {
+                    val sleep = Fit3Sleep.merge(state.sleepEpisodes, state.sleepStages, rows.getBlob(0), System.currentTimeMillis())
+                    state = state.copy(sleepEpisodes = sleep.episodes, sleepStages = sleep.stages)
+                }
+            }
+            save(context, state)
+        }
         // b24/b25 stored the sender on each packet, but not on the snapshot.
         // Migrate only an unambiguous real Bluetooth source; never infer a new watch.
         if (state.stepSourceAddress == null) {
@@ -57,6 +68,8 @@ object Fit3HealthStore {
             context.getSharedPreferences("fit3_daily_steps", Context.MODE_PRIVATE).edit()
                 .putInt(state.stepDay.toString(), state.steps).apply()
         }
+        if (state.sleepEpisodes.isNotEmpty()) state = state.copy(sleepMinutes = Fit3Sleep.todayMinutes(
+            state.sleepEpisodes, state.sleepStages, System.currentTimeMillis(), java.time.ZoneId.systemDefault()))
         state
     }.getOrElse { recoverVitalsFromDiagnosticLog(context) }
 
@@ -188,6 +201,19 @@ object Fit3HealthStore {
                     .use { require(it.moveToFirst()) }
             }
             val snapshot = JSONObject(document.toString()).apply { remove("packetArchive") }
+            val oldSleep = readDocument(context)?.let(::decode)
+            val restored = decode(snapshot)
+            var sleep = Fit3Sleep.Records(
+                (oldSleep?.sleepEpisodes.orEmpty() + restored.sleepEpisodes).associateBy { it.id }.values.toList(),
+                (oldSleep?.sleepStages.orEmpty() + restored.sleepStages)
+                    .associateBy { Triple(it.sleepId, it.start, it.end) }.values.toList())
+            db.rawQuery("SELECT payload FROM packets ORDER BY received,hash", null).use { rows ->
+                while (rows.moveToNext()) sleep = Fit3Sleep.merge(sleep.episodes, sleep.stages,
+                    rows.getBlob(0), System.currentTimeMillis())
+            }
+            val sleepJson = encode(restored.copy(sleepEpisodes = sleep.episodes, sleepStages = sleep.stages))
+            snapshot.put("sleepEpisodes", sleepJson.getJSONArray("sleepEpisodes"))
+            snapshot.put("sleepStages", sleepJson.getJSONArray("sleepStages"))
             putDocument(db, snapshot)
             db.setTransactionSuccessful()
         } finally { db.endTransaction() }
@@ -259,6 +285,13 @@ object Fit3HealthStore {
         number("sleepMinutes", state.sleepMinutes)
         number("sleepScore", state.sleepScore)
         number("sleepEndAt", state.sleepEndAt)
+        put("sleepEpisodes", JSONArray().apply {
+            state.sleepEpisodes.forEach { put(JSONObject().put("id", it.id).put("start", it.start).put("end", it.end)) }
+        })
+        put("sleepStages", JSONArray().apply {
+            state.sleepStages.forEach { put(JSONObject().put("id", it.sleepId).put("start", it.start)
+                .put("end", it.end).put("kind", it.kind)) }
+        })
         number("stepDay", state.stepDay)
         state.stepSourceAddress?.let { put("stepSourceAddress", it) }
         number("lastSyncMillis", state.lastSyncMillis)
@@ -325,8 +358,10 @@ object Fit3HealthStore {
             stress = int("stress", 0..100), stressMin = int("stressMin", 0..100),
             stressMax = int("stressMax", 0..100), stressAt = long("stressAt"),
             spo2 = int("spo2", 50..100), spo2At = long("spo2At"),
-            sleepMinutes = int("sleepMinutes", 15..1080), sleepScore = int("sleepScore", 0..100),
+            sleepMinutes = int("sleepMinutes", 0..2160), sleepScore = int("sleepScore", 0..100),
             sleepEndAt = long("sleepEndAt"), stepHistory = history, stepRecords = records,
+            sleepEpisodes = sleepRows(json, "sleepEpisodes").map { Fit3Sleep.Episode(it.getString("id"), it.getLong("start"), it.getLong("end")) },
+            sleepStages = sleepRows(json, "sleepStages").map { Fit3Sleep.Stage(it.getString("id"), it.getLong("start"), it.getLong("end"), it.getInt("kind")) },
             stepSourceAddress = json.optString("stepSourceAddress").takeIf {
                 it.matches(Regex("(?i)[0-9a-f]{2}(:[0-9a-f]{2}){5}"))
             },
@@ -334,5 +369,16 @@ object Fit3HealthStore {
             lastSyncMillis = long("lastSyncMillis"),
             lastSuccessfulSyncMillis = long("lastSuccessfulSyncMillis"),
         )
+    }
+
+    private fun sleepRows(json: JSONObject, name: String): List<JSONObject> {
+        val rows = json.optJSONArray(name) ?: return emptyList()
+        require(rows.length() <= 100000)
+        return (0 until rows.length()).map { rows.getJSONObject(it) }.onEach {
+            require(it.getString("id").length in 1..100)
+            val start = it.getLong("start")
+            val end = it.getLong("end")
+            require(start >= 946684800000L && end > start && end - start <= 36 * 3600000L)
+        }
     }
 }

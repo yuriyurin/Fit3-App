@@ -183,6 +183,8 @@ object Fit3HealthCodec {
         val sleepMinutes: Int? = null,
         val sleepScore: Int? = null,
         val sleepEndAt: Long? = null,
+        val sleepEpisodes: List<Fit3Sleep.Episode> = emptyList(),
+        val sleepStages: List<Fit3Sleep.Stage> = emptyList(),
         val stepHistory: List<Int> = emptyList(),
         val stepRecords: Map<Long, StepRecord> = emptyMap(),
         val stepSourceAddress: String? = null,
@@ -453,7 +455,8 @@ object Fit3HealthCodec {
     private fun metricsChanged(a: State, b: State): Boolean =
         a.steps != b.steps || a.distanceMeters != b.distanceMeters || a.activeCalories != b.activeCalories ||
             a.activeMinutes != b.activeMinutes || a.floors != b.floors || a.heartRate != b.heartRate ||
-            a.stress != b.stress || a.spo2 != b.spo2 || a.sleepMinutes != b.sleepMinutes
+            a.stress != b.stress || a.spo2 != b.spo2 || a.sleepMinutes != b.sleepMinutes ||
+            a.sleepEpisodes != b.sleepEpisodes || a.sleepStages != b.sleepStages
 
     private fun parseGmRequest(message: ByteArray): GmRequest? {
         val h = SaMessageCodec.parseHeader(message) ?: return null
@@ -555,6 +558,11 @@ object Fit3HealthCodec {
         // Unlike step intervals, these feature records carry a 4-byte length before each
         // payload. Their measurement fields are one byte; the old 4-byte window scan could
         // never decode them reliably and could mistake timestamps for feature ids.
+        val sleep = Fit3Sleep.merge(next.sleepEpisodes, next.sleepStages, message, now)
+        next = next.copy(sleepEpisodes = sleep.episodes, sleepStages = sleep.stages)
+        if (sleep.episodes != previous.sleepEpisodes || sleep.stages != previous.sleepStages)
+            next = next.copy(lastSyncMillis = now)
+        if (sleep.stages != previous.sleepStages) types += DATA_SLEEP_STAGE
         Fit3VitalCodec.parse(message)?.let { samples ->
             val type = samples.first().type
             types += type
@@ -612,6 +620,8 @@ object Fit3HealthCodec {
             }
         }
 
+        if (next.sleepEpisodes.isNotEmpty()) next = next.copy(sleepMinutes =
+            Fit3Sleep.todayMinutes(next.sleepEpisodes, next.sleepStages, now, java.time.ZoneId.systemDefault()))
         return next to types
     }
 

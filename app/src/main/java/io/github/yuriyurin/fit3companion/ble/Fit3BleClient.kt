@@ -1780,9 +1780,17 @@ class Fit3BleClient(
         if (!snapshot.sapReady) { publish("Дождитесь подключения часов"); return }
         sendReadOnly(Fit3SapCodec.SERVICE_OOBE,
             Fit3OobeCodec.initSettingsRequest(Instant.now(), ZoneId.systemDefault(),
+                localeId = io.github.yuriyurin.fit3companion.BandLanguage.localeId(context),
                 hour24 = DateFormat.is24HourFormat(context)))
         snapshot = snapshot.copy(featureStatus = "Время и часовой пояс отправлены на часы")
         publish()
+    }
+
+    fun syncBandLanguage() {
+        if (!snapshot.sapReady || setupStage !in listOf(SetupStage.IDLE, SetupStage.COMPLETE)) return
+        sendReadOnly(Fit3SapCodec.SERVICE_SETTINGS,
+            io.github.yuriyurin.fit3companion.protocol.Fit3Languages.languagePacket(
+                io.github.yuriyurin.fit3companion.BandLanguage.localeId(context)))
     }
 
     fun clearProtocolLog() {
@@ -2055,6 +2063,7 @@ class Fit3BleClient(
                 advanceSetup(SetupStage.WAIT_SETTINGS, "Настройка: дата и язык…")
                 sendReadOnly(Fit3SapCodec.SERVICE_OOBE,
                     Fit3OobeCodec.initSettingsRequest(Instant.now(), ZoneId.systemDefault(),
+                        localeId = io.github.yuriyurin.fit3companion.BandLanguage.localeId(context),
                         hour24 = DateFormat.is24HourFormat(context)))
                 return true
             }
@@ -2068,6 +2077,7 @@ class Fit3BleClient(
             }
             SetupStage.WAIT_AGREEMENT -> if (id == 4) {
                 advanceSetup(SetupStage.COMPLETE, "Настройка завершена. Часы могут перезапуститься")
+                syncBandLanguage()
                 refresh(manual = false)
                 return true
             }

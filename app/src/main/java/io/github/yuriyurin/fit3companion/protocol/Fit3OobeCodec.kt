@@ -12,7 +12,7 @@ object Fit3OobeCodec {
     fun initSettingsRequest(
         instant: Instant,
         zone: ZoneId,
-        localeId: Int = 57, // ru_RU in the installed plugin's LocaleUtils.
+        localeId: Int,
         hour24: Boolean = true,
     ): ByteArray {
         require(localeId in 0..0xffff)

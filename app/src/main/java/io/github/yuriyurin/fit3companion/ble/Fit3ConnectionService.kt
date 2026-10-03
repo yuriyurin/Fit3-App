@@ -400,6 +400,7 @@ class Fit3ConnectionService : Service() {
     fun setQuickPanel(ids: List<Int>) = ble.setQuickPanel(ids)
     fun setQuickMessages(messages: List<String>) = ble.setQuickMessages(messages)
     fun syncTime() = ble.syncTime()
+    fun syncBandLanguage() = ble.syncBandLanguage()
     fun clearProtocolLog() {
         ble.clearProtocolLog()
         diagnosticWriter.execute { java.io.File(filesDir, "protocol-monitor.log").writeText("") }

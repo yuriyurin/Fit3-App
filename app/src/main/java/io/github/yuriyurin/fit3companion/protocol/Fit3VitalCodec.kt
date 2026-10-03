@@ -13,6 +13,7 @@ object Fit3VitalCodec {
         val min: Int?,
         val max: Int?,
         val score: Int?,
+        val uuid: String? = null,
     ) {
         val measuredAt: Long? get() = endMillis ?: startMillis
     }
@@ -79,7 +80,8 @@ object Fit3VitalCodec {
             else -> null
         }
         return Sample(type, startTime, endTime, value, min, max,
-            if (type == 16) fields[83]?.unsignedByte() else null)
+            if (type == 16) fields[83]?.unsignedByte() else null,
+            fields[117]?.joinToString("") { "%02x".format(it.toInt() and 255) })
     }
 
     private fun fieldWidth(type: Int, id: Int): Int {

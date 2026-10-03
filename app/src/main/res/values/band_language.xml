@@ -1,0 +1,5 @@
+<resources>
+    <string name="band_language_title">Band language</string>
+    <string name="band_language_app">Same as app</string>
+    <string name="band_language_close">Close</string>
+</resources>

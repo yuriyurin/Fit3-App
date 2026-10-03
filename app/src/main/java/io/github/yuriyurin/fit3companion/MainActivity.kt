@@ -275,6 +275,7 @@ class MainActivity : ComponentActivity() {
             AppLanguage.set(this, getSharedPreferences("fit3_appearance", MODE_PRIVATE)
                 .getString("language", "system") ?: "system")
             languageMode = AppLanguage.selection(this)
+            connectionService?.syncBandLanguage()
             if (Build.VERSION.SDK_INT < 33) recreate()
             getSharedPreferences("fit3_notifications", MODE_PRIVATE).also {
                 notificationForwarding = it.getBoolean("enabled", true)
@@ -399,7 +400,7 @@ class MainActivity : ComponentActivity() {
                     onPage = {
                         page = it
                         if (bleSnapshot.connected) when (it) {
-                            Page.ACTIVITY -> connectionService?.requestHealthNow()
+                            Page.ACTIVITY, Page.SLEEP -> connectionService?.requestHealthNow()
                             Page.FACE_GALLERY, Page.CUSTOM_FACES -> connectionService?.syncWatchFaces()
                             Page.WATCH_SETTINGS -> connectionService?.requestFullSettings()
                             Page.WIDGETS -> connectionService?.requestWidgets()
@@ -462,6 +463,7 @@ class MainActivity : ComponentActivity() {
                     onTheatreMode = { connectionService?.setTheatreMode(it) },
                     onTimeout = { connectionService?.setScreenTimeout(it) },
                     onSyncTime = { connectionService?.syncTime() },
+                    onSyncBandLanguage = { connectionService?.syncBandLanguage() },
                     onRequestWidgets = { connectionService?.requestWidgets() },
                     onSetWidgets = { connectionService?.setWidgets(it) },
                     onRequestApps = { connectionService?.requestApps() },
@@ -546,6 +548,7 @@ class MainActivity : ComponentActivity() {
                     onLanguageMode = { selected ->
                         languageMode = selected
                         AppLanguage.set(this@MainActivity, selected)
+                        connectionService?.syncBandLanguage()
                         if (Build.VERSION.SDK_INT < 33) recreate()
                         connectionService?.updateConnectionNotification()
                     },
@@ -848,7 +851,7 @@ private enum class Page(val label: String) {
     LICENSES("Лицензии и благодарности"),
     NOTIFICATIONS("Уведомления"), POWER("Энергосбережение"),
     FLASHER("Прошивальщик"), APPEARANCE("Внешний вид"),
-    HEALTH_SYNC("Синхронизация Fit3 Health"),
+    HEALTH_SYNC("Синхронизация Fit3 Health"), SLEEP("Сон"),
     WATCH_MODES("Режимы"), WATCH_LAYOUT("Меню и карточки"), WATCH_TIME("Время"),
     WATCH_ORIENTATION("Ношение браслета"),
     PROTOCOL_LOG("Журнал протокола")
@@ -867,6 +870,7 @@ private fun Page.backDestination(): Page? = when (this) {
     Page.POWER -> Page.SETTINGS
     Page.LICENSES -> Page.ABOUT
     Page.HEALTH_SYNC -> Page.DEBUG
+    Page.SLEEP -> Page.ACTIVITY
 }
 
 private fun Page.depth(): Int = when (this) {
@@ -972,6 +976,7 @@ private fun CompanionScreen(
     onTheatreMode: (Boolean) -> Unit,
     onTimeout: (Int) -> Unit,
     onSyncTime: () -> Unit,
+    onSyncBandLanguage: () -> Unit,
     onRequestWidgets: () -> Unit,
     onSetWidgets: (List<Int>) -> Unit,
     onRequestApps: () -> Unit,
@@ -1181,7 +1186,7 @@ private fun CompanionScreen(
                     manualRefreshing = true
                     val started = System.currentTimeMillis()
                     manualRefreshStarted = started
-                    manualRefreshWaitsForHealth = page == Page.HOME || page == Page.ACTIVITY
+                    manualRefreshWaitsForHealth = page == Page.HOME || page == Page.ACTIVITY || page == Page.SLEEP
                     onRefresh()
                     onRefreshWeather()
                     when (page) {
@@ -1243,8 +1248,7 @@ private fun CompanionScreen(
             when (targetPage) {
                 Page.HOME -> {
                     if (homeEditing || homeDashboardEnabled) {
-                        item { Text("Сегодня", style = MaterialTheme.typography.headlineMedium,
-                            fontWeight = FontWeight.SemiBold) }
+                        item { TodayHeader() }
                         if (!homeEditing) item {
                             val updatedAt = listOfNotNull(snapshot.health.lastSuccessfulSyncMillis,
                                 snapshot.lastRefreshMillis, snapshot.health.lastSyncMillis).maxOrNull()
@@ -1275,8 +1279,7 @@ private fun CompanionScreen(
                     } else {
                         item { HomeWatchCard(snapshot, currentOfficialStyle, faceCatalog,
                             { onPage(Page.FACES) }, { onPage(Page.DISCOVERY); onScan() }) }
-                        item { Text("Сегодня", style = MaterialTheme.typography.headlineMedium,
-                            fontWeight = FontWeight.SemiBold) }
+                        item { TodayHeader() }
                         item { HomeWeatherCard(snapshot) { showCityDialog = true } }
                         item { HomeHealthSummary(snapshot) { onPage(Page.ACTIVITY) } }
                     }
@@ -1299,7 +1302,6 @@ private fun CompanionScreen(
                     } }
                 }
                 Page.ACTIVITY -> {
-                    item { ActivityHeader() }
                     item { StepsHeroCard(snapshot, stepGoal, dailySteps, onActivityGoals) }
                     item {
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -1327,9 +1329,12 @@ private fun CompanionScreen(
                     item { WeeklyStepsCard(dailySteps, stepGoal) }
                     item { Text("Здоровье", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold) }
                     item { HealthVitalsCard(snapshot) }
+                    item { SleepSummaryCard(snapshot.health) { onPage(Page.SLEEP) } }
+                }
+                Page.SLEEP -> {
+                    item { SleepDetails(snapshot.health) }
                 }
                 Page.FACES -> {
-                    item { Text("Браслет", style = MaterialTheme.typography.headlineMedium) }
                     item { CurrentFaceCard(snapshot, currentOfficialStyle, currentOfficialFace?.name, faceCatalog,
                         onClick = { onPage(Page.FACE_GALLERY) }) }
                     item { SettingsChoice(stringResource(R.string.custom_faces_title),
@@ -1557,6 +1562,7 @@ private fun CompanionScreen(
                     item { SettingsChoice("О приложении", "Fit3 App", { onPage(Page.ABOUT) }) }
                 }
                 Page.WATCH_SETTINGS -> {
+                    item { BandLanguageSelector(onSyncBandLanguage) }
                     item { SettingSwitch("Always On Display", snapshot.fullSettings.alwaysOnDisplay, onAod) }
                     item { SettingSwitch("Автояркость", snapshot.fullSettings.autoBrightness, onAutoBrightness) }
                     item { SettingSwitch("Поднять запястье для пробуждения", snapshot.fullSettings.raiseToWake, onRaiseWake) }
@@ -2349,7 +2355,7 @@ private fun DashboardMetricTile(tile: HomeTile, snapshot: BleSnapshot, stepGoal:
     val (value, detail) = when (tile.kind) {
         HomeTileKind.STEPS -> (todaySteps?.toString() ?: "—") to
             (todaySteps?.let { "Цель $stepGoal · ${(it * 100L / stepGoal).coerceAtMost(999)}%" } ?: "За сегодня")
-        HomeTileKind.SLEEP -> (health.sleepMinutes?.let(::formatMinutes) ?: "—") to "Последний сон"
+        HomeTileKind.SLEEP -> (health.sleepMinutes?.let(::formatMinutes) ?: "—") to "Сегодня"
         HomeTileKind.PULSE -> (health.heartRate?.let { "$it" } ?: "—") to "уд/мин"
         HomeTileKind.STRESS -> (health.stress?.toString() ?: "—") to
             (health.stressAt?.let { "Измерено ${dashboardTime(it)}" } ?: "Нет замера")
@@ -2417,7 +2423,7 @@ private fun HomeWatchCard(snapshot: BleSnapshot, officialStyle: OfficialFaceStyl
     catalog: OfficialFaceCatalog, onOpenBand: () -> Unit, onOpenDiscovery: () -> Unit) {
     Card(onClick = if (snapshot.connected) onOpenBand else onOpenDiscovery,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
-        Row(Modifier.fillMaxWidth().padding(18.dp), verticalAlignment = Alignment.CenterVertically,
+        Row(Modifier.fillMaxWidth().heightIn(min = MainHeroHeight).padding(18.dp), verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(18.dp)) {
             StockWatchFacePreview(if (snapshot.connected) snapshot.currentFaceId else null,
                 officialStyle = officialStyle, catalog = catalog)
@@ -2684,9 +2690,9 @@ private fun CurrentFaceCard(snapshot: BleSnapshot, officialStyle: OfficialFaceSt
     Card(onClick = onClick,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)) {
         Row(
-            Modifier.fillMaxWidth().padding(17.dp),
+            Modifier.fillMaxWidth().heightIn(min = MainHeroHeight).padding(18.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(17.dp),
+            horizontalArrangement = Arrangement.spacedBy(18.dp),
         ) {
             StockWatchFacePreview(snapshot.currentFaceId, officialStyle = officialStyle, catalog = catalog)
             Column(Modifier.weight(1f)) {
@@ -2841,6 +2847,44 @@ private fun LanguageSelector(value: String, onChange: (String) -> Unit) {
 }
 
 @Composable
+private fun BandLanguageSelector(onSync: () -> Unit) {
+    val context = LocalContext.current
+    var value by remember { mutableStateOf(BandLanguage.selection(context)) }
+    var expanded by remember { mutableStateOf(false) }
+    val title = stringResource(R.string.band_language_title)
+    val followApp = stringResource(R.string.band_language_app)
+    val options = listOf(io.github.yuriyurin.fit3companion.protocol.Fit3Languages.APP to followApp) +
+        io.github.yuriyurin.fit3companion.protocol.Fit3Languages.ids.keys
+            .map { it to io.github.yuriyurin.fit3companion.protocol.Fit3Languages.nativeName(it) }
+            .sortedBy { it.second.lowercase(java.util.Locale.ROOT) }
+    SettingsChoice(title, options.firstOrNull { it.first == value }?.second ?: followApp, { expanded = true })
+    if (expanded) AlertDialog(
+        onDismissRequest = { expanded = false },
+        title = { Text(title) },
+        text = {
+            LazyColumn(Modifier.fillMaxWidth().heightIn(max = 400.dp)) {
+                items(options, key = { it.first }) { (key, label) ->
+                    fun select() {
+                        BandLanguage.set(context, key)
+                        value = key
+                        expanded = false
+                        onSync()
+                    }
+                    Row(Modifier.fillMaxWidth().clickable { select() }.padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(selected = key == value, onClick = { select() })
+                        Text(label, modifier = Modifier.padding(start = 8.dp))
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = { expanded = false }) {
+            Text(stringResource(R.string.band_language_close))
+        } },
+    )
+}
+
+@Composable
 private fun ThemeSelector(value: String, onChange: (String, Offset) -> Unit) {
     val centers = remember { mutableStateMapOf<String, Offset>() }
     listOf("system" to "Как в системе", "dark" to "Тёмная", "light" to "Светлая",
@@ -2907,7 +2951,7 @@ private fun DataCard(label: String, value: String) {
 }
 
 @Composable
-private fun ActivityHeader() {
+private fun TodayHeader() {
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         Column(Modifier.weight(1f)) {
@@ -2917,6 +2961,10 @@ private fun ActivityHeader() {
         }
     }
 }
+
+// The three default tab heroes share their footprint and content origin.
+// A minimum rather than a fixed height preserves accessibility with enlarged text.
+private val MainHeroHeight = 228.dp
 
 @Composable
 private fun StepsHeroCard(snapshot: BleSnapshot, localGoal: Int, dailySteps: Map<Long, Int>,
@@ -2930,7 +2978,8 @@ private fun StepsHeroCard(snapshot: BleSnapshot, localGoal: Int, dailySteps: Map
     val progress by animateFloatAsState(rawProgress, animationSpec = tween(700), label = "stepProgress")
     Card(modifier = Modifier.clickable { showGoalDialog = true },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
-      Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
+      Column(Modifier.fillMaxWidth().heightIn(min = MainHeroHeight).padding(18.dp),
+          verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically)) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(18.dp)) {
             Box(Modifier.size(104.dp), contentAlignment = Alignment.Center) {
@@ -3139,10 +3188,7 @@ private fun HealthVitalsCard(snapshot: BleSnapshot) {
             HorizontalDivider()
             StressGauge(snapshot.health.stress, snapshot.health.stressAt)
             HorizontalDivider()
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                VitalCell("SpO₂", snapshot.health.spo2?.let { "$it%" } ?: "—", Modifier.weight(1f))
-                VitalCell("Период сна", snapshot.health.sleepMinutes?.let(::formatMinutes) ?: "—", Modifier.weight(1f))
-            }
+            VitalCell("SpO₂", snapshot.health.spo2?.let { "$it%" } ?: "—")
             if (snapshot.health.heartRateMin != null || snapshot.health.heartRateMax != null) {
                 Text("Пульс min ${snapshot.health.heartRateMin ?: "—"} · max ${snapshot.health.heartRateMax ?: "—"}",
                     style = MaterialTheme.typography.bodySmall,

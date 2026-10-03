@@ -18,7 +18,7 @@ class Fit3OobeCodecTest {
 
     @Test fun initSettingsMatchesPcClient() {
         val request = Fit3OobeCodec.initSettingsRequest(
-            Instant.ofEpochSecond(1_700_000_000), ZoneId.of("Europe/Moscow"))
+            Instant.ofEpochSecond(1_700_000_000), ZoneId.of("Europe/Moscow"), localeId = 57)
         assertEquals("830139000200030a313730303030303030300400302a0501",
             request.joinToString("") { "%02x".format(it.toInt() and 0xff) })
     }
