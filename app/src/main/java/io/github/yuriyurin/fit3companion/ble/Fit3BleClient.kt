@@ -513,7 +513,8 @@ class Fit3BleClient(
                     transportMtu = Fit3SapCodec.negotiatedTransportMtu(data)
                     require(transportMtu in 15..500)
                     sapSequence.reset()
-                    writeRaw(Fit3SapCodec.capabilityResponse(data))
+                    writeRaw(Fit3SapCodec.capabilityResponse(data, Fit3SapCodec.randomHelloToken(),
+                        Build.MODEL.orEmpty(), Build.MANUFACTURER.orEmpty()))
                     snapshot = snapshot.copy(sapReady = true)
                     lastMediaIdentity = null
                     lastMediaAppId = null

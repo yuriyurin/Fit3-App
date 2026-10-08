@@ -196,15 +196,40 @@ object Fit3SapCodec {
         return byteArrayOf((value ushr 8).toByte(), value.toByte())
     }
 
-    fun capabilityResponse(request: ByteArray): ByteArray {
+    /**
+     * The phone's plaintext HELLO reply to the band's 105-byte HELLO. It is not a copy
+     * of the band's frame: only the 7-byte parameter block at offset 43 is echoed.
+     * Layout (vendor capture): header 68 15 04 01 00 ff 03, "SAP_" + 32 hex chars at 7,
+     * band parameter block at 43, phone model at 50, vendor at 66 and again at 82
+     * (16 bytes each, NUL padded), phone address at 98 (left zero), trailer 02 at 104.
+     */
+    fun capabilityResponse(request: ByteArray, token: String, model: String, vendor: String): ByteArray {
         require(request.size == 105 && (request[0].toInt() and 0xff) == 104) {
             "Invalid Fit3 capability length"
         }
         require((request[1].toInt() and 0xff) == CAPABILITY_REQUEST) {
             "Not a capability request"
         }
-        return request.copyOf().also { it[1] = CAPABILITY_RESPONSE.toByte() }
+        require(token.length == 32 && token.all { it in '0'..'9' || it in 'A'..'F' })
+        val reply = ByteArray(105)
+        byteArrayOf(0x68, CAPABILITY_RESPONSE.toByte(), 0x04, 0x01, 0x00, 0xff.toByte(), 0x03)
+            .copyInto(reply, 0)
+        ("SAP_$token").toByteArray(Charsets.US_ASCII).copyInto(reply, 7)
+        request.copyInto(reply, 43, 43, 50)
+        fun field(offset: Int, value: String) {
+            val bytes = value.toByteArray(Charsets.US_ASCII)
+            bytes.copyInto(reply, offset, 0, minOf(bytes.size, 15)) // keep a NUL inside the field
+        }
+        field(50, model)
+        field(66, vendor)
+        field(82, vendor)
+        reply[104] = 0x02
+        return reply
     }
+
+    /** 16 random bytes as 32 upper-case hex characters: the session id in the phone HELLO. */
+    fun randomHelloToken(random: java.util.Random = java.security.SecureRandom()): String =
+        ByteArray(16).also(random::nextBytes).joinToString("") { "%02X".format(it.toInt() and 0xff) }
 
     fun negotiatedTransportMtu(request: ByteArray): Int {
         require(request.size == 105)

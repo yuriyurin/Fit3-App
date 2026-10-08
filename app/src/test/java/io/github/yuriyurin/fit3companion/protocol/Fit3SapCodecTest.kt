@@ -18,16 +18,27 @@ class Fit3SapCodecTest {
         assertArrayEquals(Fit3SapCodec.watchInfoRequest, decoded.payload)
     }
 
-    @Test fun capabilityReplyOnlyChangesOpcode() {
-        val request = ByteArray(105)
-        request[0] = 104
-        request[1] = Fit3SapCodec.CAPABILITY_REQUEST.toByte()
-        request[0x2c] = 1
-        request[0x2d] = 0xf4.toByte()
-        assertEquals(500, Fit3SapCodec.negotiatedTransportMtu(request))
-        val response = Fit3SapCodec.capabilityResponse(request)
-        assertEquals(Fit3SapCodec.CAPABILITY_RESPONSE, response[1].toInt() and 0xff)
-        assertTrue(request.indices.filter { it != 1 }.all { request[it] == response[it] })
+    @Test fun phoneHelloEchoesOnlyTheParameterBlock() {
+        val band = ByteArray(105)
+        band[0] = 104
+        band[1] = Fit3SapCodec.CAPABILITY_REQUEST.toByte()
+        "SAMSUNG_ACCESSARY__".toByteArray().copyInto(band, 7)
+        "0101f4000003d4".hex().copyInto(band, 43)
+        "Galaxy Fit3 (97".toByteArray().copyInto(band, 50)
+        "SAMSUNG".toByteArray().copyInto(band, 66)
+        assertEquals(500, Fit3SapCodec.negotiatedTransportMtu(band))
+        val token = "BDD549189BB3661AAE7D1209A0BE93F4"
+        val reply = Fit3SapCodec.capabilityResponse(band, token, "M2007J3SY", "Xiaomi")
+        assertEquals(105, reply.size)
+        assertArrayEquals("681504010 0ff03".replace(" ", "").hex(), reply.copyOfRange(0, 7))
+        assertEquals("SAP_$token", String(reply, 7, 36, Charsets.US_ASCII))
+        assertArrayEquals("0101f4000003d4".hex(), reply.copyOfRange(43, 50))
+        assertEquals("M2007J3SY", String(reply, 50, 9, Charsets.US_ASCII))
+        assertEquals("Xiaomi", String(reply, 66, 6, Charsets.US_ASCII))
+        assertEquals("Xiaomi", String(reply, 82, 6, Charsets.US_ASCII))
+        assertEquals(0, reply[59].toInt()) // NUL-padded
+        assertEquals(2, reply[104].toInt())
+        assertEquals(32, Fit3SapCodec.randomHelloToken().length)
     }
 
     @Test fun phoneFramesMatchVendorMuteWrite() {
