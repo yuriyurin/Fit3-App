@@ -212,25 +212,36 @@ object Fit3SapCodec {
             (request[0x2d].toInt() and 0xff)
     }
 
-    fun encodeSingle(serviceId: Int, message: ByteArray, transportMtu: Int): ByteArray {
+    // Session TYPE byte: bits 1-2 are the fragment kind (0 single, 1 first, 2 middle,
+    // 3 last), bit 0 is the originator (1 = phone). The band sends 00/02/06, the
+    // phone 01/03/07. An ACK is 88 [SEQ] [80 single | c0 fragment] 00.
+    private const val ORIGIN_PHONE = 1
+    const val TYPE_ACK = 0x88
+    private const val ACK_SINGLE = 0x80
+    private const val ACK_FRAGMENT = 0xc0
+
+    fun encodeSingle(serviceId: Int, message: ByteArray, transportMtu: Int, sequence: Int = SapSequence.START): ByteArray {
         require(serviceId in 1..31 && message.isNotEmpty())
         require(transportMtu in 15..500)
-        val body = byteArrayOf(0, 0x40, serviceId.toByte(), serviceId.toByte()) + message
+        require(sequence in 0..255)
+        val body = byteArrayOf(ORIGIN_PHONE.toByte(), sequence.toByte(), serviceId.toByte(), serviceId.toByte()) + message
         val frame = encodeTransportBody(body, transportMtu)
         require(frame.size <= transportMtu) { "Fragmentation required" }
         return frame
     }
 
     /**
-     * Encode one SAP message into one or more transport frames.  The previous Companion only
-     * supported a single frame, which prevented app icons, album art and other large payloads.
-     * The fragment flags mirror decodeFrame(): FIRST=1, CONTINUE=2, LAST=3.
+     * Encode one SAP message into one or more transport frames. A message that doesn't fit
+     * becomes a first fragment (TYPE 03, SEQ) plus continuations (SEQ | 1), which is the
+     * vendor app's shape. Only the two-frame form (first + last 07) appears in captures;
+     * messages long enough for more mark the middle frames 05.
      */
-    fun encodeMessage(serviceId: Int, message: ByteArray, transportMtu: Int, stream: Int = 0): List<ByteArray> {
+    fun encodeMessage(serviceId: Int, message: ByteArray, transportMtu: Int,
+                      sequence: Int = SapSequence.START): List<ByteArray> {
         require(serviceId in 1..31 && message.isNotEmpty())
         require(transportMtu in 15..500)
-        require(stream in 0..7)
-        runCatching { encodeSingle(serviceId, message, transportMtu) }.getOrNull()?.let { return listOf(it) }
+        require(sequence in 0..255)
+        runCatching { encodeSingle(serviceId, message, transportMtu, sequence) }.getOrNull()?.let { return listOf(it) }
 
         val prefixSize = if (transportMtu < 256) 2 else 4
         val crcSize = 2
@@ -242,29 +253,26 @@ object Fit3SapCodec {
 
         val out = mutableListOf<ByteArray>()
         var offset = 0
-        var sequence = 0
         val firstTake = minOf(firstCapacity, message.size)
         val firstBody = byteArrayOf(
-            (1 shl 1).toByte(), // FIRST
-            ((stream shl 5) or sequence).toByte(),
+            ((1 shl 1) or ORIGIN_PHONE).toByte(), // FIRST
+            sequence.toByte(),
             serviceId.toByte(), serviceId.toByte(),
         ) + message.copyOfRange(0, firstTake)
         out += encodeTransportBody(firstBody, transportMtu)
         offset = firstTake
-        sequence++
 
         while (offset < message.size) {
-            require(sequence <= 15) { "SAP message needs more than 16 fragments" }
+            require(out.size < 16) { "SAP message needs more than 16 fragments" }
             val take = minOf(continueCapacity, message.size - offset)
             val last = offset + take >= message.size
             val kind = if (last) 3 else 2
             val body = byteArrayOf(
-                (kind shl 1).toByte(),
-                ((stream shl 5) or sequence).toByte(),
+                ((kind shl 1) or ORIGIN_PHONE).toByte(),
+                (sequence or 1).toByte(),
             ) + message.copyOfRange(offset, offset + take)
             out += encodeTransportBody(body, transportMtu)
             offset += take
-            sequence++
         }
         return out
     }
@@ -409,5 +417,24 @@ class SapReassembler {
         stream = -1
         nextSequence = 0
         data.reset()
+    }
+}
+
+/**
+ * Outgoing SAP SEQ. The vendor app never uses 00: it starts at 40 and moves in steps of
+ * 10 (40, 50, ... f0, then 40 again). Continuations use SEQ | 1 (see encodeMessage).
+ */
+class SapSequence {
+    private var value = START
+    fun reset() { value = START }
+    fun next(): Int {
+        val current = value
+        value = (value + STEP) and 0xff
+        if (value == 0) value = START
+        return current
+    }
+    companion object {
+        const val START = 0x40
+        private const val STEP = 0x10
     }
 }

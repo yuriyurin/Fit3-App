@@ -12,7 +12,7 @@ class Fit3SapCodecTest {
     @Test fun watchInfoFrameMatchesLivePcVector() {
         val encoded = Fit3SapCodec.encodeSingle(
             Fit3SapCodec.SERVICE_OOBE, Fit3SapCodec.watchInfoRequest, 500)
-        assertArrayEquals("000dc5c10040010101040200000005000e60ea".hex(), encoded)
+        assertArrayEquals("000dc5c10140010101040200000005000ee1e8".hex(), encoded)
         val decoded = Fit3SapCodec.decodeFrame(encoded)
         assertEquals(1, decoded.serviceId)
         assertArrayEquals(Fit3SapCodec.watchInfoRequest, decoded.payload)
@@ -28,6 +28,35 @@ class Fit3SapCodecTest {
         val response = Fit3SapCodec.capabilityResponse(request)
         assertEquals(Fit3SapCodec.CAPABILITY_RESPONSE, response[1].toInt() and 0xff)
         assertTrue(request.indices.filter { it != 1 }.all { request[it] == response[it] })
+    }
+
+    @Test fun phoneFramesMatchVendorMuteWrite() {
+        // fit3_sap_protocol.md §7.2: phone TYPE 01, SEQ d0, mute on = 03 00 01.
+        assertArrayEquals("0007c24101d00b0b0300017595".hex(),
+            Fit3SapCodec.encodeSingle(11, "030001".hex(), 500, 0xd0))
+    }
+
+    @Test fun sequenceSkipsZeroAndStepsLikeTheVendorApp() {
+        val sequence = SapSequence()
+        val values = List(13) { sequence.next() }
+        assertEquals(listOf(0x40, 0x50, 0x60, 0x70, 0x80, 0x90, 0xa0, 0xb0, 0xc0, 0xd0, 0xe0, 0xf0, 0x40), values)
+    }
+
+    @Test fun fragmentedMessageUsesFirstAndContinuationTypes() {
+        val message = ByteArray(900) { it.toByte() }
+        val frames = Fit3SapCodec.encodeMessage(5, message, 500, 0x50)
+        assertEquals(2, frames.size)
+        val first = Fit3SapCodec.decodeFrame(frames[0])
+        val last = Fit3SapCodec.decodeFrame(frames[1])
+        assertEquals(0x03, frames[0][4].toInt() and 0xff)
+        assertEquals(0x50, frames[0][5].toInt() and 0xff)
+        assertEquals(0x07, frames[1][4].toInt() and 0xff)
+        assertEquals(0x51, frames[1][5].toInt() and 0xff)
+        val assembler = SapReassembler()
+        assertNull(assembler.push(first))
+        val (service, body) = requireNotNull(assembler.push(last))
+        assertEquals(5, service)
+        assertArrayEquals(message, body)
     }
 
     @Test fun currentFaceParserUsesApkOffsets() {

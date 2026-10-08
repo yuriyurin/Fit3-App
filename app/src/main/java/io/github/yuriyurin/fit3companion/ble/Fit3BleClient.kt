@@ -126,6 +126,7 @@ class Fit3BleClient(
         context.getSystemService(BluetoothManager::class.java)?.adapter
     private val discovered = linkedMapOf<String, WatchCandidate>()
     private val assembler = SapReassembler()
+    private val sapSequence = io.github.yuriyurin.fit3companion.protocol.SapSequence()
     private val healthLargeDataReceiver = Fit3HealthLargeDataReceiver()
     private val mediaBridge = Fit3MediaBridge(context)
     private val initialHealth = Fit3HealthStore.load(context)
@@ -511,6 +512,7 @@ class Fit3BleClient(
                 try {
                     transportMtu = Fit3SapCodec.negotiatedTransportMtu(data)
                     require(transportMtu in 15..500)
+                    sapSequence.reset()
                     writeRaw(Fit3SapCodec.capabilityResponse(data))
                     snapshot = snapshot.copy(sapReady = true)
                     lastMediaIdentity = null
@@ -985,7 +987,8 @@ class Fit3BleClient(
 
     private fun writeFirmwareControl(message: ByteArray) {
         protocolLog("TX", Fit3SapCodec.SERVICE_OTA_TRANSFER, message)
-        Fit3SapCodec.encodeMessage(Fit3SapCodec.SERVICE_OTA_TRANSFER, message, transportMtu).forEach { writeRaw(it) }
+        Fit3SapCodec.encodeMessage(Fit3SapCodec.SERVICE_OTA_TRANSFER, message, transportMtu, sapSequence.next())
+            .forEach { writeRaw(it) }
     }
 
     fun releaseFirmwareTransfer() {
@@ -998,7 +1001,7 @@ class Fit3BleClient(
 
     private fun writeMessage(serviceId: Int, message: ByteArray, onSent: (() -> Unit)? = null) {
         if (firmwareSession != null || fileSession != null) return
-        val frames = Fit3SapCodec.encodeMessage(serviceId, message, transportMtu)
+        val frames = Fit3SapCodec.encodeMessage(serviceId, message, transportMtu, sapSequence.next())
         frames.forEachIndexed { index, bytes ->
             writeRaw(bytes, onSent.takeIf { index == frames.lastIndex })
         }
