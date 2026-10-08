@@ -538,7 +538,11 @@ class Fit3BleClient(
                 return@post
             }
             try {
-                val reply = assembler.push(Fit3SapCodec.decodeFrame(data)) ?: return@post
+                val fragment = Fit3SapCodec.decodeFrame(data)
+                if (fragment.isAck) return@post
+                // Every data frame from the band gets a transport ACK echoing its SEQ.
+                writeRaw(Fit3SapCodec.encodeAck(fragment.sequenceByte, fragment.isFragment, transportMtu))
+                val reply = assembler.push(fragment) ?: return@post
                 gotSapReply = true
                 val serviceId = reply.first
                 val message = reply.second

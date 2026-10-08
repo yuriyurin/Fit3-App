@@ -49,14 +49,41 @@ class Fit3SapCodecTest {
         val first = Fit3SapCodec.decodeFrame(frames[0])
         val last = Fit3SapCodec.decodeFrame(frames[1])
         assertEquals(0x03, frames[0][4].toInt() and 0xff)
-        assertEquals(0x50, frames[0][5].toInt() and 0xff)
+        assertEquals(0x50, first.sequenceByte)
         assertEquals(0x07, frames[1][4].toInt() and 0xff)
-        assertEquals(0x51, frames[1][5].toInt() and 0xff)
+        assertEquals(0x51, last.sequenceByte)
         val assembler = SapReassembler()
         assertNull(assembler.push(first))
         val (service, body) = requireNotNull(assembler.push(last))
         assertEquals(5, service)
         assertArrayEquals(message, body)
+    }
+
+    @Test fun ackEchoesSequenceWithSingleOrFragmentFlag() {
+        assertArrayEquals("0004c30188408000b44b".hex(), Fit3SapCodec.encodeAck(0x40, false, 500))
+        assertArrayEquals("0004c3018841c000b42b".hex(), Fit3SapCodec.encodeAck(0x41, true, 500))
+        val ack = Fit3SapCodec.decodeFrame(Fit3SapCodec.encodeAck(0xd0, false, 500))
+        assertTrue(ack.isAck)
+        assertEquals(0xd0, ack.sequenceByte)
+        assertNull(SapReassembler().push(ack))
+    }
+
+    @Test fun bandContinuationWithWrongSequenceIsDropped() {
+        // Band frames: first 02/40, continuation 06/41 (see sleep0709.log).
+        val assembler = SapReassembler()
+        fun band(type: Int, seq: Int, rest: String) = Fit3SapCodec.decodeFrame(
+            frameOf("%02x%02x".format(type, seq).hex() + rest.hex()))
+        assertNull(assembler.push(band(0x02, 0x40, "0a0a0102")))
+        assertNull(assembler.push(band(0x06, 0x51, "0304")))
+        assertNull(assembler.push(band(0x02, 0x40, "0a0a0102")))
+        assertEquals("01020304", assembler.push(band(0x06, 0x41, "0304"))!!.second
+            .joinToString("") { "%02x".format(it) })
+    }
+
+    private fun frameOf(body: ByteArray): ByteArray {
+        val length = byteArrayOf((body.size ushr 8).toByte(), body.size.toByte())
+        fun crc(data: ByteArray) = Fit3SapCodec.crc16(data).let { byteArrayOf((it ushr 8).toByte(), it.toByte()) }
+        return length + crc(length) + body + crc(body)
     }
 
     @Test fun currentFaceParserUsesApkOffsets() {

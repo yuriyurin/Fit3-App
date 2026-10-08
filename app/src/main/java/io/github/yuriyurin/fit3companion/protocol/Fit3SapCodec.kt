@@ -277,6 +277,14 @@ object Fit3SapCodec {
         return out
     }
 
+    /** Transport ACK for one received data frame: 88 [its SEQ] [80 single | c0 fragment] 00. */
+    fun encodeAck(sequence: Int, fragment: Boolean, transportMtu: Int): ByteArray {
+        require(sequence in 0..255)
+        val body = byteArrayOf(TYPE_ACK.toByte(), sequence.toByte(),
+            (if (fragment) ACK_FRAGMENT else ACK_SINGLE).toByte(), 0)
+        return encodeTransportBody(body, transportMtu)
+    }
+
     private fun encodeTransportBody(body: ByteArray, transportMtu: Int): ByteArray {
         val prefixSize = if (transportMtu < 256) 2 else 4
         val prefix = if (prefixSize == 2) {
@@ -296,7 +304,14 @@ object Fit3SapCodec {
         val stream: Int,
         val serviceId: Int?,
         val payload: ByteArray,
-    )
+        /** The raw SEQ byte: what an ACK echoes and what continuations derive from. */
+        val sequenceByte: Int = 0,
+        val isAck: Boolean = false,
+    ) {
+        /** Every data frame is ACKed; single frames with 80, fragments with c0. */
+        val needsAck: Boolean get() = !isAck
+        val isFragment: Boolean get() = kind != 0
+    }
 
     fun decodeFrame(frame: ByteArray): Fragment {
         require(frame.size >= 8) { "Frame too short" }
@@ -316,6 +331,10 @@ object Fit3SapCodec {
         }
         require(body.size >= 2)
         val flags = body[0].toInt() and 0xff
+        if (flags == TYPE_ACK) {
+            return Fragment(kind = -1, sequence = 0, stream = 0, serviceId = null,
+                payload = ByteArray(0), sequenceByte = body[1].toInt() and 0xff, isAck = true)
+        }
         require((flags ushr 6) == 0) { "Unsupported SAP control frame" }
         val kind = (flags ushr 1) and 3
         val sequenceFlags = body[1].toInt() and 0xff
@@ -327,6 +346,7 @@ object Fit3SapCodec {
             stream = sequenceFlags ushr 5,
             serviceId = if (first) body[2].toInt() and 0xff else null,
             payload = body.copyOfRange(if (first) 4 else 2, body.size),
+            sequenceByte = sequenceFlags,
         )
     }
 
@@ -377,35 +397,36 @@ object Fit3SapCodec {
     }
 }
 
-/** Assembles one SAP response at a time; invalid continuations are dropped. */
+/**
+ * Assembles one SAP message at a time; invalid continuations are dropped. A continuation
+ * carries its first fragment's SEQ with bit 0 set (40 -> 41), not a running index.
+ */
 class SapReassembler {
     private var serviceId: Int? = null
-    private var stream = -1
-    private var nextSequence = 0
+    private var continuationSequence = -1
     private val data = ByteArrayOutputStream()
 
     fun push(fragment: Fit3SapCodec.Fragment): Pair<Int, ByteArray>? {
+        if (fragment.isAck) return null
         if (fragment.kind == 0) {
             reset()
             return fragment.serviceId?.let { it to fragment.payload }
         }
         if (fragment.kind == 1) {
             reset()
-            if (fragment.sequence != 0 || fragment.serviceId == null) return null
+            if (fragment.serviceId == null) return null
             serviceId = fragment.serviceId
-            stream = fragment.stream
-            nextSequence = 1
+            continuationSequence = fragment.sequenceByte or 1
             data.write(fragment.payload)
             return null
         }
         val id = serviceId ?: return null
-        if (fragment.stream != stream || fragment.sequence != nextSequence ||
+        if (fragment.sequenceByte != continuationSequence ||
             fragment.kind !in 2..3 || data.size() + fragment.payload.size > 4096) {
             reset()
             return null
         }
         data.write(fragment.payload)
-        nextSequence++
         if (fragment.kind != 3) return null
         val result = id to data.toByteArray()
         reset()
@@ -414,8 +435,7 @@ class SapReassembler {
 
     private fun reset() {
         serviceId = null
-        stream = -1
-        nextSequence = 0
+        continuationSequence = -1
         data.reset()
     }
 }
