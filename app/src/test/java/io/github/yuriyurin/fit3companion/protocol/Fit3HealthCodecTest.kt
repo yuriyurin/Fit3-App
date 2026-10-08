@@ -143,6 +143,15 @@ class Fit3HealthCodecTest {
         assertEquals(0x44add387, SaMessageCodec.readLeInt(requireNotNull(next.reply), 8 + 11))
     }
 
+    @Test fun wearableMessageReplyUsesTheCapturedOffsetMap() {
+        // samsung_reconnect_alarms.log frames 464 (band) and 488 (vendor phone).
+        fun hex(s: String) = s.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
+        val request = hex("04e05e27198509024c270305031a07800395d0079301")
+        assertArrayEquals(hex("44e05e271a8003930195d007"),
+            Fit3HealthCodec.handle(Fit3HealthCodec.State(), request, 100L).reply)
+        assertNull(Fit3HealthCodec.handle(Fit3HealthCodec.State(), hex("04e05e27"), 100L).reply)
+    }
+
     @Test fun retainsConfirmedMinimalAcknowledgmentsWithoutReflectingWearableDeviceIdentity() {
         val device = Fit3HealthCodec.requestData(10001, 1790736668000L).copyOfRange(4, 31)
         val sync = byteArrayOf(0x82.toByte(), 2, 0xE0.toByte(), 0x28, 0x27) + device

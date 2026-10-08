@@ -312,7 +312,7 @@ object Fit3HealthCodec {
             )
             CMD_WEARABLE_MSG -> Incoming(
                 previous.copy(lastTransportMillis = now),
-                reply = if (request) SaMessageCodec.fixedResponse(CMD_WEARABLE_MSG) else null,
+                reply = if (request) wearableMessageResponse(message) else null,
                 status = "Получено Health wearable-message",
                 event = Event.WEARABLE_MESSAGE,
             )
@@ -390,6 +390,17 @@ object Fit3HealthCodec {
             sequence.toByte(), (sequence ushr 8).toByte(),
             0x04, 0x02, 0x01, 0x01,
         ) + deviceInfo(watermark)
+    }
+
+    /**
+     * WEARABLE_MSG (0x04) reply: specific request offsets copied into a 12-byte response,
+     * reconstructed from captures. The 46-byte form (a workout announcement) uses the same
+     * map and must be answered before the band releases that workout.
+     */
+    fun wearableMessageResponse(request: ByteArray): ByteArray? {
+        if (request.size < 22) return null
+        return byteArrayOf(0x44) + intArrayOf(1, 2, 3, 13, 15, 16, 20, 21, 17, 18, 19)
+            .map { request[it] }.toByteArray()
     }
 
     /** Extracts the E0 sequence number that starts Fit3 capability requests. */
