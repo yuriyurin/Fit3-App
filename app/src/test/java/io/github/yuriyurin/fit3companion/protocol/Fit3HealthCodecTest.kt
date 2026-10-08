@@ -19,9 +19,9 @@ class Fit3HealthCodecTest {
         assertTrue(result.state.sessionReady)
         assertEquals(301, result.state.healthProtocolVersion)
         assertEquals(Fit3HealthCodec.Event.GM_CAPABILITY_REQUEST, result.event)
-        val reply = requireNotNull(result.reply)
-        assertEquals(0xE2, reply[0].toInt() and 0xff)
-        assertEquals(6, reply[1].toInt() and 0xff)
+        // Vendor phone's reply to the same request shape (samsung_reconnect_alarms.log 465).
+        assertArrayEquals(byteArrayOf(0xE2.toByte(), 4, 0xE0.toByte(), 0x17, 0x27, 0xE1.toByte(), 0x2D, 0x01,
+            0xD0.toByte(), 2, 0xD2.toByte(), 0x3B, 0xE7.toByte(), 0x6A, 0x00), result.reply)
     }
 
 
@@ -40,12 +40,10 @@ class Fit3HealthCodecTest {
         assertTrue(result.state.sessionReady)
         assertEquals(Fit3HealthCodec.Event.WEARABLE_CAPABILITY_REQUEST, result.event)
 
+        // The vendor's fixed capability table: binary, no E0 echo.
         val reply = requireNotNull(result.reply)
-        assertEquals(0xE0, reply[0].toInt() and 0xff)
-        assertEquals(0xE0, reply[2].toInt() and 0xff)
-        assertEquals(0x3A, reply[3].toInt() and 0xff)
-        assertEquals(0x27, reply[4].toInt() and 0xff)
-        assertTrue(reply.size > 500) // must exercise SAP fragmentation path
+        assertEquals(189, reply.size)
+        assertEquals(listOf(0xE0, 0x0B, 0xA1, 0x04, 0x33), reply.take(5).map { it.toInt() and 0xff })
     }
 
     @Test

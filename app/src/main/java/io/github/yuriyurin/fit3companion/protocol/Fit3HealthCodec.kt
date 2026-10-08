@@ -54,34 +54,10 @@ object Fit3HealthCodec {
     private const val GM_SEQUENCE_NUMBER = 0xE0
     private const val GM_HEALTH_PROTOCOL_VERSION = 0xE1
     private const val GM_SHEALTH_INSTALLED = 2
-    private const val GM_RESULT_SUCCESS = 0
 
-    // Capability field ids used by Fit3/Samsung Health (CapaParamNameConstants).
-    private const val CAPA_DATA_SYNC_SUPPORT = 0xA0
-    private const val CAPA_PROTOCOL_VERSION = 0xA1
-    private const val CAPA_SHEALTH_VERSION = 0xA2
-    private const val CAPA_CONFIG = 0xAC
-    private const val CAPA_LAUNCH_SUPPORT = 0xAD
-    private const val CAPA_BINNING = 0xAE
-    private const val CAPA_PROTOCOL_FEATURE = 0xAF
-    private const val CAPA_SYNC_ADDRESS = 0xB1
-    private const val CAPA_TRACKER_FEATURE = 0xB3
-    private const val CAPA_MESSAGE_TYPE = 0xC0
-    private const val CAPA_SENDER = 0xC1
-    private const val CAPA_RECEIVER = 0xC2
-    private const val CAPA_WEARABLE_MESSAGE = 0xC3
-
-    // Samsung Health 7.0.6.011 advertises protocol 4.51. The Fit3 capture supplied by the
-    // user advertises A1 04 33 (wearable protocol 4.33), confirming Samsung's two-byte
-    // major/BCD-minor wire representation.
-    private const val HOST_PROTOCOL_MAJOR = 4
-    private const val HOST_PROTOCOL_MINOR_BCD = 0x51
-
-    // This is the S Health generation shipped with the supplied reference APK and the minimum
-    // Galaxy Fit3 target accepted by the official plugin.  We emulate that host capability; the
-    // standalone Companion does not load or call Samsung Health itself.
+    // S Health version code announced in the GM capability reply (D2). 7.0.6.011 is what a
+    // vendor phone sent (3B E7 6A 00). The Companion doesn't load or call Samsung Health itself.
     private const val EMULATED_SHEALTH_VERSION = 7_006_011
-    private const val FIT3_MIN_SHEALTH_VERSION = 6_040_000
 
     // PedometerDaySummary fields.
     private const val PEDO_STEP_COUNT = 18
@@ -417,75 +393,32 @@ object Fit3HealthCodec {
         return null
     }
 
-    private fun compactJson(vararg entries: Pair<String, String>): String =
-        entries.joinToString(prefix = "{", postfix = "}", separator = ",") { (k, v) -> "\"$k\":$v" }
-
-    private fun quoted(value: String): String =
-        "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
-
     /**
-     * Mobile capability generated from the supplied Samsung Health 7.0.6.011 APK.
-     * WearableDeviceCapability.a(false) advertises protocol 4.51 plus the same core objects
-     * below.  Keep each JSON capability below 255 bytes so it uses Fit3's one-byte string
-     * length form observed in the real A0 capability packet.
+     * Reply to the band's WEARABLE_REQUEST_CAPABILITY (A0): the vendor phone's capability
+     * table, replayed byte for byte as captured (2026-07-12). It is binary [tag][value]
+     * data (a1 protocol 4.33, a2 S Health version, ...), not JSON, and carries no E0
+     * echo. The vendor sent the identical table in independent sessions whatever the
+     * band announced, so nothing in it is computed here.
      */
-    private fun wearableCapabilityResponse(sequence: Int): ByteArray {
-        val binning = compactJson("pedometer" to "4")
-        val protocolFeature = compactJson(
-            "wearable_messaging" to "true",
-            "compression" to "true",
-            "wm_chunk_size" to "10000",
-            "sync_duration" to "30",
-            "blob_compression" to "true",
-        )
-        val syncAddress = compactJson(
-            "common_sync" to quoted("com.samsung.android.app.shealth.wearable.syncmanager"),
-        )
-        val trackerFeature = compactJson(
-            "pedometer_sync" to compactJson("support_wearable_all_step" to "true"),
-            "goal_support" to compactJson("pedometer" to "1", "floor" to "1", "water" to "0"),
-            "daily_activity" to compactJson("support" to "false"),
-            "dashboard_config_sync" to compactJson("version" to "1000", "is_support" to "true"),
-        )
-        val config = compactJson(
-            "os" to quoted("android"),
-            "os_version" to quoted("16"),
-            "country_iso" to quoted(""),
-            "one_ui_version" to "-1",
-        )
-        val wearableMessage = compactJson(
-            "message_version" to "5.18",
-            "message_support" to "true",
-            "message_compression" to "true",
-            "message_compression_format" to quoted("gzip"),
-            "message_size" to "10000",
-        )
-        val launchSupport = compactJson(
-            "support" to "false",
-            "target_list" to quoted("settings.band.manage_exercises"),
-        )
+    private val wearableCapabilityTemplate = intArrayOf(
+        0xe0, 0x0b, 0xa1, 0x04, 0x33, 0xc0, 0x01, 0xc1, 0x00, 0xc2, 0x02, 0xa2, 0x2b, 0xd0, 0x6a,
+        0x00, 0xb1, 0x01, 0xae, 0x01, 0x04, 0x03, 0x0a, 0xaf, 0x07, 0x00, 0xb1, 0x01, 0xb2, 0x97,
+        0x32, 0x15, 0x8e, 0x08, 0x16, 0x8e, 0x08, 0x14, 0x8e, 0x08, 0x2d, 0x8e, 0x08, 0x2e, 0x01,
+        0x00, 0x2f, 0x01, 0x00, 0x31, 0x8e, 0x08, 0x32, 0x01, 0x00, 0x33, 0x01, 0x00, 0x30, 0x8e,
+        0x08, 0x45, 0x07, 0x00, 0x46, 0x8e, 0x08, 0x47, 0x07, 0x00, 0x51, 0x07, 0x00, 0x52, 0x07,
+        0x00, 0x3a, 0x8e, 0x08, 0x3b, 0x8e, 0x08, 0x1d, 0x8e, 0x08, 0x4c, 0x8e, 0x08, 0x4d, 0x8e,
+        0x08, 0x4e, 0x8e, 0x08, 0x4f, 0x8e, 0x08, 0x50, 0x8e, 0x08, 0x3c, 0x07, 0x00, 0x3d, 0x01,
+        0x00, 0x0e, 0x07, 0x00, 0x0f, 0x01, 0x00, 0x4b, 0x0e, 0x00, 0x53, 0x0e, 0x00, 0x20, 0x01,
+        0x00, 0x1f, 0x01, 0x00, 0x2c, 0x01, 0x00, 0x07, 0x01, 0x00, 0x06, 0x01, 0x00, 0x37, 0x01,
+        0x00, 0x09, 0x8e, 0x08, 0x39, 0x01, 0x00, 0x48, 0x23, 0x00, 0x49, 0x23, 0x00, 0x1c, 0x07,
+        0x00, 0x03, 0x8e, 0x08, 0x23, 0x8e, 0x08, 0x40, 0x8e, 0x08, 0x41, 0x8e, 0x08, 0x18, 0x8e,
+        0x08, 0x19, 0x8e, 0x08, 0x42, 0x8e, 0x08, 0x12, 0x01, 0x00, 0x28, 0x8e, 0x08, 0x3f, 0x10,
+        0x27, 0xb3, 0x0d, 0x12, 0x06, 0xd0, 0x07, 0x01, 0x00,
+    )
 
-        val params = listOf(
-            SaMessageCodec.shortParam(GM_SEQUENCE_NUMBER, sequence),
-            byteArrayOf(CAPA_PROTOCOL_VERSION.toByte(), HOST_PROTOCOL_MAJOR.toByte(), HOST_PROTOCOL_MINOR_BCD.toByte()),
-            SaMessageCodec.intParam(CAPA_SHEALTH_VERSION, EMULATED_SHEALTH_VERSION),
-            SaMessageCodec.stringParam(CAPA_MESSAGE_TYPE, "com.samsung.android.app.shealth.RESPONSE_CAPABILITY"),
-            SaMessageCodec.stringParam(CAPA_SENDER, "shealth"),
-            SaMessageCodec.stringParam(CAPA_RECEIVER, "wearable"),
-            SaMessageCodec.stringParam(CAPA_BINNING, binning),
-            SaMessageCodec.stringParam(CAPA_PROTOCOL_FEATURE, protocolFeature),
-            SaMessageCodec.stringParam(CAPA_SYNC_ADDRESS, syncAddress),
-            SaMessageCodec.stringParam(CAPA_TRACKER_FEATURE, trackerFeature),
-            SaMessageCodec.stringParam(CAPA_CONFIG, config),
-            SaMessageCodec.stringParam(CAPA_WEARABLE_MESSAGE, wearableMessage),
-            SaMessageCodec.stringParam(CAPA_LAUNCH_SUPPORT, launchSupport),
-        )
-        return ByteArrayOutputStream().apply {
-            write(SaMessageCodec.header(SaMessageCodec.FORMAT_VARIABLE, SaMessageCodec.TYPE_RESPONSE, CMD_WEARABLE_REQUEST_CAPABILITY).toInt())
-            write(params.size)
-            params.forEach { write(it) }
-        }.toByteArray()
-    }
+    @Suppress("UNUSED_PARAMETER")
+    private fun wearableCapabilityResponse(sequence: Int): ByteArray =
+        ByteArray(wearableCapabilityTemplate.size) { wearableCapabilityTemplate[it].toByte() }
 
     private fun metricsChanged(a: State, b: State): Boolean =
         a.steps != b.steps || a.distanceMeters != b.distanceMeters || a.activeCalories != b.activeCalories ||
@@ -524,19 +457,17 @@ object Fit3HealthCodec {
     }
 
     /**
-     * Official GM capability response fields: status/result, host/current target versions, the
-     * request sequence and Health protocol version.  Variable Health messages carry a field count
-     * immediately after the SAP header (the real AZA3 request is A2 02 E0 xx xx E1 xx xx).
+     * GM capability response as the vendor phone sends it: the request's E0 sequence and
+     * E1 protocol version echoed, then D0 = 2 (S Health installed) and D2 = its version
+     * code. Captured: E2 04 E0 5D 27 E1 2D 01 D0 02 D2 3B E7 6A 00.
      */
     private fun gmCapabilityResponse(req: GmRequest): ByteArray = ByteArrayOutputStream().apply {
         write(SaMessageCodec.header(SaMessageCodec.FORMAT_VARIABLE, SaMessageCodec.TYPE_RESPONSE, CMD_GM_REQUEST_CAPABILITY).toInt())
-        write(6)
-        write(SaMessageCodec.byteParam(GM_STATUS, GM_SHEALTH_INSTALLED))
-        write(SaMessageCodec.byteParam(GM_RESULT, GM_RESULT_SUCCESS))
-        write(SaMessageCodec.intParam(GM_HOST_SHEALTH_VERSION, EMULATED_SHEALTH_VERSION))
-        write(SaMessageCodec.intParam(GM_HOST_SHEALTH_TARGET_VERSION, FIT3_MIN_SHEALTH_VERSION))
+        write(4)
         write(SaMessageCodec.shortParam(GM_SEQUENCE_NUMBER, req.sequence))
         write(SaMessageCodec.shortParam(GM_HEALTH_PROTOCOL_VERSION, req.protocolVersion))
+        write(SaMessageCodec.byteParam(GM_STATUS, GM_SHEALTH_INSTALLED))
+        write(SaMessageCodec.intParam(GM_HOST_SHEALTH_VERSION, EMULATED_SHEALTH_VERSION))
     }.toByteArray()
 
     private fun mergeSyncPayload(previous: State, message: ByteArray, now: Long): Pair<State, Set<Int>> {
