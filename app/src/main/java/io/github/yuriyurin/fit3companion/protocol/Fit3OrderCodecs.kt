@@ -38,10 +38,12 @@ private fun parseOrdered(
 
 object Fit3WidgetsCodec {
     val request = SaMessageCodec.fixedRequest(0)
+    /** Shown tiles only, listed in widget-id order, each with its 1-based carousel slot
+     * (the plugin sorts by id; captured: 01 01 08 | 03 02 02 04 | 03 06 02 06 | ...). */
     fun set(items: List<Fit3OrderedItem>): ByteArray = ByteArrayOutputStream().apply {
         write(SaMessageCodec.header(SaMessageCodec.FORMAT_FIXED, SaMessageCodec.TYPE_REQUEST, 1).toInt())
         write(1); write(items.size)
-        items.sortedBy { it.order }.forEach { item ->
+        items.sortedBy { it.id }.forEach { item ->
             write(3); write(item.id)
             write(2); write(item.order)
         }

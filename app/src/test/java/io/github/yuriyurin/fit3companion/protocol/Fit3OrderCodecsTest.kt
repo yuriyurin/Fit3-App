@@ -22,4 +22,11 @@ class Fit3OrderCodecsTest {
         assertEquals("Samsung Health", Fit3AppsCodec.names[1])
     }
 
+    @Test fun tilesSetListsShownTilesByWidgetId() {
+        // Same capture, frame 1168: slots 1..8, listed in widget-id order.
+        val slots = listOf(0x15, 0x17, 0x1c, 0x02, 0x08, 0x06, 0x19, 0x18)
+        assertArrayEquals(("01 01 08 03 02 02 04 03 06 02 06 03 08 02 05 03 15 02 01 03 17 02 02" +
+            " 03 18 02 08 03 19 02 07 03 1c 02 03").hex(),
+            Fit3WidgetsCodec.set(slots.mapIndexed { i, id -> Fit3OrderedItem(id, i + 1) }))
+    }
 }
