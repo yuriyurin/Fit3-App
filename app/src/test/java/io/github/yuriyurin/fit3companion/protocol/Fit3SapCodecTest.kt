@@ -9,13 +9,17 @@ import org.junit.Test
 class Fit3SapCodecTest {
     private fun String.hex(): ByteArray = chunked(2).map { it.toInt(16).toByte() }.toByteArray()
 
-    @Test fun watchInfoFrameMatchesLivePcVector() {
+    @Test fun watchInfoRequestMatchesVendorCapture() {
+        // samsung_reconnect_alarms.log frame 355, phone on Android 14.
+        assertArrayEquals("01040205000e".hex(), Fit3SapCodec.watchInfoRequest(34))
+        assertArrayEquals("01040205000d".hex(), Fit3SapCodec.watchInfoRequest(33))
+        assertArrayEquals("01040205010c".hex(), Fit3SapCodec.watchInfoRequest(32))
         val encoded = Fit3SapCodec.encodeSingle(
-            Fit3SapCodec.SERVICE_OOBE, Fit3SapCodec.watchInfoRequest, 500)
-        assertArrayEquals("000dc5c10140010101040200000005000ee1e8".hex(), encoded)
+            Fit3SapCodec.SERVICE_OOBE, Fit3SapCodec.watchInfoRequest(34), 500)
+        assertArrayEquals("000a07800140010101040205000e66d1".hex(), encoded)
         val decoded = Fit3SapCodec.decodeFrame(encoded)
         assertEquals(1, decoded.serviceId)
-        assertArrayEquals(Fit3SapCodec.watchInfoRequest, decoded.payload)
+        assertArrayEquals(Fit3SapCodec.watchInfoRequest(34), decoded.payload)
     }
 
     @Test fun phoneHelloEchoesOnlyTheParameterBlock() {

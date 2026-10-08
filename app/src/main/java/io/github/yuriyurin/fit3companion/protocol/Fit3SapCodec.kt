@@ -22,7 +22,19 @@ object Fit3SapCodec {
     const val SERVICE_OTA_TRANSFER = 30
 
     // Read-only requests from the installed Fit3 plugin (message IDs 1 and 2).
-    val watchInfoRequest = byteArrayOf(0x01, 0x04, 0x02, 0, 0, 0, 0x05, 0, 0x0e)
+    // WatchInfo: fixed request, param 4 = byte 2, param 5 = two-byte OS version
+    // [minor, major]. Vendor capture: 01 04 02 05 00 0e (Android 14).
+    fun watchInfoRequest(sdkInt: Int): ByteArray {
+        val (minor, major) = when (sdkInt) {
+            29 -> 0 to 10
+            30 -> 0 to 11
+            31 -> 0 to 12
+            32 -> 1 to 12
+            33 -> 0 to 13
+            else -> 0 to 14 // 34 and anything newer the plugin doesn't know
+        }
+        return byteArrayOf(0x01, 0x04, 0x02, 0x05, minor.toByte(), major.toByte())
+    }
     val currentFaceRequest = byteArrayOf(0x02)
     val installedFacesRequest = byteArrayOf(0x01)
     val allFacesInfoRequest = byteArrayOf(0x00)

@@ -2133,7 +2133,7 @@ class Fit3BleClient(
         }
         if (setupStage !in listOf(SetupStage.IDLE, SetupStage.COMPLETE)) return
         advanceSetup(SetupStage.WAIT_INFO, "Настройка: сведения о часах…")
-        sendReadOnly(Fit3SapCodec.SERVICE_OOBE, Fit3SapCodec.watchInfoRequest)
+        sendReadOnly(Fit3SapCodec.SERVICE_OOBE, Fit3SapCodec.watchInfoRequest(Build.VERSION.SDK_INT))
     }
 
     private fun advanceSetup(stage: SetupStage, status: String) {
