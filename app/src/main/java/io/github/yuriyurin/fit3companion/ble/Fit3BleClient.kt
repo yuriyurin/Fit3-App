@@ -1613,7 +1613,7 @@ class Fit3BleClient(
         val sequence = nextHealthSequence()
         pendingHealthRequest = sequence
         pendingHealthRequestAt = now
-        sendReadOnly(Fit3SapCodec.SERVICE_HEALTH, Fit3HealthCodec.requestData(sequence, now))
+        sendReadOnly(Fit3SapCodec.SERVICE_HEALTH, Fit3HealthCodec.requestData(sequence, snapshot.health.syncWatermark))
     }
 
     private fun scheduleRefreshCompletion() {

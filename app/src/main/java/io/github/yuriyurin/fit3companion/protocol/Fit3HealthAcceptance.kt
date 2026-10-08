@@ -11,7 +11,7 @@ object Fit3HealthAcceptance {
         val base = if (changedSource) previous.copy(steps = null, walkSteps = null, runSteps = null,
             distanceMeters = null, activeCalories = null, activeMinutes = null,
             stepHistory = emptyList(), stepRecords = emptyMap(), stepDay = null,
-            stepsPartial = false, stepSourceAddress = source) else previous
+            stepsPartial = false, stepSourceAddress = source, syncWatermark = 0) else previous
         val incoming = Fit3HealthCodec.handle(base, payload, now)
         val accepted = incoming.reply != null && incoming.event == Fit3HealthCodec.Event.SYNC_DATA
         val result = if (accepted) incoming.copy(state = incoming.state.copy(lastSuccessfulSyncMillis = now))

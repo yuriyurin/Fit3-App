@@ -119,22 +119,40 @@ object Fit3HealthCodec {
     /** The official plugin sends this one-byte request when registering a new Fit3 host. */
     val mobileCapabilityRequest: ByteArray = SaMessageCodec.fixedRequest(CMD_PLUGIN_HEALTH_CAPABILITY_REQUEST)
 
-    /** Stock REQUEST_DATA has no count byte. Its DeviceInfo body is 25 bytes.
-     * A zero last-sync cursor asks for a full exchange; never invent phone step totals.
-     * DeviceInfo's version minor is decimal (createDeviceInfoByte), unlike CAPA's BCD.
+    /**
+     * DEVICE_INFO record (marker 05, 25-byte body) as the phone sends it: tag 4
+     * last_sync_time is the phone's sync watermark (1990-epoch seconds), start/end are
+     * zero. DeviceInfo's version minor is decimal (createDeviceInfoByte), unlike CAPA's BCD.
      */
-    fun requestData(sequence: Int, now: Long): ByteArray {
+    fun deviceInfo(lastSyncTime: Long): ByteArray = ByteArrayOutputStream().apply {
+        write(byteArrayOf(5, 25, 1, 0, 2, 0, 0, 3, 4, 51))
+        write(SaMessageCodec.intParam(4, lastSyncTime.coerceIn(0, 0xffff_ffffL).toInt()))
+        write(SaMessageCodec.intParam(5, 0))
+        write(SaMessageCodec.intParam(6, 0))
+        write(byteArrayOf(7, 1))
+    }.toByteArray()
+
+    /** Stock REQUEST_DATA has no count byte. The band only sends records newer than
+     * [lastSyncTime]; 0 asks for everything it still holds. Never claim more than was
+     * actually consumed, or the band withholds the difference. */
+    fun requestData(sequence: Int, lastSyncTime: Long): ByteArray {
         require(sequence in 1..0xffff)
-        val end = ((now / 1000L) - 631_152_000L).coerceIn(0, 0xffff_ffffL).toInt()
-        return ByteArrayOutputStream().apply {
-            write(3)
-            write(SaMessageCodec.shortParam(0xE0, sequence))
-            write(byteArrayOf(5, 25, 1, 0, 2, 0, 0, 3, 4, 51))
-            write(SaMessageCodec.intParam(4, 0))
-            write(SaMessageCodec.intParam(5, 0))
-            write(SaMessageCodec.intParam(6, end))
-            write(byteArrayOf(7, 1))
-        }.toByteArray()
+        return byteArrayOf(3) + SaMessageCodec.shortParam(0xE0, sequence) + deviceInfo(lastSyncTime)
+    }
+
+    /**
+     * The band's own clock from the DEVICE_INFO record that ends its pushes (tag 6,
+     * 1990-epoch seconds), or null. Acking with it as the watermark tells the band
+     * that everything up to then has been consumed.
+     */
+    fun trailingBandTime(payload: ByteArray): Long? {
+        if (payload.size < 27) return null
+        val at = payload.size - 27
+        val tags = intArrayOf(1, 2, 3, 4, 5, 6, 7)
+        val offsets = intArrayOf(2, 4, 7, 10, 15, 20, 25)
+        if ((payload[at].toInt() and 0xff) != 5 || (payload[at + 1].toInt() and 0xff) != 25 ||
+            tags.indices.any { (payload[at + offsets[it]].toInt() and 0xff) != tags[it] }) return null
+        return (SaMessageCodec.readLeInt(payload, at + 21) ?: return null).toLong() and 0xffff_ffffL
     }
 
     fun sequence(message: ByteArray): Int? {
@@ -196,6 +214,8 @@ object Fit3HealthCodec {
         val lastTransportMillis: Long? = null,
         val lastSyncMillis: Long? = null,
         val lastSuccessfulSyncMillis: Long? = null,
+        /** Sync watermark (1990-epoch seconds) sent in every DEVICE_INFO; not persisted. */
+        val syncWatermark: Long = 0,
     ) {
         val hasActivityData: Boolean get() = steps != null || distanceMeters != null ||
             activeCalories != null || floors != null
@@ -286,7 +306,7 @@ object Fit3HealthCodec {
                 event = Event.PEDOMETER_BACK_SYNC)
             CMD_REQUEST_DATA -> Incoming(
                 previous.copy(lastTransportMillis = now),
-                reply = if (request) requestDataEmptySuccessResponse(message) else null,
+                reply = if (request) requestDataEmptySuccessResponse(message, previous.syncWatermark) else null,
                 status = "Fit3 запросил Health data у телефона",
                 event = Event.REQUEST_DATA,
             )
@@ -314,7 +334,10 @@ object Fit3HealthCodec {
         request: Boolean,
         event: Event,
     ): Incoming {
-        val (merged, types) = mergeSyncPayload(previous, message, now)
+        val (parsed, types) = mergeSyncPayload(previous, message, now)
+        // Claim the band's own clock from this push once it is handled, never earlier.
+        val merged = if (request) parsed.copy(syncWatermark = maxOf(parsed.syncWatermark,
+            trailingBandTime(message) ?: parsed.syncWatermark)) else parsed
         val changedMetrics = metricsChanged(previous, merged)
         val status = when {
             changedMetrics -> "Fit3 Health: получены реальные данные ${types.joinToString { dataTypeName(it) }}"
@@ -331,7 +354,7 @@ object Fit3HealthCodec {
                 // The plugin forwards this request to Samsung Health and then returns its
                 // sequence-numbered SUCCESS result. A bare 0x42 does not acknowledge which
                 // batch was stored, so the watch can keep replaying the old intervals.
-                syncDataSuccessResponse(message)
+                syncDataSuccessResponse(message, merged.syncWatermark)
             } else null,
             status = status,
             event = event,
@@ -339,33 +362,34 @@ object Fit3HealthCodec {
         )
     }
 
-    /** Plugin generateTheSyncByte(): 42 02 E0 <seq LE> 04 02 01 SUCCESS.
-     * createMessageInfoByte replaces its length placeholder; it does not emit an extra 00.
+    /** Plugin generateTheSyncByte(): 42 03 E0 <seq LE> 04 02 01 SUCCESS + DEVICE_INFO.
+     * The DEVICE_INFO's last_sync_time is the watermark. Without it the band never
+     * records the phone's progress: it re-sends the same objects and then stops syncing.
      */
-    private fun syncDataSuccessResponse(request: ByteArray): ByteArray? {
+    private fun syncDataSuccessResponse(request: ByteArray, watermark: Long): ByteArray? {
         if (request.size < 5 || (request[2].toInt() and 0xff) != GM_SEQUENCE_NUMBER) return null
         val sequence = SaMessageCodec.readLeShort(request, 3) ?: return null
         return byteArrayOf(
-            0x42, 0x02, GM_SEQUENCE_NUMBER.toByte(),
+            0x42, 0x03, GM_SEQUENCE_NUMBER.toByte(),
             sequence.toByte(), (sequence ushr 8).toByte(),
             0x04, 0x02, 0x01, 0x01,
-        )
+        ) + deviceInfo(watermark)
     }
 
     /**
      * The plugin's generateTheSyncByte() omits the field-count byte for REQUEST_DATA, but
-     * still echoes E0 and includes MessageInfo SUCCESS. A bare 0x43 never identifies which
-     * request was answered; AZA3 repeats it with a new sequence roughly every two minutes.
-     * We currently have no Samsung Health database to return, so the response has no records.
+     * still echoes E0, includes MessageInfo SUCCESS and the DEVICE_INFO watermark
+     * (43 E0 <seq> 04 02 01 01 05 19 ...). We have no Samsung Health database to
+     * return, so the response has no other records.
      */
-    private fun requestDataEmptySuccessResponse(request: ByteArray): ByteArray? {
+    private fun requestDataEmptySuccessResponse(request: ByteArray, watermark: Long): ByteArray? {
         if (request.size < 4 || (request[1].toInt() and 0xff) != GM_SEQUENCE_NUMBER) return null
         val sequence = SaMessageCodec.readLeShort(request, 2) ?: return null
         return byteArrayOf(
             0x43, GM_SEQUENCE_NUMBER.toByte(),
             sequence.toByte(), (sequence ushr 8).toByte(),
             0x04, 0x02, 0x01, 0x01,
-        )
+        ) + deviceInfo(watermark)
     }
 
     /** Extracts the E0 sequence number that starts Fit3 capability requests. */
