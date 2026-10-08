@@ -1738,7 +1738,8 @@ class Fit3BleClient(
             // Keep each Health chunk below both the stock-size limit and SAP's 16 fragments.
             val prefix = if (transportMtu < 256) 2 else 4
             val sapCapacity = 16 * (transportMtu - prefix - 4) - 2
-            val messages = Fit3PedometerBackSync.chunks(payload, minOf(1024, sapCapacity))
+            // 980 is the vendor's big-data chunk size: one first fragment plus one continuation.
+            val messages = Fit3PedometerBackSync.chunks(payload, minOf(980, sapCapacity))
             backSyncChunkCount = if (messages.size > 1) messages.size else 0
             protocolLog("HEALTH-BACK-SYNC-SEND", null,
                 "seq=$sequence bins=${bins.size} steps=${bins.sumOf { it.record.count }}".toByteArray())
