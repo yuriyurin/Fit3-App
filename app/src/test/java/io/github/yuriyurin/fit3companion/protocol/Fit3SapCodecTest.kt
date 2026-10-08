@@ -22,6 +22,12 @@ class Fit3SapCodecTest {
         assertArrayEquals(Fit3SapCodec.watchInfoRequest(34), decoded.payload)
     }
 
+    @Test fun phoneFramesMatchVendorMuteWrite() {
+        // fit3_sap_protocol.md §7.2: phone TYPE 01, SEQ d0, mute on = 03 00 01.
+        assertArrayEquals("0007c24101d00b0b0300017595".hex(),
+            Fit3SapCodec.encodeSingle(11, "030001".hex(), 500, 0xd0))
+    }
+
     @Test fun phoneHelloEchoesOnlyTheParameterBlock() {
         val band = ByteArray(105)
         band[0] = 104
@@ -45,10 +51,13 @@ class Fit3SapCodecTest {
         assertEquals(32, Fit3SapCodec.randomHelloToken().length)
     }
 
-    @Test fun phoneFramesMatchVendorMuteWrite() {
-        // fit3_sap_protocol.md §7.2: phone TYPE 01, SEQ d0, mute on = 03 00 01.
-        assertArrayEquals("0007c24101d00b0b0300017595".hex(),
-            Fit3SapCodec.encodeSingle(11, "030001".hex(), 500, 0xd0))
+    @Test fun ackEchoesSequenceWithSingleOrFragmentFlag() {
+        assertArrayEquals("0004c30188408000b44b".hex(), Fit3SapCodec.encodeAck(0x40, false, 500))
+        assertArrayEquals("0004c3018841c000b42b".hex(), Fit3SapCodec.encodeAck(0x41, true, 500))
+        val ack = Fit3SapCodec.decodeFrame(Fit3SapCodec.encodeAck(0xd0, false, 500))
+        assertTrue(ack.isAck)
+        assertEquals(0xd0, ack.sequenceByte)
+        assertNull(SapReassembler().push(ack))
     }
 
     @Test fun sequenceSkipsZeroAndStepsLikeTheVendorApp() {
@@ -72,15 +81,6 @@ class Fit3SapCodecTest {
         val (service, body) = requireNotNull(assembler.push(last))
         assertEquals(5, service)
         assertArrayEquals(message, body)
-    }
-
-    @Test fun ackEchoesSequenceWithSingleOrFragmentFlag() {
-        assertArrayEquals("0004c30188408000b44b".hex(), Fit3SapCodec.encodeAck(0x40, false, 500))
-        assertArrayEquals("0004c3018841c000b42b".hex(), Fit3SapCodec.encodeAck(0x41, true, 500))
-        val ack = Fit3SapCodec.decodeFrame(Fit3SapCodec.encodeAck(0xd0, false, 500))
-        assertTrue(ack.isAck)
-        assertEquals(0xd0, ack.sequenceByte)
-        assertNull(SapReassembler().push(ack))
     }
 
     @Test fun bandContinuationWithWrongSequenceIsDropped() {

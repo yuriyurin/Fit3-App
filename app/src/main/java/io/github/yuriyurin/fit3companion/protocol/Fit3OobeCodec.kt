@@ -38,17 +38,21 @@ object Fit3OobeCodec {
         return if (header in 0x41..0x44) header and 0x3f else null
     }
 
-    /** Param 4 of WatchInfo response is the initialized flag. */
+    /**
+     * Param 4 of the WatchInfo response is the initialized (EULA accepted) flag.
+     * OOBEPacketInfo's watch-info schema, in order: 1 firmware version (string),
+     * 2 device name (string), 3 model number (fixed 7), 4 initialized (byte).
+     * Strings are [id][len:1][bytes]. Captured reply:
+     * 41 01 0c "R390XXU0AZA3" 02 0b "Galaxy Fit3" 03 "SM-R390" 04 01 ...
+     */
     fun isInitialized(message: ByteArray): Boolean? {
         if (responseId(message) != 1) return null
         var offset = 1
-        // OOBEPacketInfo: param 1 fixed 12, param 2 variable string,
-        // param 3 fixed 7, param 4 fixed boolean.
-        if (offset + 13 > message.size || message[offset++].toInt() != 1) return null
-        offset += 12
-        if (offset + 2 > message.size || message[offset++].toInt() != 2) return null
-        val modelSize = message[offset++].toInt() and 0xff
-        offset += modelSize
+        for (id in 1..2) {
+            if (offset + 2 > message.size || message[offset++].toInt() != id) return null
+            val length = message[offset++].toInt() and 0xff
+            offset += length
+        }
         if (offset + 8 > message.size || message[offset++].toInt() != 3) return null
         offset += 7
         if (offset + 2 > message.size || message[offset++].toInt() != 4) return null
