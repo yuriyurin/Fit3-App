@@ -90,18 +90,20 @@ object Fit3QuickPanelCodec {
 object Fit3AppsCodec {
     val request = SaMessageCodec.fixedRequest(0)
 
-    /** Reorderable Fit3 app IDs. IDs 2..5 are confirmed from the user's AZA3 order + watch UI.
-     * The remaining names follow Samsung's stock Fit3 app set; numeric ID is kept in UI for diagnostics. */
+    /** Fit3 app ids from the plugin's app dictionary. A non-Samsung phone doesn't get
+     * world clock (10) or camera controller (11) until their phone-side services talk. */
     val names = mapOf(
-        1 to "Таймер",
+        1 to "Samsung Health",
         2 to "Контроллер мультимедиа",
         3 to "Найти мой телефон",
         4 to "Погода",
         5 to "Календарь",
-        6 to "Камера",
-        7 to "Будильник",
-        8 to "Секундомер",
-        9 to "Мировое время",
+        6 to "Настройки",
+        7 to "Таймер",
+        8 to "Будильник",
+        9 to "Секундомер",
+        10 to "Мировое время",
+        11 to "Камера",
         12 to "Калькулятор",
     )
     fun set(appIds: List<Int>): ByteArray = ByteArrayOutputStream().apply {
@@ -110,10 +112,11 @@ object Fit3AppsCodec {
         write(2); write(1)
         write(3); write(appIds.size)
         appIds.forEachIndexed { index, id ->
-            // AppsPacketParser constants: APP_ID=0, APP_ORDER=1. The watch uses
-            // one-based order values in its response, so mirror that on SET.
+            // AppsPacketParser constants: APP_ID=0, APP_ORDER=1. Positions are 0-based on SET
+            // although the band's own table numbers them from 1 (captured set:
+            // 01 02 01 03 0a | 00 02 01 00 | 00 03 01 01 | ...).
             write(0); write(id)
-            write(1); write(index + 1)
+            write(1); write(index)
         }
     }.toByteArray()
     fun parse(message: ByteArray) = parseOrdered(message, 0, 3, 0, 1)
