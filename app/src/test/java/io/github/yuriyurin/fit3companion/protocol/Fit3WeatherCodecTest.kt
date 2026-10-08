@@ -20,13 +20,14 @@ class Fit3WeatherCodecTest {
     @Test fun weatherPacketMatchesSamsungVariableResponseShape() {
         val bytes = Fit3WeatherCodec.response(sample)
         assertEquals(0xc1, bytes[0].toInt() and 0xff)
-        val count = ((bytes[1].toInt() and 0xff) shl 8) or (bytes[2].toInt() and 0xff)
+        // Little-endian count: the vendor capture sends 06 00 for six params.
+        val count = (bytes[1].toInt() and 0xff) or ((bytes[2].toInt() and 0xff) shl 8)
         assertEquals(6 + 17 + 1 + 6 + 1 + 7 + 11, count)
         assertEquals(8, bytes[3].toInt() and 0xff)
-        // The plugin constructs LITTLE_ENDIAN values then writes them in reverse order.
+        // The plugin fills a big-endian buffer and copies it out in reverse: little-endian.
         val timeParam = bytes.indexOf(19)
         assertTrue(timeParam > 0)
-        assertEquals(0x65, bytes[timeParam + 1].toInt() and 0xff) // 0x6553f100 = 1_700_000_000
+        assertEquals(1_700_000_000, SaMessageCodec.readLeInt(bytes, timeParam + 1)) // 00 f1 53 65
         val temperatureParam = timeParam + 5
         assertEquals(20, bytes[temperatureParam].toInt() and 0xff)
         assertEquals(0xfd, bytes[temperatureParam + 1].toInt() and 0xff) // -3°C, little-endian
