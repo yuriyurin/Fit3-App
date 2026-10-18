@@ -42,14 +42,16 @@ object Fit3WeatherCodec {
             out.write(id); out.write(value and 0xff); out.write((value ushr 8) and 0xff); params++
         }
         fun dword(id: Int, value: Long) {
-            out.write(id); for (shift in 3 downTo 0) out.write(((value ushr (shift * 8)) and 0xff).toInt()); params++
+            // Little-endian like the 16-bit values: the plugin fills a big-endian buffer
+            // and copies it out in reverse.
+            out.write(id); for (shift in 0..3) out.write(((value ushr (shift * 8)) and 0xff).toInt()); params++
         }
         fun text(id: Int, value: String) {
             val bytes = value.toByteArray(Charsets.UTF_8).take(80).toByteArray()
             out.write(id); out.write(bytes.size); out.write(bytes); params++
         }
         out.write(0xc1) // VARIABLE, RESPONSE, WEATHER_INFO(1)
-        out.write(0); out.write(0) // total parameter count, filled at the end
+        out.write(0); out.write(0) // total parameter count (2 bytes, little-endian), filled at the end
         one(8, 0) // TWC-compatible condition indices
         one(6, 0) // Celsius
         one(9, 0) // no Samsung location prompt
@@ -101,8 +103,8 @@ object Fit3WeatherCodec {
         word(54, forecast.humidity.coerceIn(0, 100))
         val result = out.toByteArray()
         require(result.size <= 980) { "Weather packet too large: ${result.size}" }
-        result[1] = ((params ushr 8) and 0xff).toByte()
-        result[2] = (params and 0xff).toByte()
+        result[1] = (params and 0xff).toByte()
+        result[2] = ((params ushr 8) and 0xff).toByte()
         return result
     }
 

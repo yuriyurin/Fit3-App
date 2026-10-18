@@ -108,11 +108,13 @@ object Fit3NotificationCodec {
         result.fixed(2, ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN).putLong(whenMillis).array())
         result.shortText(3, title)
         result.body(text)
+        // Vendor wire order: category, quick-reply flag, app name, alert type, urgency,
+        // then the icon and package (fit3_sap_protocol.md §7, SMS capture).
+        if (!category.isNullOrBlank()) result.shortText(12, category)
+        if (canReply) result.fixed(13, byteArrayOf(1))
         result.shortText(14, appName)
         result.fixed(15, byteArrayOf(1))
         result.fixed(16, byteArrayOf(0))
-        if (!category.isNullOrBlank()) result.shortText(12, category)
-        if (canReply) result.fixed(13, byteArrayOf(1))
         if (iconBinary != null) result.binary(7, iconBinary)
         if (iconUrl != null) result.shortText(9, iconUrl)
         if (iconUrl != null && iconNewlyAdded) result.fixed(19, byteArrayOf(1))

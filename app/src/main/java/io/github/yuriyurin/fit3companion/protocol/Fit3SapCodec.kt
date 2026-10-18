@@ -22,7 +22,19 @@ object Fit3SapCodec {
     const val SERVICE_OTA_TRANSFER = 30
 
     // Read-only requests from the installed Fit3 plugin (message IDs 1 and 2).
-    val watchInfoRequest = byteArrayOf(0x01, 0x04, 0x02, 0, 0, 0, 0x05, 0, 0x0e)
+    // WatchInfo: fixed request, param 4 = byte 2, param 5 = two-byte OS version
+    // [minor, major]. Vendor capture: 01 04 02 05 00 0e (Android 14).
+    fun watchInfoRequest(sdkInt: Int): ByteArray {
+        val (minor, major) = when (sdkInt) {
+            29 -> 0 to 10
+            30 -> 0 to 11
+            31 -> 0 to 12
+            32 -> 1 to 12
+            33 -> 0 to 13
+            else -> 0 to 14 // 34 and anything newer the plugin doesn't know
+        }
+        return byteArrayOf(0x01, 0x04, 0x02, 0x05, minor.toByte(), major.toByte())
+    }
     val currentFaceRequest = byteArrayOf(0x02)
     val installedFacesRequest = byteArrayOf(0x01)
     val allFacesInfoRequest = byteArrayOf(0x00)
@@ -196,15 +208,40 @@ object Fit3SapCodec {
         return byteArrayOf((value ushr 8).toByte(), value.toByte())
     }
 
-    fun capabilityResponse(request: ByteArray): ByteArray {
+    /**
+     * The phone's plaintext HELLO reply to the band's 105-byte HELLO. It is not a copy
+     * of the band's frame: only the 7-byte parameter block at offset 43 is echoed.
+     * Layout (vendor capture): header 68 15 04 01 00 ff 03, "SAP_" + 32 hex chars at 7,
+     * band parameter block at 43, phone model at 50, vendor at 66 and again at 82
+     * (16 bytes each, NUL padded), phone address at 98 (left zero), trailer 02 at 104.
+     */
+    fun capabilityResponse(request: ByteArray, token: String, model: String, vendor: String): ByteArray {
         require(request.size == 105 && (request[0].toInt() and 0xff) == 104) {
             "Invalid Fit3 capability length"
         }
         require((request[1].toInt() and 0xff) == CAPABILITY_REQUEST) {
             "Not a capability request"
         }
-        return request.copyOf().also { it[1] = CAPABILITY_RESPONSE.toByte() }
+        require(token.length == 32 && token.all { it in '0'..'9' || it in 'A'..'F' })
+        val reply = ByteArray(105)
+        byteArrayOf(0x68, CAPABILITY_RESPONSE.toByte(), 0x04, 0x01, 0x00, 0xff.toByte(), 0x03)
+            .copyInto(reply, 0)
+        ("SAP_$token").toByteArray(Charsets.US_ASCII).copyInto(reply, 7)
+        request.copyInto(reply, 43, 43, 50)
+        fun field(offset: Int, value: String) {
+            val bytes = value.toByteArray(Charsets.US_ASCII)
+            bytes.copyInto(reply, offset, 0, minOf(bytes.size, 15)) // keep a NUL inside the field
+        }
+        field(50, model)
+        field(66, vendor)
+        field(82, vendor)
+        reply[104] = 0x02
+        return reply
     }
+
+    /** 16 random bytes as 32 upper-case hex characters: the session id in the phone HELLO. */
+    fun randomHelloToken(random: java.util.Random = java.security.SecureRandom()): String =
+        ByteArray(16).also(random::nextBytes).joinToString("") { "%02X".format(it.toInt() and 0xff) }
 
     fun negotiatedTransportMtu(request: ByteArray): Int {
         require(request.size == 105)
@@ -212,25 +249,36 @@ object Fit3SapCodec {
             (request[0x2d].toInt() and 0xff)
     }
 
-    fun encodeSingle(serviceId: Int, message: ByteArray, transportMtu: Int): ByteArray {
+    // Session TYPE byte: bits 1-2 are the fragment kind (0 single, 1 first, 2 middle,
+    // 3 last), bit 0 is the originator (1 = phone). The band sends 00/02/06, the
+    // phone 01/03/07. An ACK is 88 [SEQ] [80 single | c0 fragment] 00.
+    private const val ORIGIN_PHONE = 1
+    const val TYPE_ACK = 0x88
+    private const val ACK_SINGLE = 0x80
+    private const val ACK_FRAGMENT = 0xc0
+
+    fun encodeSingle(serviceId: Int, message: ByteArray, transportMtu: Int, sequence: Int = SapSequence.START): ByteArray {
         require(serviceId in 1..31 && message.isNotEmpty())
         require(transportMtu in 15..500)
-        val body = byteArrayOf(0, 0x40, serviceId.toByte(), serviceId.toByte()) + message
+        require(sequence in 0..255)
+        val body = byteArrayOf(ORIGIN_PHONE.toByte(), sequence.toByte(), serviceId.toByte(), serviceId.toByte()) + message
         val frame = encodeTransportBody(body, transportMtu)
         require(frame.size <= transportMtu) { "Fragmentation required" }
         return frame
     }
 
     /**
-     * Encode one SAP message into one or more transport frames.  The previous Companion only
-     * supported a single frame, which prevented app icons, album art and other large payloads.
-     * The fragment flags mirror decodeFrame(): FIRST=1, CONTINUE=2, LAST=3.
+     * Encode one SAP message into one or more transport frames. A message that doesn't fit
+     * becomes a first fragment (TYPE 03, SEQ) plus continuations (SEQ | 1), which is the
+     * vendor app's shape. Only the two-frame form (first + last 07) appears in captures;
+     * messages long enough for more mark the middle frames 05.
      */
-    fun encodeMessage(serviceId: Int, message: ByteArray, transportMtu: Int, stream: Int = 0): List<ByteArray> {
+    fun encodeMessage(serviceId: Int, message: ByteArray, transportMtu: Int,
+                      sequence: Int = SapSequence.START): List<ByteArray> {
         require(serviceId in 1..31 && message.isNotEmpty())
         require(transportMtu in 15..500)
-        require(stream in 0..7)
-        runCatching { encodeSingle(serviceId, message, transportMtu) }.getOrNull()?.let { return listOf(it) }
+        require(sequence in 0..255)
+        runCatching { encodeSingle(serviceId, message, transportMtu, sequence) }.getOrNull()?.let { return listOf(it) }
 
         val prefixSize = if (transportMtu < 256) 2 else 4
         val crcSize = 2
@@ -242,31 +290,36 @@ object Fit3SapCodec {
 
         val out = mutableListOf<ByteArray>()
         var offset = 0
-        var sequence = 0
         val firstTake = minOf(firstCapacity, message.size)
         val firstBody = byteArrayOf(
-            (1 shl 1).toByte(), // FIRST
-            ((stream shl 5) or sequence).toByte(),
+            ((1 shl 1) or ORIGIN_PHONE).toByte(), // FIRST
+            sequence.toByte(),
             serviceId.toByte(), serviceId.toByte(),
         ) + message.copyOfRange(0, firstTake)
         out += encodeTransportBody(firstBody, transportMtu)
         offset = firstTake
-        sequence++
 
         while (offset < message.size) {
-            require(sequence <= 15) { "SAP message needs more than 16 fragments" }
+            require(out.size < 16) { "SAP message needs more than 16 fragments" }
             val take = minOf(continueCapacity, message.size - offset)
             val last = offset + take >= message.size
             val kind = if (last) 3 else 2
             val body = byteArrayOf(
-                (kind shl 1).toByte(),
-                ((stream shl 5) or sequence).toByte(),
+                ((kind shl 1) or ORIGIN_PHONE).toByte(),
+                (sequence or 1).toByte(),
             ) + message.copyOfRange(offset, offset + take)
             out += encodeTransportBody(body, transportMtu)
             offset += take
-            sequence++
         }
         return out
+    }
+
+    /** Transport ACK for one received data frame: 88 [its SEQ] [80 single | c0 fragment] 00. */
+    fun encodeAck(sequence: Int, fragment: Boolean, transportMtu: Int): ByteArray {
+        require(sequence in 0..255)
+        val body = byteArrayOf(TYPE_ACK.toByte(), sequence.toByte(),
+            (if (fragment) ACK_FRAGMENT else ACK_SINGLE).toByte(), 0)
+        return encodeTransportBody(body, transportMtu)
     }
 
     private fun encodeTransportBody(body: ByteArray, transportMtu: Int): ByteArray {
@@ -288,7 +341,14 @@ object Fit3SapCodec {
         val stream: Int,
         val serviceId: Int?,
         val payload: ByteArray,
-    )
+        /** The raw SEQ byte: what an ACK echoes and what continuations derive from. */
+        val sequenceByte: Int = 0,
+        val isAck: Boolean = false,
+    ) {
+        /** Every data frame is ACKed; single frames with 80, fragments with c0. */
+        val needsAck: Boolean get() = !isAck
+        val isFragment: Boolean get() = kind != 0
+    }
 
     fun decodeFrame(frame: ByteArray): Fragment {
         require(frame.size >= 8) { "Frame too short" }
@@ -308,6 +368,10 @@ object Fit3SapCodec {
         }
         require(body.size >= 2)
         val flags = body[0].toInt() and 0xff
+        if (flags == TYPE_ACK) {
+            return Fragment(kind = -1, sequence = 0, stream = 0, serviceId = null,
+                payload = ByteArray(0), sequenceByte = body[1].toInt() and 0xff, isAck = true)
+        }
         require((flags ushr 6) == 0) { "Unsupported SAP control frame" }
         val kind = (flags ushr 1) and 3
         val sequenceFlags = body[1].toInt() and 0xff
@@ -319,6 +383,7 @@ object Fit3SapCodec {
             stream = sequenceFlags ushr 5,
             serviceId = if (first) body[2].toInt() and 0xff else null,
             payload = body.copyOfRange(if (first) 4 else 2, body.size),
+            sequenceByte = sequenceFlags,
         )
     }
 
@@ -369,35 +434,36 @@ object Fit3SapCodec {
     }
 }
 
-/** Assembles one SAP response at a time; invalid continuations are dropped. */
+/**
+ * Assembles one SAP message at a time; invalid continuations are dropped. A continuation
+ * carries its first fragment's SEQ with bit 0 set (40 -> 41), not a running index.
+ */
 class SapReassembler {
     private var serviceId: Int? = null
-    private var stream = -1
-    private var nextSequence = 0
+    private var continuationSequence = -1
     private val data = ByteArrayOutputStream()
 
     fun push(fragment: Fit3SapCodec.Fragment): Pair<Int, ByteArray>? {
+        if (fragment.isAck) return null
         if (fragment.kind == 0) {
             reset()
             return fragment.serviceId?.let { it to fragment.payload }
         }
         if (fragment.kind == 1) {
             reset()
-            if (fragment.sequence != 0 || fragment.serviceId == null) return null
+            if (fragment.serviceId == null) return null
             serviceId = fragment.serviceId
-            stream = fragment.stream
-            nextSequence = 1
+            continuationSequence = fragment.sequenceByte or 1
             data.write(fragment.payload)
             return null
         }
         val id = serviceId ?: return null
-        if (fragment.stream != stream || fragment.sequence != nextSequence ||
+        if (fragment.sequenceByte != continuationSequence ||
             fragment.kind !in 2..3 || data.size() + fragment.payload.size > 4096) {
             reset()
             return null
         }
         data.write(fragment.payload)
-        nextSequence++
         if (fragment.kind != 3) return null
         val result = id to data.toByteArray()
         reset()
@@ -406,8 +472,26 @@ class SapReassembler {
 
     private fun reset() {
         serviceId = null
-        stream = -1
-        nextSequence = 0
+        continuationSequence = -1
         data.reset()
+    }
+}
+
+/**
+ * Outgoing SAP SEQ. The vendor app never uses 00: it starts at 40 and moves in steps of
+ * 10 (40, 50, ... f0, then 40 again). Continuations use SEQ | 1 (see encodeMessage).
+ */
+class SapSequence {
+    private var value = START
+    fun reset() { value = START }
+    fun next(): Int {
+        val current = value
+        value = (value + STEP) and 0xff
+        if (value == 0) value = START
+        return current
+    }
+    companion object {
+        const val START = 0x40
+        private const val STEP = 0x10
     }
 }

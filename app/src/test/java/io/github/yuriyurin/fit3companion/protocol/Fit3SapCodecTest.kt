@@ -9,25 +9,96 @@ import org.junit.Test
 class Fit3SapCodecTest {
     private fun String.hex(): ByteArray = chunked(2).map { it.toInt(16).toByte() }.toByteArray()
 
-    @Test fun watchInfoFrameMatchesLivePcVector() {
+    @Test fun watchInfoRequestMatchesVendorCapture() {
+        // samsung_reconnect_alarms.log frame 355, phone on Android 14.
+        assertArrayEquals("01040205000e".hex(), Fit3SapCodec.watchInfoRequest(34))
+        assertArrayEquals("01040205000d".hex(), Fit3SapCodec.watchInfoRequest(33))
+        assertArrayEquals("01040205010c".hex(), Fit3SapCodec.watchInfoRequest(32))
         val encoded = Fit3SapCodec.encodeSingle(
-            Fit3SapCodec.SERVICE_OOBE, Fit3SapCodec.watchInfoRequest, 500)
-        assertArrayEquals("000dc5c10040010101040200000005000e60ea".hex(), encoded)
+            Fit3SapCodec.SERVICE_OOBE, Fit3SapCodec.watchInfoRequest(34), 500)
+        assertArrayEquals("000a07800140010101040205000e66d1".hex(), encoded)
         val decoded = Fit3SapCodec.decodeFrame(encoded)
         assertEquals(1, decoded.serviceId)
-        assertArrayEquals(Fit3SapCodec.watchInfoRequest, decoded.payload)
+        assertArrayEquals(Fit3SapCodec.watchInfoRequest(34), decoded.payload)
     }
 
-    @Test fun capabilityReplyOnlyChangesOpcode() {
-        val request = ByteArray(105)
-        request[0] = 104
-        request[1] = Fit3SapCodec.CAPABILITY_REQUEST.toByte()
-        request[0x2c] = 1
-        request[0x2d] = 0xf4.toByte()
-        assertEquals(500, Fit3SapCodec.negotiatedTransportMtu(request))
-        val response = Fit3SapCodec.capabilityResponse(request)
-        assertEquals(Fit3SapCodec.CAPABILITY_RESPONSE, response[1].toInt() and 0xff)
-        assertTrue(request.indices.filter { it != 1 }.all { request[it] == response[it] })
+    @Test fun phoneFramesMatchVendorMuteWrite() {
+        // fit3_sap_protocol.md §7.2: phone TYPE 01, SEQ d0, mute on = 03 00 01.
+        assertArrayEquals("0007c24101d00b0b0300017595".hex(),
+            Fit3SapCodec.encodeSingle(11, "030001".hex(), 500, 0xd0))
+    }
+
+    @Test fun phoneHelloEchoesOnlyTheParameterBlock() {
+        val band = ByteArray(105)
+        band[0] = 104
+        band[1] = Fit3SapCodec.CAPABILITY_REQUEST.toByte()
+        "SAMSUNG_ACCESSARY__".toByteArray().copyInto(band, 7)
+        "0101f4000003d4".hex().copyInto(band, 43)
+        "Galaxy Fit3 (97".toByteArray().copyInto(band, 50)
+        "SAMSUNG".toByteArray().copyInto(band, 66)
+        assertEquals(500, Fit3SapCodec.negotiatedTransportMtu(band))
+        val token = "BDD549189BB3661AAE7D1209A0BE93F4"
+        val reply = Fit3SapCodec.capabilityResponse(band, token, "M2007J3SY", "Xiaomi")
+        assertEquals(105, reply.size)
+        assertArrayEquals("681504010 0ff03".replace(" ", "").hex(), reply.copyOfRange(0, 7))
+        assertEquals("SAP_$token", String(reply, 7, 36, Charsets.US_ASCII))
+        assertArrayEquals("0101f4000003d4".hex(), reply.copyOfRange(43, 50))
+        assertEquals("M2007J3SY", String(reply, 50, 9, Charsets.US_ASCII))
+        assertEquals("Xiaomi", String(reply, 66, 6, Charsets.US_ASCII))
+        assertEquals("Xiaomi", String(reply, 82, 6, Charsets.US_ASCII))
+        assertEquals(0, reply[59].toInt()) // NUL-padded
+        assertEquals(2, reply[104].toInt())
+        assertEquals(32, Fit3SapCodec.randomHelloToken().length)
+    }
+
+    @Test fun ackEchoesSequenceWithSingleOrFragmentFlag() {
+        assertArrayEquals("0004c30188408000b44b".hex(), Fit3SapCodec.encodeAck(0x40, false, 500))
+        assertArrayEquals("0004c3018841c000b42b".hex(), Fit3SapCodec.encodeAck(0x41, true, 500))
+        val ack = Fit3SapCodec.decodeFrame(Fit3SapCodec.encodeAck(0xd0, false, 500))
+        assertTrue(ack.isAck)
+        assertEquals(0xd0, ack.sequenceByte)
+        assertNull(SapReassembler().push(ack))
+    }
+
+    @Test fun sequenceSkipsZeroAndStepsLikeTheVendorApp() {
+        val sequence = SapSequence()
+        val values = List(13) { sequence.next() }
+        assertEquals(listOf(0x40, 0x50, 0x60, 0x70, 0x80, 0x90, 0xa0, 0xb0, 0xc0, 0xd0, 0xe0, 0xf0, 0x40), values)
+    }
+
+    @Test fun fragmentedMessageUsesFirstAndContinuationTypes() {
+        val message = ByteArray(900) { it.toByte() }
+        val frames = Fit3SapCodec.encodeMessage(5, message, 500, 0x50)
+        assertEquals(2, frames.size)
+        val first = Fit3SapCodec.decodeFrame(frames[0])
+        val last = Fit3SapCodec.decodeFrame(frames[1])
+        assertEquals(0x03, frames[0][4].toInt() and 0xff)
+        assertEquals(0x50, first.sequenceByte)
+        assertEquals(0x07, frames[1][4].toInt() and 0xff)
+        assertEquals(0x51, last.sequenceByte)
+        val assembler = SapReassembler()
+        assertNull(assembler.push(first))
+        val (service, body) = requireNotNull(assembler.push(last))
+        assertEquals(5, service)
+        assertArrayEquals(message, body)
+    }
+
+    @Test fun bandContinuationWithWrongSequenceIsDropped() {
+        // Band frames: first 02/40, continuation 06/41 (see sleep0709.log).
+        val assembler = SapReassembler()
+        fun band(type: Int, seq: Int, rest: String) = Fit3SapCodec.decodeFrame(
+            frameOf("%02x%02x".format(type, seq).hex() + rest.hex()))
+        assertNull(assembler.push(band(0x02, 0x40, "0a0a0102")))
+        assertNull(assembler.push(band(0x06, 0x51, "0304")))
+        assertNull(assembler.push(band(0x02, 0x40, "0a0a0102")))
+        assertEquals("01020304", assembler.push(band(0x06, 0x41, "0304"))!!.second
+            .joinToString("") { "%02x".format(it) })
+    }
+
+    private fun frameOf(body: ByteArray): ByteArray {
+        val length = byteArrayOf((body.size ushr 8).toByte(), body.size.toByte())
+        fun crc(data: ByteArray) = Fit3SapCodec.crc16(data).let { byteArrayOf((it ushr 8).toByte(), it.toByte()) }
+        return length + crc(length) + body + crc(body)
     }
 
     @Test fun currentFaceParserUsesApkOffsets() {

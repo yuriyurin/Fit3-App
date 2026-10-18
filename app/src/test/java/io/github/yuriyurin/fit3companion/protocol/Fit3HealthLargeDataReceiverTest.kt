@@ -68,10 +68,11 @@ class Fit3HealthLargeDataReceiverTest {
             assertEquals(118, incoming.state.steps)
             assertEquals(4, incoming.state.stepRecords.size)
             assertEquals(java.time.LocalDate.of(2026, 9, 28).toEpochDay(), incoming.state.stepDay)
+            // The SYNC_DATA ack carries the DEVICE_INFO watermark (this payload has none of its own).
             assertArrayEquals(byteArrayOf(
-                0x42, 0x02, 0xE0.toByte(), 0x6D, 0x28,
+                0x42, 0x03, 0xE0.toByte(), 0x6D, 0x28,
                 0x04, 0x02, 0x01, 0x01,
-            ), incoming.reply)
+            ) + Fit3HealthCodec.deviceInfo(0), incoming.reply)
         } finally {
             TimeZone.setDefault(originalZone)
         }

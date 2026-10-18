@@ -126,6 +126,7 @@ class Fit3BleClient(
         context.getSystemService(BluetoothManager::class.java)?.adapter
     private val discovered = linkedMapOf<String, WatchCandidate>()
     private val assembler = SapReassembler()
+    private val sapSequence = io.github.yuriyurin.fit3companion.protocol.SapSequence()
     private val healthLargeDataReceiver = Fit3HealthLargeDataReceiver()
     private val mediaBridge = Fit3MediaBridge(context)
     private val initialHealth = Fit3HealthStore.load(context)
@@ -511,7 +512,9 @@ class Fit3BleClient(
                 try {
                     transportMtu = Fit3SapCodec.negotiatedTransportMtu(data)
                     require(transportMtu in 15..500)
-                    writeRaw(Fit3SapCodec.capabilityResponse(data))
+                    sapSequence.reset()
+                    writeRaw(Fit3SapCodec.capabilityResponse(data, Fit3SapCodec.randomHelloToken(),
+                        Build.MODEL.orEmpty(), Build.MANUFACTURER.orEmpty()))
                     snapshot = snapshot.copy(sapReady = true)
                     lastMediaIdentity = null
                     lastMediaAppId = null
@@ -536,7 +539,11 @@ class Fit3BleClient(
                 return@post
             }
             try {
-                val reply = assembler.push(Fit3SapCodec.decodeFrame(data)) ?: return@post
+                val fragment = Fit3SapCodec.decodeFrame(data)
+                if (fragment.isAck) return@post
+                // Every data frame from the band gets a transport ACK echoing its SEQ.
+                writeRaw(Fit3SapCodec.encodeAck(fragment.sequenceByte, fragment.isFragment, transportMtu))
+                val reply = assembler.push(fragment) ?: return@post
                 gotSapReply = true
                 val serviceId = reply.first
                 val message = reply.second
@@ -985,7 +992,8 @@ class Fit3BleClient(
 
     private fun writeFirmwareControl(message: ByteArray) {
         protocolLog("TX", Fit3SapCodec.SERVICE_OTA_TRANSFER, message)
-        Fit3SapCodec.encodeMessage(Fit3SapCodec.SERVICE_OTA_TRANSFER, message, transportMtu).forEach { writeRaw(it) }
+        Fit3SapCodec.encodeMessage(Fit3SapCodec.SERVICE_OTA_TRANSFER, message, transportMtu, sapSequence.next())
+            .forEach { writeRaw(it) }
     }
 
     fun releaseFirmwareTransfer() {
@@ -998,7 +1006,7 @@ class Fit3BleClient(
 
     private fun writeMessage(serviceId: Int, message: ByteArray, onSent: (() -> Unit)? = null) {
         if (firmwareSession != null || fileSession != null) return
-        val frames = Fit3SapCodec.encodeMessage(serviceId, message, transportMtu)
+        val frames = Fit3SapCodec.encodeMessage(serviceId, message, transportMtu, sapSequence.next())
         frames.forEachIndexed { index, bytes ->
             writeRaw(bytes, onSent.takeIf { index == frames.lastIndex })
         }
@@ -1605,7 +1613,7 @@ class Fit3BleClient(
         val sequence = nextHealthSequence()
         pendingHealthRequest = sequence
         pendingHealthRequestAt = now
-        sendReadOnly(Fit3SapCodec.SERVICE_HEALTH, Fit3HealthCodec.requestData(sequence, now))
+        sendReadOnly(Fit3SapCodec.SERVICE_HEALTH, Fit3HealthCodec.requestData(sequence, snapshot.health.syncWatermark))
     }
 
     private fun scheduleRefreshCompletion() {
@@ -1730,7 +1738,8 @@ class Fit3BleClient(
             // Keep each Health chunk below both the stock-size limit and SAP's 16 fragments.
             val prefix = if (transportMtu < 256) 2 else 4
             val sapCapacity = 16 * (transportMtu - prefix - 4) - 2
-            val messages = Fit3PedometerBackSync.chunks(payload, minOf(1024, sapCapacity))
+            // 980 is the vendor's big-data chunk size: one first fragment plus one continuation.
+            val messages = Fit3PedometerBackSync.chunks(payload, minOf(980, sapCapacity))
             backSyncChunkCount = if (messages.size > 1) messages.size else 0
             protocolLog("HEALTH-BACK-SYNC-SEND", null,
                 "seq=$sequence bins=${bins.size} steps=${bins.sumOf { it.record.count }}".toByteArray())
@@ -2125,7 +2134,7 @@ class Fit3BleClient(
         }
         if (setupStage !in listOf(SetupStage.IDLE, SetupStage.COMPLETE)) return
         advanceSetup(SetupStage.WAIT_INFO, "Настройка: сведения о часах…")
-        sendReadOnly(Fit3SapCodec.SERVICE_OOBE, Fit3SapCodec.watchInfoRequest)
+        sendReadOnly(Fit3SapCodec.SERVICE_OOBE, Fit3SapCodec.watchInfoRequest(Build.VERSION.SDK_INT))
     }
 
     private fun advanceSetup(stage: SetupStage, status: String) {
