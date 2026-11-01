@@ -1759,7 +1759,7 @@ private fun CompanionScreen(
                     item { Text(snapshot.status, style = MaterialTheme.typography.bodySmall) }
                     item { Text("Канал данных: ${if (snapshot.sapReady) "готов" else "не готов"} · пакетов в памяти: ${snapshot.protocolLog.size}",
                         style = MaterialTheme.typography.bodySmall) }
-                    item { Text("Health: ${snapshot.healthStatus}", style = MaterialTheme.typography.bodySmall) }
+                    item { Text("Health: ${AppStrings.translate(snapshot.healthStatus)}", style = MaterialTheme.typography.bodySmall) }
                     item { Text(snapshot.notificationStatus, style = MaterialTheme.typography.bodySmall) }
                 }
                 Page.PROTOCOL_LOG -> {
@@ -1871,7 +1871,7 @@ private fun CompanionScreen(
                 168 to "Раз в 7 дней").forEach { (hours, label) ->
                 TextButton(onClick = { onAutoBackupHours(hours); showBackupInterval = false },
                     modifier = Modifier.fillMaxWidth()) {
-                    Text((if (autoBackupHours == hours) "✓  " else "   ") + label)
+                    Text((if (autoBackupHours == hours) "✓  " else "   ") + AppStrings.translate(label))
                 }
             }
         } },
@@ -2059,7 +2059,7 @@ private fun OrderedItemCard(
     Card {
         Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("${index + 1}. $title", modifier = Modifier.weight(1f))
+            Text("${index + 1}. ${AppStrings.translate(title)}", modifier = Modifier.weight(1f))
             Button(onClick = {
                 if (index > 0) {
                     val ids = ordered.map { it.id }.toMutableList()

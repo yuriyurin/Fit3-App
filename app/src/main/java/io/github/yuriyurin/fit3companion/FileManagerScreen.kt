@@ -60,7 +60,7 @@ internal fun FileManagerScreen(snapshot: BleSnapshot) {
         if (state.busy) {
             if (state.total > 0) LinearProgressIndicator(progress = { (state.done.toFloat() / state.total).coerceIn(0f, 1f) }, modifier = Modifier.fillMaxWidth())
             else LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-            Text("${state.status} ${if (state.total > 0) "${state.done} / ${state.total} Б" else ""}")
+            Text("${AppStrings.translate(state.status)} ${if (state.total > 0) "${state.done} / ${state.total} Б" else ""}")
             TextButton(onClick = { Fit3ConnectionService.active?.cancelFileOperation() }) { Text(stringResource(R.string.files_cancel)) }
         } else if (state.status.isNotEmpty()) Text(state.status)
         (localError ?: state.error)?.let { Text(it, color = MaterialTheme.colorScheme.error) }
