@@ -1996,7 +1996,7 @@ private fun DiscreteIntSettingSlider(
     Card {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(
-                "$title: ${valueLabel(values[index.coerceIn(values.indices)])}",
+                "${AppStrings.translate(title)}: ${valueLabel(values[index.coerceIn(values.indices)])}",
                 style = MaterialTheme.typography.titleMedium,
             )
             Slider(

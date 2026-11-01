@@ -625,4 +625,95 @@
     <string name="loc_630" formatted="false">&quot;Высокий&quot;</string>
     <string name="loc_631" formatted="false">&quot;Очень высокий&quot;</string>
     <string name="loc_632" formatted="false">&quot;Экстремальный&quot;</string>
+    <string name="loc_633" formatted="false">&quot;Получаем циферблаты с часов…&quot;</string>
+    <string name="loc_634" formatted="false">&quot;Выбираем циферблат…&quot;</string>
+    <string name="loc_635" formatted="false">&quot;Удаляем циферблат…&quot;</string>
+    <string name="loc_636" formatted="false">&quot;Возвращаем встроенный циферблат…&quot;</string>
+    <string name="loc_637" formatted="false">&quot;Отменено&quot;</string>
+    <string name="loc_638" formatted="false">&quot;Bluetooth выключен&quot;</string>
+    <string name="loc_639" formatted="false">&quot;Слишком большой файл Fit3UI на часах&quot;</string>
+    <string name="loc_640" formatted="false">&quot;Проверяем запись на часах…&quot;</string>
+    <string name="loc_641" formatted="false">&quot;Проверка циферблата после передачи не прошла&quot;</string>
+    <string name="loc_642" formatted="false">&quot;На часах уже 24 циферблата. Удалите один из них&quot;</string>
+    <string name="loc_643" formatted="false">&quot;Циферблат установлен на часы&quot;</string>
+    <string name="loc_644" formatted="false">&quot;Сначала установите циферблат на часы&quot;</string>
+    <string name="loc_645" formatted="false">&quot;Циферблат выбран. Откройте Fit3UI на часах заново&quot;</string>
+    <string name="loc_646" formatted="false">&quot;Сначала выберите другой циферблат или встроенный&quot;</string>
+    <string name="loc_647" formatted="false">&quot;Циферблат удалён с часов&quot;</string>
+    <string name="loc_648" formatted="false">&quot;Выбран встроенный циферблат. Откройте Fit3UI заново&quot;</string>
+    <string name="loc_649" formatted="false">&quot;Неизвестная операция Fit3UI&quot;</string>
+    <string name="loc_650" formatted="false">&quot;Неверный размер файла&quot;</string>
+    <string name="loc_651" formatted="false">&quot;Содержимое файла не соответствует его имени&quot;</string>
+    <string name="loc_652" formatted="false">&quot;Повреждённый файл&quot;</string>
+    <string name="loc_653" formatted="false">&quot;Максимум 16 МиБ&quot;</string>
+    <string name="loc_654" formatted="false">&quot;Записанный файл отличается от исходного&quot;</string>
+    <string name="loc_655" formatted="false">&quot;Не удалось сохранить файл&quot;</string>
+    <string name="loc_656" formatted="false">&quot;Для работы с циферблатами нужна прошивка Fit3UI 0.2 или новее&quot;</string>
+    <string name="loc_657" formatted="false">&quot;Для погоды на этом циферблате нужна прошивка Fit3UI 0.5 или новее&quot;</string>
+    <string name="loc_658" formatted="false">&quot;ID циферблата должен быть от 1 до 99999&quot;</string>
+    <string name="loc_659" formatted="false">&quot;Fit3 поддерживает варианты от 0 до 9&quot;</string>
+    <string name="loc_660" formatted="false">&quot;Число вариантов в setting.bin ({0}) не совпадает с числом style*.bin ({1})&quot;</string>
+    <string name="loc_661" formatted="false">&quot;Начальный вариант {0} отсутствует внутри BIN&quot;</string>
+    <string name="loc_662" formatted="false">&quot;Выберите этот циферблат в меню Fit3&quot;</string>
+    <string name="loc_663" formatted="false">&quot;Выбранный вариант отсутствует внутри BIN&quot;</string>
+    <string name="loc_664" formatted="false">&quot;Этот вариант пока нельзя установить из приложения&quot;</string>
+    <string name="loc_665" formatted="false">&quot;Получаем список циферблатов. Повторите выбор после обновления&quot;</string>
+    <string name="loc_666" formatted="false">&quot;Список циферблатов заполнен. Удалите один в разделе «Установленные»&quot;</string>
+    <string name="loc_667" formatted="false">&quot;Часы не подтвердили установку пользовательского циферблата&quot;</string>
+    <string name="loc_668" formatted="false">&quot;Сервис подключения недоступен&quot;</string>
+    <string name="loc_669" formatted="false">&quot;{0} / {1} Б&quot;</string>
+    <string name="loc_670" formatted="false">&quot;Введите имя файла&quot;</string>
+    <string name="loc_671" formatted="false">&quot;Папка с таким именем уже существует&quot;</string>
+    <string name="loc_672" formatted="false">&quot;Слишком большой файл Fit3UI&quot;</string>
+    <string name="loc_673" formatted="false">&quot;Не удалось удалить файл с телефона&quot;</string>
+    <string name="loc_674" formatted="false">&quot;Добавлен «{0}» в коллекцию телефона&quot;</string>
+    <string name="loc_675" formatted="false">&quot;Файл циферблата сохранён&quot;</string>
+    <string name="loc_676" formatted="false">&quot;Свои циферблаты · один файл&quot;</string>
+    <string name="loc_677" formatted="false">&quot;Установите файл .f3ui и выберите оформление для приложения Fit3UI на часах.&quot;</string>
+    <string name="loc_678" formatted="false">&quot;Добавить файл&quot;</string>
+    <string name="loc_679" formatted="false">&quot;Обновить&quot;</string>
+    <string name="loc_680" formatted="false">&quot;Подключите часы, чтобы установить или выбрать циферблат. Коллекция телефона доступна без подключения.&quot;</string>
+    <string name="loc_681" formatted="false">&quot;Проверяем файл…&quot;</string>
+    <string name="loc_682" formatted="false">&quot;Отменить&quot;</string>
+    <string name="loc_683" formatted="false">&quot;На часах ({0})&quot;</string>
+    <string name="loc_684" formatted="false">&quot;Моя коллекция ({0})&quot;</string>
+    <string name="loc_685" formatted="false">&quot;Встроенный циферблат&quot;</string>
+    <string name="loc_686" formatted="false">&quot;Активен&quot;</string>
+    <string name="loc_687" formatted="false">&quot;Всегда доступен на часах&quot;</string>
+    <string name="loc_688" formatted="false">&quot;Файл выбранного циферблата повреждён. Fit3UI использует встроенный.&quot;</string>
+    <string name="loc_689" formatted="false">&quot;Использовать встроенный&quot;</string>
+    <string name="loc_690" formatted="false">&quot;Пока нет своих циферблатов. В «Моей коллекции» уже есть два примера — установите любой.&quot;</string>
+    <string name="loc_691" formatted="false">&quot;Нажмите «Обновить», чтобы получить список с часов. Нужна прошивка Fit3UI 0.2 или новее.&quot;</string>
+    <string name="loc_692" formatted="false">&quot;На часах&quot;</string>
+    <string name="loc_693" formatted="false">&quot;{0} КБ · {1}&quot;</string>
+    <string name="loc_694" formatted="false">&quot;Выбрать&quot;</string>
+    <string name="loc_695" formatted="false">&quot;Удалить&quot;</string>
+    <string name="loc_696" formatted="false">&quot;Добавьте файл .f3ui. Он останется в коллекции телефона, даже если удалить его с часов.&quot;</string>
+    <string name="loc_697" formatted="false">&quot; · На часах&quot;</string>
+    <string name="loc_698" formatted="false">&quot;256 × 402 · {0} Б{1}&quot;</string>
+    <string name="loc_699" formatted="false">&quot;Установлен&quot;</string>
+    <string name="loc_700" formatted="false">&quot;Установить&quot;</string>
+    <string name="loc_701" formatted="false">&quot;Убрать&quot;</string>
+    <string name="loc_702" formatted="false">&quot;Основной экран Samsung сохраняется. После выбора откройте Fit3UI заново на часах.&quot;</string>
+    <string name="loc_703" formatted="false">&quot;Удалить «{0}»?&quot;</string>
+    <string name="loc_704" formatted="false">&quot;Файл будет удалён с часов. Копия в коллекции телефона сохранится.&quot;</string>
+    <string name="loc_705" formatted="false">&quot;Файл будет убран из коллекции телефона. Циферблат на часах сохранится.&quot;</string>
+    <string name="loc_706" formatted="false">&quot;Убрано из коллекции&quot;</string>
+    <string name="loc_707" formatted="false">&quot;Предпросмотр циферблата&quot;</string>
+    <string name="loc_708" formatted="false">&quot;Установленные&quot;</string>
+    <string name="loc_709" formatted="false">&quot;Файловый менеджер&quot;</string>
+    <string name="loc_710" formatted="false">&quot;Отчёт об ошибке&quot;</string>
+    <string name="loc_711" formatted="false">&quot;Свои циферблаты: установка и управление&quot;</string>
+    <string name="loc_712" formatted="false">&quot;Неверный размер файла Fit3UI&quot;</string>
+    <string name="loc_713" formatted="false">&quot;Выберите файл .f3ui, а не прошивку или циферблат Samsung&quot;</string>
+    <string name="loc_714" formatted="false">&quot;Эта версия циферблата не поддерживается&quot;</string>
+    <string name="loc_715" formatted="false">&quot;Файл циферблата обрезан&quot;</string>
+    <string name="loc_716" formatted="false">&quot;Повреждён файл циферблата&quot;</string>
+    <string name="loc_717" formatted="false">&quot;Нужен циферблат 256 × 402&quot;</string>
+    <string name="loc_718" formatted="false">&quot;Неверный заголовок Fit3UI&quot;</string>
+    <string name="loc_719" formatted="false">&quot;Неверное название циферблата&quot;</string>
+    <string name="loc_720" formatted="false">&quot;Неверная структура циферблата&quot;</string>
+    <string name="loc_721" formatted="false">&quot;Неверные параметры элемента {0}&quot;</string>
+    <string name="loc_722" formatted="false">&quot;Текст элемента {0} не поддерживается&quot;</string>
+    <string name="loc_723" formatted="false">&quot;Текст элемента {0} выходит за границы&quot;</string>
 </resources>
