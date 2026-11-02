@@ -618,6 +618,97 @@
         <item>&quot;Высокий&quot;</item>
         <item>&quot;Очень высокий&quot;</item>
         <item>&quot;Экстремальный&quot;</item>
+        <item>&quot;Получаем циферблаты с часов…&quot;</item>
+        <item>&quot;Выбираем циферблат…&quot;</item>
+        <item>&quot;Удаляем циферблат…&quot;</item>
+        <item>&quot;Возвращаем встроенный циферблат…&quot;</item>
+        <item>&quot;Отменено&quot;</item>
+        <item>&quot;Bluetooth выключен&quot;</item>
+        <item>&quot;Слишком большой файл Fit3UI на часах&quot;</item>
+        <item>&quot;Проверяем запись на часах…&quot;</item>
+        <item>&quot;Проверка циферблата после передачи не прошла&quot;</item>
+        <item>&quot;На часах уже 24 циферблата. Удалите один из них&quot;</item>
+        <item>&quot;Циферблат установлен на часы&quot;</item>
+        <item>&quot;Сначала установите циферблат на часы&quot;</item>
+        <item>&quot;Циферблат выбран. Откройте Fit3UI на часах заново&quot;</item>
+        <item>&quot;Сначала выберите другой циферблат или встроенный&quot;</item>
+        <item>&quot;Циферблат удалён с часов&quot;</item>
+        <item>&quot;Выбран встроенный циферблат. Откройте Fit3UI заново&quot;</item>
+        <item>&quot;Неизвестная операция Fit3UI&quot;</item>
+        <item>&quot;Неверный размер файла&quot;</item>
+        <item>&quot;Содержимое файла не соответствует его имени&quot;</item>
+        <item>&quot;Повреждённый файл&quot;</item>
+        <item>&quot;Максимум 16 МиБ&quot;</item>
+        <item>&quot;Записанный файл отличается от исходного&quot;</item>
+        <item>&quot;Не удалось сохранить файл&quot;</item>
+        <item>&quot;Для работы с циферблатами нужна прошивка Fit3UI 0.2 или новее&quot;</item>
+        <item>&quot;Для погоды на этом циферблате нужна прошивка Fit3UI 0.5 или новее&quot;</item>
+        <item>&quot;ID циферблата должен быть от 1 до 99999&quot;</item>
+        <item>&quot;Fit3 поддерживает варианты от 0 до 9&quot;</item>
+        <item>&quot;Число вариантов в setting.bin ({0}) не совпадает с числом style*.bin ({1})&quot;</item>
+        <item>&quot;Начальный вариант {0} отсутствует внутри BIN&quot;</item>
+        <item>&quot;Выберите этот циферблат в меню Fit3&quot;</item>
+        <item>&quot;Выбранный вариант отсутствует внутри BIN&quot;</item>
+        <item>&quot;Этот вариант пока нельзя установить из приложения&quot;</item>
+        <item>&quot;Получаем список циферблатов. Повторите выбор после обновления&quot;</item>
+        <item>&quot;Список циферблатов заполнен. Удалите один в разделе «Установленные»&quot;</item>
+        <item>&quot;Часы не подтвердили установку пользовательского циферблата&quot;</item>
+        <item>&quot;Сервис подключения недоступен&quot;</item>
+        <item>&quot;{0} / {1} Б&quot;</item>
+        <item>&quot;Введите имя файла&quot;</item>
+        <item>&quot;Папка с таким именем уже существует&quot;</item>
+        <item>&quot;Слишком большой файл Fit3UI&quot;</item>
+        <item>&quot;Не удалось удалить файл с телефона&quot;</item>
+        <item>&quot;Добавлен «{0}» в коллекцию телефона&quot;</item>
+        <item>&quot;Файл циферблата сохранён&quot;</item>
+        <item>&quot;Свои циферблаты · один файл&quot;</item>
+        <item>&quot;Установите файл .f3ui и выберите оформление для приложения Fit3UI на часах.&quot;</item>
+        <item>&quot;Добавить файл&quot;</item>
+        <item>&quot;Обновить&quot;</item>
+        <item>&quot;Подключите часы, чтобы установить или выбрать циферблат. Коллекция телефона доступна без подключения.&quot;</item>
+        <item>&quot;Проверяем файл…&quot;</item>
+        <item>&quot;Отменить&quot;</item>
+        <item>&quot;На часах ({0})&quot;</item>
+        <item>&quot;Моя коллекция ({0})&quot;</item>
+        <item>&quot;Встроенный циферблат&quot;</item>
+        <item>&quot;Активен&quot;</item>
+        <item>&quot;Всегда доступен на часах&quot;</item>
+        <item>&quot;Файл выбранного циферблата повреждён. Fit3UI использует встроенный.&quot;</item>
+        <item>&quot;Использовать встроенный&quot;</item>
+        <item>&quot;Пока нет своих циферблатов. В «Моей коллекции» уже есть два примера — установите любой.&quot;</item>
+        <item>&quot;Нажмите «Обновить», чтобы получить список с часов. Нужна прошивка Fit3UI 0.2 или новее.&quot;</item>
+        <item>&quot;На часах&quot;</item>
+        <item>&quot;{0} КБ · {1}&quot;</item>
+        <item>&quot;Выбрать&quot;</item>
+        <item>&quot;Удалить&quot;</item>
+        <item>&quot;Добавьте файл .f3ui. Он останется в коллекции телефона, даже если удалить его с часов.&quot;</item>
+        <item>&quot; · На часах&quot;</item>
+        <item>&quot;256 × 402 · {0} Б{1}&quot;</item>
+        <item>&quot;Установлен&quot;</item>
+        <item>&quot;Установить&quot;</item>
+        <item>&quot;Убрать&quot;</item>
+        <item>&quot;Основной экран Samsung сохраняется. После выбора откройте Fit3UI заново на часах.&quot;</item>
+        <item>&quot;Удалить «{0}»?&quot;</item>
+        <item>&quot;Файл будет удалён с часов. Копия в коллекции телефона сохранится.&quot;</item>
+        <item>&quot;Файл будет убран из коллекции телефона. Циферблат на часах сохранится.&quot;</item>
+        <item>&quot;Убрано из коллекции&quot;</item>
+        <item>&quot;Предпросмотр циферблата&quot;</item>
+        <item>&quot;Установленные&quot;</item>
+        <item>&quot;Файловый менеджер&quot;</item>
+        <item>&quot;Отчёт об ошибке&quot;</item>
+        <item>&quot;Свои циферблаты: установка и управление&quot;</item>
+        <item>&quot;Неверный размер файла Fit3UI&quot;</item>
+        <item>&quot;Выберите файл .f3ui, а не прошивку или циферблат Samsung&quot;</item>
+        <item>&quot;Эта версия циферблата не поддерживается&quot;</item>
+        <item>&quot;Файл циферблата обрезан&quot;</item>
+        <item>&quot;Повреждён файл циферблата&quot;</item>
+        <item>&quot;Нужен циферблат 256 × 402&quot;</item>
+        <item>&quot;Неверный заголовок Fit3UI&quot;</item>
+        <item>&quot;Неверное название циферблата&quot;</item>
+        <item>&quot;Неверная структура циферблата&quot;</item>
+        <item>&quot;Неверные параметры элемента {0}&quot;</item>
+        <item>&quot;Текст элемента {0} не поддерживается&quot;</item>
+        <item>&quot;Текст элемента {0} выходит за границы&quot;</item>
     </string-array>
     <string-array name="legacy_text_keys" translatable="false">
         <item>loc_000</item>
@@ -1237,5 +1328,96 @@
         <item>loc_630</item>
         <item>loc_631</item>
         <item>loc_632</item>
+        <item>loc_633</item>
+        <item>loc_634</item>
+        <item>loc_635</item>
+        <item>loc_636</item>
+        <item>loc_637</item>
+        <item>loc_638</item>
+        <item>loc_639</item>
+        <item>loc_640</item>
+        <item>loc_641</item>
+        <item>loc_642</item>
+        <item>loc_643</item>
+        <item>loc_644</item>
+        <item>loc_645</item>
+        <item>loc_646</item>
+        <item>loc_647</item>
+        <item>loc_648</item>
+        <item>loc_649</item>
+        <item>loc_650</item>
+        <item>loc_651</item>
+        <item>loc_652</item>
+        <item>loc_653</item>
+        <item>loc_654</item>
+        <item>loc_655</item>
+        <item>loc_656</item>
+        <item>loc_657</item>
+        <item>loc_658</item>
+        <item>loc_659</item>
+        <item>loc_660</item>
+        <item>loc_661</item>
+        <item>loc_662</item>
+        <item>loc_663</item>
+        <item>loc_664</item>
+        <item>loc_665</item>
+        <item>loc_666</item>
+        <item>loc_667</item>
+        <item>loc_668</item>
+        <item>loc_669</item>
+        <item>loc_670</item>
+        <item>loc_671</item>
+        <item>loc_672</item>
+        <item>loc_673</item>
+        <item>loc_674</item>
+        <item>loc_675</item>
+        <item>loc_676</item>
+        <item>loc_677</item>
+        <item>loc_678</item>
+        <item>loc_679</item>
+        <item>loc_680</item>
+        <item>loc_681</item>
+        <item>loc_682</item>
+        <item>loc_683</item>
+        <item>loc_684</item>
+        <item>loc_685</item>
+        <item>loc_686</item>
+        <item>loc_687</item>
+        <item>loc_688</item>
+        <item>loc_689</item>
+        <item>loc_690</item>
+        <item>loc_691</item>
+        <item>loc_692</item>
+        <item>loc_693</item>
+        <item>loc_694</item>
+        <item>loc_695</item>
+        <item>loc_696</item>
+        <item>loc_697</item>
+        <item>loc_698</item>
+        <item>loc_699</item>
+        <item>loc_700</item>
+        <item>loc_701</item>
+        <item>loc_702</item>
+        <item>loc_703</item>
+        <item>loc_704</item>
+        <item>loc_705</item>
+        <item>loc_706</item>
+        <item>loc_707</item>
+        <item>loc_708</item>
+        <item>loc_709</item>
+        <item>loc_710</item>
+        <item>loc_711</item>
+        <item>loc_712</item>
+        <item>loc_713</item>
+        <item>loc_714</item>
+        <item>loc_715</item>
+        <item>loc_716</item>
+        <item>loc_717</item>
+        <item>loc_718</item>
+        <item>loc_719</item>
+        <item>loc_720</item>
+        <item>loc_721</item>
+        <item>loc_722</item>
+        <item>loc_723</item>
     </string-array>
 </resources>

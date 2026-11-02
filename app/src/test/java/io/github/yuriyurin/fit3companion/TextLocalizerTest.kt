@@ -33,7 +33,7 @@ class TextLocalizerTest {
     private val localizer = TextLocalizer(pairs)
 
     @Test fun resourceSetsAreCompleteAndArgumentsMatch() {
-        assertEquals(625, russian.size)
+        assertEquals(716, russian.size)
         listOf(404, 430, 431, 432, 433, 434, 458, 459).forEach {
             assertFalse("Retired debug label $it", russian.containsKey("loc_$it"))
         }

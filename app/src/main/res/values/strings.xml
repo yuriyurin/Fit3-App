@@ -625,4 +625,95 @@
     <string name="loc_630" formatted="false">&quot;High&quot;</string>
     <string name="loc_631" formatted="false">&quot;Very high&quot;</string>
     <string name="loc_632" formatted="false">&quot;Extreme&quot;</string>
+    <string name="loc_633" formatted="false">&quot;Getting watch faces from the watch…&quot;</string>
+    <string name="loc_634" formatted="false">&quot;Selecting watch face…&quot;</string>
+    <string name="loc_635" formatted="false">&quot;Deleting watch face…&quot;</string>
+    <string name="loc_636" formatted="false">&quot;Restoring the built-in watch face…&quot;</string>
+    <string name="loc_637" formatted="false">&quot;Canceled&quot;</string>
+    <string name="loc_638" formatted="false">&quot;Bluetooth is off&quot;</string>
+    <string name="loc_639" formatted="false">&quot;Fit3UI file on the watch is too large&quot;</string>
+    <string name="loc_640" formatted="false">&quot;Checking the file on the watch…&quot;</string>
+    <string name="loc_641" formatted="false">&quot;Watch face check failed after transfer&quot;</string>
+    <string name="loc_642" formatted="false">&quot;The watch already has 24 watch faces. Delete one of them&quot;</string>
+    <string name="loc_643" formatted="false">&quot;Watch face installed on the watch&quot;</string>
+    <string name="loc_644" formatted="false">&quot;Install the watch face on the watch first&quot;</string>
+    <string name="loc_645" formatted="false">&quot;Watch face selected. Reopen Fit3UI on the watch&quot;</string>
+    <string name="loc_646" formatted="false">&quot;Select another watch face or the built-in one first&quot;</string>
+    <string name="loc_647" formatted="false">&quot;Watch face deleted from the watch&quot;</string>
+    <string name="loc_648" formatted="false">&quot;Built-in watch face selected. Reopen Fit3UI&quot;</string>
+    <string name="loc_649" formatted="false">&quot;Unknown Fit3UI operation&quot;</string>
+    <string name="loc_650" formatted="false">&quot;Wrong file size&quot;</string>
+    <string name="loc_651" formatted="false">&quot;File contents do not match its name&quot;</string>
+    <string name="loc_652" formatted="false">&quot;Damaged file&quot;</string>
+    <string name="loc_653" formatted="false">&quot;16 MiB maximum&quot;</string>
+    <string name="loc_654" formatted="false">&quot;Written file differs from the original&quot;</string>
+    <string name="loc_655" formatted="false">&quot;Could not save the file&quot;</string>
+    <string name="loc_656" formatted="false">&quot;Watch faces need Fit3UI firmware 0.2 or newer&quot;</string>
+    <string name="loc_657" formatted="false">&quot;Weather on this watch face needs Fit3UI firmware 0.5 or newer&quot;</string>
+    <string name="loc_658" formatted="false">&quot;Watch face ID must be from 1 to 99999&quot;</string>
+    <string name="loc_659" formatted="false">&quot;Fit3 supports variants from 0 to 9&quot;</string>
+    <string name="loc_660" formatted="false">&quot;Variant count in setting.bin ({0}) does not match the number of style*.bin files ({1})&quot;</string>
+    <string name="loc_661" formatted="false">&quot;Initial variant {0} is missing from the BIN&quot;</string>
+    <string name="loc_662" formatted="false">&quot;Select this watch face in the Fit3 menu&quot;</string>
+    <string name="loc_663" formatted="false">&quot;Selected variant is missing from the BIN&quot;</string>
+    <string name="loc_664" formatted="false">&quot;This variant can\'t be installed from the app yet&quot;</string>
+    <string name="loc_665" formatted="false">&quot;Getting the watch face list. Try again after it updates&quot;</string>
+    <string name="loc_666" formatted="false">&quot;Watch face list is full. Delete one under “Installed”&quot;</string>
+    <string name="loc_667" formatted="false">&quot;Watch did not confirm the custom watch face installation&quot;</string>
+    <string name="loc_668" formatted="false">&quot;Connection service unavailable&quot;</string>
+    <string name="loc_669" formatted="false">&quot;{0} / {1} B&quot;</string>
+    <string name="loc_670" formatted="false">&quot;Enter a file name&quot;</string>
+    <string name="loc_671" formatted="false">&quot;A folder with this name already exists&quot;</string>
+    <string name="loc_672" formatted="false">&quot;Fit3UI file is too large&quot;</string>
+    <string name="loc_673" formatted="false">&quot;Could not delete the file from the phone&quot;</string>
+    <string name="loc_674" formatted="false">&quot;Added “{0}” to the phone collection&quot;</string>
+    <string name="loc_675" formatted="false">&quot;Watch face file saved&quot;</string>
+    <string name="loc_676" formatted="false">&quot;Custom watch faces · one file&quot;</string>
+    <string name="loc_677" formatted="false">&quot;Install an .f3ui file and choose a look for the Fit3UI app on the watch.&quot;</string>
+    <string name="loc_678" formatted="false">&quot;Add file&quot;</string>
+    <string name="loc_679" formatted="false">&quot;Refresh&quot;</string>
+    <string name="loc_680" formatted="false">&quot;Connect the watch to install or select a watch face. The phone collection works without a connection.&quot;</string>
+    <string name="loc_681" formatted="false">&quot;Checking file…&quot;</string>
+    <string name="loc_682" formatted="false">&quot;Cancel&quot;</string>
+    <string name="loc_683" formatted="false">&quot;On the watch ({0})&quot;</string>
+    <string name="loc_684" formatted="false">&quot;My collection ({0})&quot;</string>
+    <string name="loc_685" formatted="false">&quot;Built-in watch face&quot;</string>
+    <string name="loc_686" formatted="false">&quot;Active&quot;</string>
+    <string name="loc_687" formatted="false">&quot;Always available on the watch&quot;</string>
+    <string name="loc_688" formatted="false">&quot;The selected watch face file is damaged. Fit3UI is using the built-in one.&quot;</string>
+    <string name="loc_689" formatted="false">&quot;Use built-in&quot;</string>
+    <string name="loc_690" formatted="false">&quot;No custom watch faces yet. “My collection” already has two examples. Install either one.&quot;</string>
+    <string name="loc_691" formatted="false">&quot;Tap “Refresh” to get the list from the watch. Needs Fit3UI firmware 0.2 or newer.&quot;</string>
+    <string name="loc_692" formatted="false">&quot;On the watch&quot;</string>
+    <string name="loc_693" formatted="false">&quot;{0} KB · {1}&quot;</string>
+    <string name="loc_694" formatted="false">&quot;Select&quot;</string>
+    <string name="loc_695" formatted="false">&quot;Delete&quot;</string>
+    <string name="loc_696" formatted="false">&quot;Add an .f3ui file. It stays in the phone collection even if you delete it from the watch.&quot;</string>
+    <string name="loc_697" formatted="false">&quot; · On the watch&quot;</string>
+    <string name="loc_698" formatted="false">&quot;256 × 402 · {0} B{1}&quot;</string>
+    <string name="loc_699" formatted="false">&quot;Installed&quot;</string>
+    <string name="loc_700" formatted="false">&quot;Install&quot;</string>
+    <string name="loc_701" formatted="false">&quot;Remove&quot;</string>
+    <string name="loc_702" formatted="false">&quot;The main Samsung screen stays. After selecting, reopen Fit3UI on the watch.&quot;</string>
+    <string name="loc_703" formatted="false">&quot;Delete “{0}”?&quot;</string>
+    <string name="loc_704" formatted="false">&quot;The file will be deleted from the watch. The copy in the phone collection stays.&quot;</string>
+    <string name="loc_705" formatted="false">&quot;The file will be removed from the phone collection. The watch face on the watch stays.&quot;</string>
+    <string name="loc_706" formatted="false">&quot;Removed from collection&quot;</string>
+    <string name="loc_707" formatted="false">&quot;Watch face preview&quot;</string>
+    <string name="loc_708" formatted="false">&quot;Installed&quot;</string>
+    <string name="loc_709" formatted="false">&quot;File manager&quot;</string>
+    <string name="loc_710" formatted="false">&quot;Error report&quot;</string>
+    <string name="loc_711" formatted="false">&quot;Custom watch faces: install and manage&quot;</string>
+    <string name="loc_712" formatted="false">&quot;Wrong Fit3UI file size&quot;</string>
+    <string name="loc_713" formatted="false">&quot;Choose an .f3ui file, not firmware or a Samsung watch face&quot;</string>
+    <string name="loc_714" formatted="false">&quot;This watch face version is not supported&quot;</string>
+    <string name="loc_715" formatted="false">&quot;Watch face file is truncated&quot;</string>
+    <string name="loc_716" formatted="false">&quot;Watch face file is damaged&quot;</string>
+    <string name="loc_717" formatted="false">&quot;Needs a 256 × 402 watch face&quot;</string>
+    <string name="loc_718" formatted="false">&quot;Invalid Fit3UI header&quot;</string>
+    <string name="loc_719" formatted="false">&quot;Invalid watch face name&quot;</string>
+    <string name="loc_720" formatted="false">&quot;Invalid watch face structure&quot;</string>
+    <string name="loc_721" formatted="false">&quot;Invalid parameters for element {0}&quot;</string>
+    <string name="loc_722" formatted="false">&quot;Text of element {0} is not supported&quot;</string>
+    <string name="loc_723" formatted="false">&quot;Text of element {0} is out of bounds&quot;</string>
 </resources>
