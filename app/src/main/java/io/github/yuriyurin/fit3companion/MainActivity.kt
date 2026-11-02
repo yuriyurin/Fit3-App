@@ -2100,7 +2100,7 @@ private fun WatchLayoutPreview(items: List<Fit3OrderedItem>, quickPanel: Boolean
                                             Column(Modifier.width(66.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                                                 Surface(shape = CircleShape, color = Color(0xFF303540)) {
                                                     Box(Modifier.size(44.dp), contentAlignment = Alignment.Center) {
-                                                        Text(titleFor(entry.id).take(1), color = Color.White,
+                                                        Text(AppStrings.translate(titleFor(entry.id)).take(1), color = Color.White,
                                                             style = MaterialTheme.typography.titleMedium)
                                                     }
                                                 }
